@@ -40,3 +40,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# ignore all files in any directory node_modules
+node_modules/
