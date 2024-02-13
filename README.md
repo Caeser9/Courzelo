@@ -1,7 +1,13 @@
-1-Add your branch (by your name) 
-2-Git clone --branch <your branch name> 
+### Add your branch (by your name) 
+### Then clone the repository from your branch to make changes:
+```
+git clone --branch <your branch name>
+```
 
-After every change you make:
-1-Git add .
-2-Git Commit -m "commit name" 
-3-Git push -u origin <your branch name> 
+### After every change you make 
+```
+Git status
+Git add .
+Git commit -m "commit name" 
+Git push -u origin <your branch name> 
+```
