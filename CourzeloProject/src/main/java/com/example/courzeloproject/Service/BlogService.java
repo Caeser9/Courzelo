@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+
 public class BlogService implements IBlogService{
     @Autowired
     BlogRepository blogRepository;
@@ -17,19 +18,35 @@ public class BlogService implements IBlogService{
     InteractionsRepository interactionsRepository;
     @Override
     public Blog addBlogWithInteractions(Blog blog) {
-        // Enregistrez d'abord le blog
         Blog savedBlog = blogRepository.save(blog);
-
-        // Associez les interactions au blog
         savedBlog.setInteractions(blog.getInteractions());
         blogRepository.save(savedBlog);
-
-        // Enregistrez les interactions associées
         for (Interactions interaction : blog.getInteractions()) {
             interaction.setBlog(savedBlog);
             interactionsRepository.save(interaction);
         }
 
         return savedBlog;
+    }
+
+    @Override
+    public List<Blog> getAllBlogs() {
+        return blogRepository.findAll();
+    }
+
+    @Override
+    public Blog modifierBlog(Blog blog, String id) {
+        Blog newblog=blogRepository.findBlogByBlogCode(id);
+        newblog.setTitreBlog(blog.getTitreBlog());
+        newblog.setDateBlog(blog.getDateBlog());
+        newblog.setPhoto(blog.getPhoto());
+        newblog.setDomaine(blog.getDomaine());
+        return blogRepository.save(newblog);
+    }
+
+    @Override
+    public void deleteBlog(String id) {
+
+        blogRepository.deleteById(id);
     }
 }

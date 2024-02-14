@@ -7,9 +7,7 @@ import com.example.courzeloproject.Repository.BlogRepository;
 import com.example.courzeloproject.Repository.InteractionsRepository;
 import com.example.courzeloproject.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserRestController {
@@ -18,7 +16,7 @@ public class UserRestController {
     @PostMapping("/addUser")
     public String AddUser(@RequestBody User user){
         userRepository.save(user);
-
         return "Added Successfully";
     }
+
 }

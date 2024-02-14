@@ -1,5 +1,6 @@
 package com.example.courzeloproject.Entite;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class Blog {
     private Date dateBlog;
     private String domaine;
     private String photo;
+    @JsonIgnore
     @DBRef
     User user;
     @DBRef

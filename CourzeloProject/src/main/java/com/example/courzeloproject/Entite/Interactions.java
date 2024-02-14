@@ -1,5 +1,6 @@
 package com.example.courzeloproject.Entite;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ public class Interactions {
     private String commentaire;
     @DBRef
     private User user;
+    @JsonIgnore
     @DBRef
     private Blog blog;
 
