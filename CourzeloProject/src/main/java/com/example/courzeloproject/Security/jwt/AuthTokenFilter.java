@@ -2,7 +2,6 @@ package com.example.courzeloproject.Security.jwt;
 
 
 import com.example.courzeloproject.Service.UserDetailsServiceImpl;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -60,5 +59,4 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         return null;
     }
 }
-
 

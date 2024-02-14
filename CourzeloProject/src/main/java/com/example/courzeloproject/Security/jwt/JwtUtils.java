@@ -1,11 +1,8 @@
 package com.example.courzeloproject.Security.jwt;
 
 import com.example.courzeloproject.Service.UserDetailsImpl;
-
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
-import java.security.Key;
-import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,9 +10,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.security.core.Authentication;
 
 import java.security.Key;
-
-
 import java.util.Date;
+
+import io.jsonwebtoken.security.Keys;
+
 
 @Component
 public class JwtUtils {

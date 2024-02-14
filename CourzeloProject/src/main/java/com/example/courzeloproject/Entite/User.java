@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-@Document(collection = "users")
+@Document(collection = "user")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -37,17 +37,17 @@ public class User {
     @Size(max = 120)
     private String password;
 
-    @NotBlank
-    @Size(max = 120)
-    private String nom;
-
-    @NotBlank
-    @Size(max = 120)
-    private String prenom;
-
-    @NotBlank
-    @Size(max = 120)
-    private Date dateNaissance;
+//    @NotBlank
+//    @Size(max = 120)
+//    private String nom;
+//
+//    @NotBlank
+//    @Size(max = 120)
+//    private String prenom;
+//
+//    @NotBlank
+//    @Size(max = 120)
+//    private Date dateNaissance;
 
 //    @NotBlank
 //    @Size(max = 120)
