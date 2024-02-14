@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
-    @Autowired
-    IUserService userService;
-
-    @PostMapping("/add")
-    public User addBloc(@RequestBody User u){
-        return userService.addUser(u) ;
-    }
+//    @Autowired
+//    IUserService userService;
+//
+//    @PostMapping("/add")
+//    public User addBloc(@RequestBody User u){
+//        return userService.addUser(u) ;
+//    }
 }
