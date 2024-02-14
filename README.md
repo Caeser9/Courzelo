@@ -1,7 +1,7 @@
 ### Add your branch (by your name) 
 ### Then clone the repository from your branch to make changes:
 ```
-git clone --branch <your branch name>
+git clone --branch <your branch name> https://github.com/Caeser9/Courzelo.git
 ```
 
 ### After every change you make 
