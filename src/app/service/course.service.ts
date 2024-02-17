@@ -15,4 +15,12 @@ export class CourseService {
    postCourse(course:course){
       return this.http.post(this.url+"/ajouterCour",course)
    } 
+   deleteCourse(id:string){
+    return this.http.delete(`${this.url}/supprimerCour/${id}`);
+  }
+  modifierCourse(id:string , course:course){
+    return this.http.put(`${this.url}/modifierCour/${id}`,course);
+
+  }
+
 }

@@ -4,10 +4,12 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HomeComponent } from './shared/home/home.component';
 import { CourseListComponent } from './cour/course-list/course-list.component';
 import { AddCourseComponent } from './cour/add-course/add-course.component';
+import { CourseDeleteComponent } from './cour/course-delete/course-delete.component';
 
 const routes: Routes = [
   {path:"courselist",component:CourseListComponent},
-  {path:"add-course",component:AddCourseComponent}
+  {path:"add-course",component:AddCourseComponent},
+  {path:"delete-course",component:CourseDeleteComponent}
 
 ];
 

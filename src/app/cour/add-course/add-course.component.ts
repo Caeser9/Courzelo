@@ -24,26 +24,20 @@ export class AddCourseComponent implements OnInit {
     this.course=new course();
 
   }
-
-
-
-  
-
-
-
-
 save(f:NgForm){
   console.log(this.course.niveau)
   console.log(this.httpOptions)
 }
 
-
-
-
-
-
-ajouter(){
-  return this.CourseService.postCourse(this.course).subscribe()
-
+ajouter() {
+  this.CourseService.postCourse(this.course).subscribe(
+    () => {
+      alert("Cour ajouté !!");
+      location.reload();
+    },
+    (error) => {
+      console.error("Erreur lors de l'ajout de la course :", error);
+    }
+  );
 }
 }
