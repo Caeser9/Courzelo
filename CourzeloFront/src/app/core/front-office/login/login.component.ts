@@ -13,6 +13,7 @@ import { ERole } from 'src/app/shared/model/role';
 export class LoginComponent implements OnInit{
   dark: boolean;
   user: any = {};
+  isLoggedIn: Boolean = false;
   isLoginFailed = false;
   loginForm: FormGroup;
 
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
     
@@ -33,12 +34,14 @@ login(){
   this.authService.signInWithId(this.user).subscribe(
     (data) =>{
       this.user = data;
-      console.log("kdhee token ")
+      
       if (this.user) {
         this.tokenStorage.saveToken(this.user.token);
         this.tokenStorage.saveUser(this.user);
         this.tokenStorage.saveRole(this.user.roles);
-        
+        this.isLoggedIn = true;
+        this.isLoginFailed = false;
+       
         if (this.user.roles == ERole.ROLE_ADMIN) {
           console.log("wselll lena ba3ed el if ")
                 this.router.navigate([`/home`])
@@ -47,7 +50,14 @@ login(){
               }
 
             }
-    });
-  }
+    },
+    (error) => {
+     
+      this.isLoginFailed = true;
+      this.isLoggedIn = false;
+      console.log('Here error', error);
+
+    }
+  )};
 }
 

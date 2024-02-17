@@ -49,7 +49,8 @@
                             <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                         </div>
                         <h1>Sign up</h1>
-                        <form action="https://dreamslms.dreamstechnologies.com/html/login.html" [formGroup]="registerForm" (ngSubmit)="register()">
+                        <form action="https://dreamslms.dreamstechnologies.com/html/login.html" 
+                        [formGroup]="registerForm" (ngSubmit)="register()">
 
                             <div class="input-block">
                                 <label class="form-control-label">Username</label>
@@ -90,12 +91,7 @@
                                     <span class="toggle-password feather-eye"></span>
                                     <span class="pass-checked"><i class="feather-check"></i></span>
                                 </div>
-                                <div  class="password-strength" id="passwordStrength">
-                                    <span id="poor"></span>
-                                    <span id="weak"></span>
-                                    <span id="strong"></span>
-                                    <span id="heavy"></span>
-                                </div>
+
                                 <small class="text-red-500"
                                 *ngIf="registerForm.controls['password'].errors && registerForm.controls['password']?.touched"
                                 style="color: #f44336;">
@@ -107,13 +103,34 @@
                                 <div id="passwordInfo"></div>	
                             </div>
 
+                            <div class="input-block">
+                                <label class="form-control-label">Confirm Password</label>
+                                <div class="pass-group" id="passwordInput">																	
+                                    <input type="password" class="form-control pass-input" placeholder="Enter your password" id="confirmPassword" 
+                                    formControlName="confirmPassword" required />
+                                    <span class="toggle-password feather-eye"></span>
+                                    <span class="pass-checked"><i class="feather-check"></i></span>
+                                </div>
+                                <small class="text-red-500"
+                                *ngIf="registerForm.controls['confirmPassword'].errors && registerForm.controls['confirmPassword']?.touched"
+                                style="color: #f44336;">
+                                {{ registerForm.get("confirmPassword").hasError("required")? "Ce champ est obligatoire
+                                ": ""}}
+                                {{ registerForm.get("confirmPassword").hasError("mustMatch")? "veuillez confirmer votre
+                                mot de passe !": ""}}
+
+                            </small>
+                                <div id="passwordInfo"></div>	
+                            </div>
+
                             <div class="form-check remember-me">
                                 <label class="form-check-label mb-0">
                                   <input class="form-check-input" type="checkbox" name="remember"> I agree to the <a href="term-condition.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy.</a>
                                 </label>
                             </div>
+
                             <div class="d-grid">
-                                <button class="btn btn-primary btn-start" type="submit" >Create Account</button>
+                                <button class="btn btn-primary btn-start" type="submit" [disabled]="registerForm.invalid">Create Account</button>
                             </div>
                         </form>
                     </div>

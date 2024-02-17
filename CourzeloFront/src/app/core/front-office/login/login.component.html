@@ -33,7 +33,8 @@
           
                             </div>
                             <h1>Sign into Your Account</h1>
-                            <form action="https://dreamslms.dreamstechnologies.com/html/instructor-dashboard.html" [formGroup]="loginForm" (ngSubmit)="login()">
+                            <form action="https://dreamslms.dreamstechnologies.com/html/instructor-dashboard.html"
+                             [formGroup]="loginForm" (ngSubmit)="login()"  *ngIf="!isLoggedIn">
                                 <div class="input-block">
                                     <label class="form-control-label">Username</label>
                                     <input id="username" [(ngModel)]="user.username" type="email" class="form-control" placeholder="Enter your email Username" formControlName="username">
@@ -48,28 +49,15 @@
                                         ? "username doit contenir 8 chiffres"
                                         : ""
                                         }}
-                                        {{ loginForm.get("username").hasError("maxlength")
-                                        ? "username ne doit dépasser 8 chiffres
-                                        ": ""}}
+
                                     </div>
                                 </div>
 
                                 <div class="input-block">
                                     <label class="form-control-label">Password</label>
-                               <!--
-
-                                    <div [ngClass]="
-                                    (loginForm.get('password').touched ||
-                                    loginForm.get('password').dirty) &&
-                                    loginForm.get('password').errors
-              
-                                      ? 'is-invalid'
-                                      : ''
-                                  "> 
-                               -->    
+   
                                     <div class="pass-group">
-                                        <input type="password" class="form-control pass-input" placeholder="Enter your password" formControlName="password"
-                                         id="password" [(ngModel)]="user.password">
+                                        <input type="password" class="form-control pass-input" placeholder="Enter your password" formControlName="password" id="password" [(ngModel)]="user.password">
                                         <div class="invalid-feedback">
                                             {{
                                             loginForm.get("password").hasError("required")
@@ -84,9 +72,7 @@
                                         </div>
                                         <span class="feather-eye toggle-password"></span>
                                     </div>
-                                    <div class="col-12 text-danger" *ngIf="loginForm.valid && isLoginFailed">
-                                        username ou mot de passe incorrect!
-                                    </div>
+
                                 </div>
                                 <div class="forgot">
                                     <span><a class="forgot-link" href="forgot-password.html">Forgot Password ?</a></span>
@@ -96,6 +82,9 @@
                                         <input type="checkbox" name="radio">
                                         <span class="checkmark"></span>
                                     </label>
+                                </div>
+                                <div class="col-12 text-danger" *ngIf="loginForm.valid && isLoginFailed">
+                                    Bad credentials !
                                 </div>
                                 <div class="d-grid">
                                     <button class="btn btn-primary btn-start" type="submit" [disabled]="loginForm.invalid">Sign In</button>

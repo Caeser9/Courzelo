@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { ERole } from 'src/app/shared/model/role';
 import { User } from 'src/app/shared/model/user.model';
+import { MustMatch } from 'src/app/shared/validators/confirmPassword';
 
 @Component({
   selector: 'app-register',
@@ -26,22 +27,21 @@ export class RegisterComponent implements OnInit {
       username :[''],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$")]],
-      
+      confirmPassword:[''],
     }
-    /*
-    nzidhaa wa9et nzid confirmer mot de passe 
+    
+    //nzidhaa wa9et nzid confirmer mot de passe 
     ,
       {
         validator: MustMatch('password', 'confirmPassword')
 
-      },*/
+      },
     )
 
   }
   register() {
   console.log(this.user.password)
     this.user.roles = [ERole.ROLE_PARTICIPANT]
-    this.user.id = 9 
     this.authService.signupWithUsername(this.user).subscribe(
 
       (data) => {
