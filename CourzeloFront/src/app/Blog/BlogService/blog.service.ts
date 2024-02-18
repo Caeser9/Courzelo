@@ -1,0 +1,50 @@
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import {HttpClient}from "@angular/common/http";
+import { Blog } from '../BlogClass/blog';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BlogService {
+  private baseUrl='http://localhost:8097/courzelo'
+
+  constructor(private http:HttpClient) { }
+  getBlogList(): Observable<any> {  
+    return this.http.get(`${this.baseUrl}`+'/getAllBlogs');  
+  }  
+  
+  createBlog(blogData: any): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post(`${this.baseUrl}`+'/addBlog', blogData, { headers });
+  }
+  
+  deleteBlog(id: string): Observable<any> {  
+    return this.http.delete(`${this.baseUrl}/deleteBlog/${id}`, { responseType: 'text' });  
+  }  
+  
+  getBlog(id: string): Observable<Blog> {  
+    return this.http.get<Blog>(`${this.baseUrl}/getDetailsBlog/${id}`);  
+  }  
+  
+  updateBlog(id: string, blog: Blog): Observable<Object> {  
+    return this.http.put(`${this.baseUrl}/modifierBlog/${id}`, blog);  
+  }  
+
+  uploadPhoto(id: string, file: File): Observable<any> {
+    const uploadUrl = `${this.baseUrl}/upload/${id}`;
+
+    const formData: FormData = new FormData();
+    formData.append('photo', file, file.name);
+
+    return this.http.post(uploadUrl, formData);
+  }
+
+  getPhoto(photo: string): string{
+    const photoUrl = `${this.baseUrl}/download/${photo}`;
+
+    return `${this.baseUrl}/download/${photo}`;
+  }
+    
+
+}

@@ -5,10 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.catalina.LifecycleState;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -19,10 +22,17 @@ import java.util.List;
 public class Blog {
     @Id
     private String blogCode;
+    @NotBlank
+    @Length(min = 2, max = 20)
     private String titreBlog;
-    private Date dateBlog;
+
+    private LocalDate dateBlog;
+    @NotBlank
     private String domaine;
-    private String photo;
+    @NotBlank
+    private String contenu;
+
+    private String  photo;
     @JsonIgnore
     @DBRef
     User user;

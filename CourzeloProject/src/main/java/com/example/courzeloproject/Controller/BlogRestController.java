@@ -1,30 +1,50 @@
 package com.example.courzeloproject.Controller;
 
 import com.example.courzeloproject.Entite.Blog;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import com.example.courzeloproject.Entite.Interactions;
 import com.example.courzeloproject.Repository.BlogRepository;
 import com.example.courzeloproject.Service.BlogService;
 import com.example.courzeloproject.Service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class BlogRestController {
+
 
     @Autowired
     private IBlogService iBlogService;
-    @PostMapping("/addBlog")
-    public String AddBlog(@RequestBody Blog blog){
+    @PostMapping("/addBlogwithInter")
+    public String AddBlogWithInteractions(@RequestBody Blog blog){
         iBlogService.addBlogWithInteractions(blog);
 
         return "Added Successfully";
     }
+    @PostMapping("/addBlog")
+    public Blog AddBlog(@RequestBody Blog blog){
+        return iBlogService.addOnlyBlog(blog);
+    }
+
     @GetMapping("/getAllBlogs")
     public List<Blog> showAllBlogs(){
         return iBlogService.getAllBlogs();
+    }
+    @GetMapping("/getDetailsBlog/{id}")
+    public Blog detailsBlog(@PathVariable("id") String id){
+        return iBlogService.detailsBlog(id);
     }
     @PutMapping("/modifierBlog/{id}")
     public Blog modifierBlog(@RequestBody Blog blog, @PathVariable ("id") String id){
@@ -35,4 +55,18 @@ public class BlogRestController {
         iBlogService.deleteBlog(id);
         return "Blog Deleted";
     }
+    @PostMapping("/upload/{id}")
+    public ResponseEntity<String> handleFileUpload(@RequestParam("photo") MultipartFile file,@PathVariable("id") String blogCode) {
+        String fileName = iBlogService.storeFile(file,blogCode);
+        return ResponseEntity.ok().body(fileName);
+    }
+
+    @GetMapping("/download/{fileName:.+}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
+        Resource resource = iBlogService.loadFileAsResource(fileName);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
 }
+
