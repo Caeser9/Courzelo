@@ -229,7 +229,8 @@
 																	</div>
 																</td>
 																<td>  <input type="button" value="delete" (click)="delete(c.idCour)"></td>
-																<td>  <input type="button" value="delete" (click)="modifier(c.idCour)"></td>
+                                                                <td>    <a [routerLink]="'/course-update/' + c.idCour" (click)="modifier(c.idCour)">Modifier</a>
+                                                                </td>
 															</tr>  
                                                         </tbody>
                                                      </table>

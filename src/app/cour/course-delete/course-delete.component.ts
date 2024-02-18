@@ -9,6 +9,7 @@ import { CourseService } from 'src/app/service/course.service';
 export class CourseDeleteComponent implements OnInit {
   constructor(private CourseService:CourseService){}
   course!:any
+  idc!:String
   listeCourse!:course[]
   ngOnInit() {
     this.course=new course();
@@ -34,7 +35,8 @@ export class CourseDeleteComponent implements OnInit {
     );
   }
   modifier(id: string){
-
+    this.idc=id;
+    console.log(id);
   }
 
   afficher(){
