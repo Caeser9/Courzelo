@@ -1,0 +1,42 @@
+<div class="col-xl-9 col-lg-8 col-md-12">
+
+    <div class="card settings-inner-blk p-0">
+        <div class="widget-set sell-course-head comman-space">
+            <!-- ... Remaining HTML content ... -->
+            <div class="widget-content multistep-form">
+                <div class="widget-content multistep-form">
+                    <form class="field-card">
+                        <div class="add-course-info">
+                            <div class="add-course-inner-header">
+                                <h4>Courses Media</h4>
+                            </div>
+                            <div class="add-course-form">
+                                <form action="#">
+
+                                    <div class="input-block">
+                                        <label class="add-course-label">cour image</label>
+                                        <div class="relative-form">
+
+                                            <div *ngIf="selectedFile">
+                                                <span>{{selectedFile.name}}</span>
+                                            </div>
+                                            <label class="relative-file-upload">
+                                                Upload File <input type="file"
+                                                    (change)="onFileSelected($event)">
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="widget-btn">
+                                <a class="btn btn-black prev_btn">Previous</a>
+                                <a (click)="onUpload()"
+                                    class="btn btn-info-light next_btn">Continue</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

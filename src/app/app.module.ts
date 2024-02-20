@@ -11,6 +11,8 @@ import { AddCourseComponent } from './cour/add-course/add-course.component';
 import { FormsModule } from '@angular/forms';
 import { CourseDeleteComponent } from './cour/course-delete/course-delete.component';
 import { CourseUpdateComponent } from './cour/course-update/course-update.component';
+import { StripeComponent } from './cour/stripe/stripe.component';
+import { AddRessourceComponent } from './cour/add-ressource/add-ressource.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { CourseUpdateComponent } from './cour/course-update/course-update.compon
     CourseListComponent,
     AddCourseComponent,
     CourseDeleteComponent,
-    CourseUpdateComponent
+    CourseUpdateComponent,
+    StripeComponent,
+    AddRessourceComponent
   ],
   imports: [
     BrowserModule,

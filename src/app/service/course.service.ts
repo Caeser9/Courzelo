@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { course } from 'src/app/model/Course';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +21,22 @@ export class CourseService {
   }
   modifierCourse(id:string , course:course){
     return this.http.put(`${this.url}/modifierCour/${id}`,course);
+  }
+  getCourseTrier(){
+    return this.http.get(this.url+"/findAllByOrderByDateDesc");
+  }
+  uploadPhoto(id: string, file: File): Observable<any> {
+    const uploadUrl = `${this.url}/upload/${id}`;
 
+    const formData: FormData = new FormData();
+    formData.append('photo', file, file.name);
+
+    return this.http.post(uploadUrl, formData);
   }
 
+  getPhoto(photo: string): string{
+    const photoUrl = `${this.url}/download/${photo}`;
+
+    return `${this.url}/download/${photo}`;
+  }
 }
