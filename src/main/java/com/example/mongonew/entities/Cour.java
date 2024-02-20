@@ -26,8 +26,9 @@ public class Cour {
     private String description;
     private Date date;
     private Niveau niveau;
+    private TypeCour typeCour;
     @DBRef
-    private List<User> listUser=new ArrayList<>();
+    private List<Ressource> ressourceList=new ArrayList<>();
 
 
 

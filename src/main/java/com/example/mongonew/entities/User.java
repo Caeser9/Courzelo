@@ -21,5 +21,5 @@ public class User {
     private int idUser;
     private String nomUser;
     @DBRef
-    private List<Cour> listCour=new ArrayList<>();
+    private Cour cour;
 }

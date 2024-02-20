@@ -4,7 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document("Ressource")
 @Getter
@@ -12,7 +16,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ressource {
-    private int idRessource;
+    @Id
+    private String idRessource;
     private String nomRessource;
+    @DBRef
+    private Cour cour;
+    private byte[] fichier;
+
 
 }
