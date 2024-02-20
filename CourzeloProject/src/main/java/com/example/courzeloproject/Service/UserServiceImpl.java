@@ -5,6 +5,8 @@ import com.example.courzeloproject.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements IUserService{
     @Autowired
@@ -22,5 +24,9 @@ public class UserServiceImpl implements IUserService{
     public void deleteUser(User u){
         repo.delete(u);
     }
+    public List<User> getUserByRole(String role){
+        return repo.findAllByRoles(role);
+    }
+
 
 }

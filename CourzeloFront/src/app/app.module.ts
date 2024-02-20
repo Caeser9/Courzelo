@@ -10,6 +10,10 @@ import { LoginComponent } from './core/front-office/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './core/front-office/register/register.component';
+import { EditProfileComponent } from './core/back-office/User/edit-profile/edit-profile.component';
+import { SideBarComponent } from './shared/side-bar/side-bar.component';
+import { AdminListComponent } from './core/back-office/User/admin-list/admin-list.component';
+import { StudentListComponent } from './core/back-office/User/student-list/student-list.component';
 
 
 
@@ -20,7 +24,11 @@ import { RegisterComponent } from './core/front-office/register/register.compone
     FooterComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    EditProfileComponent,
+    SideBarComponent,
+    StudentListComponent,
+    AdminListComponent
     
   ],
   imports: [

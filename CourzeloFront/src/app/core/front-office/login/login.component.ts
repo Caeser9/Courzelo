@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
+import { ProfileService } from 'src/app/service/profile.service';
 import { TokenStorageService } from 'src/app/service/token-storage-service.service';
+import { Profile } from 'src/app/shared/model/profile.module';
 import { ERole } from 'src/app/shared/model/role';
 
 @Component({
@@ -16,11 +18,12 @@ export class LoginComponent implements OnInit{
   isLoggedIn: Boolean = false;
   isLoginFailed = false;
   loginForm: FormGroup;
-
+  profile: Profile
 
  constructor(private formBuilder: FormBuilder, private authService: AuthServiceService,
   private tokenStorage: TokenStorageService,
-  private router: Router,) { }
+  private router: Router,
+  private profileService: ProfileService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -41,16 +44,24 @@ login(){
         this.tokenStorage.saveRole(this.user.roles);
         this.isLoggedIn = true;
         this.isLoginFailed = false;
-       
+           
         if (this.user.roles == ERole.ROLE_ADMIN) {
-          console.log("wselll lena ba3ed el if ")
+          console.log("wsel lena ")
+          this.profileService.getProfileByIdUser(this.user.id).subscribe(
+            (data) => {
+              this.profile = data  
+              console.log("Profile", data)
+              if (this.profile != null) {
                 this.router.navigate([`/home`])
               } else {
                 this.router.navigate([`/navbar`])
               }
+  
+            })
 
-            }
-    },
+            }//lena nkamel el routee 
+    }
+  },
     (error) => {
      
       this.isLoginFailed = true;
