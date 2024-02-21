@@ -21,7 +21,6 @@ public class Ressource {
     private String nomRessource;
     @DBRef
     private Cour cour;
-    private byte[] fichier;
 
 
 }

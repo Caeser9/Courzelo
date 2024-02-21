@@ -27,6 +27,8 @@ public class Cour {
     private Date date;
     private Niveau niveau;
     private TypeCour typeCour;
+    private String photo;
+    private double prix;
     @DBRef
     private List<Ressource> ressourceList=new ArrayList<>();
 
