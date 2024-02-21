@@ -1,5 +1,6 @@
 package com.example.courzeloproject.Service;
 
+import com.example.courzeloproject.Entite.Answers;
 import com.example.courzeloproject.Entite.Question;
 import com.example.courzeloproject.Entite.QuestionWrapper;
 import com.example.courzeloproject.Entite.Quiz;
@@ -11,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -23,18 +21,19 @@ public class QuizServiceImpl implements IQuizService{
     QuizRepository quizRepository;
     @Autowired
     QuestionRepository questionRepository;
-   /* public ResponseEntity<String> createQuiz(String category, int numberOfQue, String title) {
-
-        List<Question> questions = questionRepository.findRandomQuestionsByCategory(category,numberOfQue);
-        Quiz quiz = new Quiz();
-        quiz.setTitle(title);
-        quiz.setQuestions(questions);
-        quizRepository.save(quiz);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<String> createQuiz(Quiz quiz , String category, int numberOfQue) {
+        try {
+            List<Question> questions = questionRepository.findRandomQuestionsByCategory(category, numberOfQue);
+            quiz.setQuestions(questions);
+            quizRepository.save(quiz);
+            return new ResponseEntity<>("Quiz créé avec succès", HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Erreur lors de la création du quiz", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    */
-
+    @Override
    public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(String id) {
 
        Optional<Quiz> optionalQuiz = quizRepository.findById(id);
@@ -57,19 +56,21 @@ public class QuizServiceImpl implements IQuizService{
        }
    }
 
-    public ResponseEntity<String> createQuiz(String category, int numberOfQue, String title) {
-        try {
-            List<Question> questions = questionRepository.findRandomQuestionsByCategory(category, numberOfQue);
-            Quiz quiz = new Quiz();
-            quiz.setTitle(title);
-            quiz.setQuestions(new HashSet<>(questions));
-            quizRepository.save(quiz);
-            return new ResponseEntity<>("Quiz créé avec succès", HttpStatus.CREATED);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>("Erreur lors de la création du quiz", HttpStatus.INTERNAL_SERVER_ERROR);
+
+    @Override
+    public ResponseEntity<Integer> calculateResult(String id, List<Answers> responses) {
+        Quiz quiz = quizRepository.findById(id).get();
+        List<Question> questions =  quiz.getQuestions();
+        int i = 0;
+        int right = 0;
+        for(Answers res: responses)
+        {
+            if(res.getResponse().equals(questions.get(i++).getRight_answer()))
+                right++;
         }
+        return new ResponseEntity<>(right,HttpStatus.OK);
+    }
     }
 
 
-}
+

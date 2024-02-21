@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Repository
@@ -19,7 +20,7 @@ public interface QuestionRepository extends MongoRepository<Question,String>
 ])*/
   // @Query("{ 'category' : ?0, $sample: { size: ?1 } }")
    @Query("{ 'category' : ?0 }")
-    List<Question> findRandomQuestionsByCategory(String category, int numberOfQue);
+   List<Question> findRandomQuestionsByCategory(String category, int numberOfQue);
 
     List<Question> findByCategory(String category);
 

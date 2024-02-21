@@ -1,5 +1,6 @@
 package com.example.courzeloproject.Entite;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 public class QuestionWrapper {
     @Id
+    @JsonIgnore
     private String id;
     private String question_title;
     private String option1;

@@ -2,6 +2,7 @@ package com.example.courzeloproject.Controller;
 
 import com.example.courzeloproject.Entite.Answers;
 import com.example.courzeloproject.Entite.QuestionWrapper;
+import com.example.courzeloproject.Entite.Quiz;
 import com.example.courzeloproject.Service.QuizServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,18 +17,15 @@ public class QuizController {
     @Autowired
     QuizServiceImpl quizService;
 
-    @PostMapping("create")
-    public ResponseEntity<String> createQuiz(@RequestParam String category, @RequestParam int numberOfQue, @RequestParam String title)
+    @PostMapping("/create/{num}/{categorie}")
+    public ResponseEntity<String> createQuiz(@RequestBody Quiz quiz, @PathVariable("num") int numberOfQue, @PathVariable("categorie") String category)
     {
-        return quizService.createQuiz(category,numberOfQue,title);
+        return quizService.createQuiz(quiz,category,numberOfQue);
     }
 
-    @GetMapping("get/{id}")
-    public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable String id)
+    @GetMapping("/get/{id}")
+    public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable("id") String id)
     {
-        //return quizService.getQuizQuestion(id);
-        /*ResponseEntity<List<QuestionWrapper>> response = quizService.getQuizQuestions(id);
-        return response;*/
         try {
             ResponseEntity<List<QuestionWrapper>> response = quizService.getQuizQuestions(id);
             return response;
@@ -36,10 +34,11 @@ public class QuizController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-//
-//    @PostMapping("submit/{id}")
-//    public ResponseEntity<Integer> submitQuiz(@PathVariable Integer id,@RequestBody List<Answers> response)
-//    {
-//        return quizService.calculateResult(id,response);
-//    }
+    @GetMapping("/getResult/{id-quiz}")
+    public ResponseEntity<Integer> getQuizQuestions(@RequestBody List<Answers> answers,
+                                                                  @PathVariable("id-quiz") String id)
+    {
+       return quizService.calculateResult(id,answers) ;
+    }
+
 }
