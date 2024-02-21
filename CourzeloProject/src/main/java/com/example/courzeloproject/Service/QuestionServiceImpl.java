@@ -20,7 +20,6 @@ public class QuestionServiceImpl implements IQuestionService {
     QuestionRepository questionRepository;
 
 
-
     // Méthode pour récupérer un échantillon aléatoire de questions par catégorie
     public List<Question> findRandomQuestionsByCategory(String category, int numberOfQue) {
         List<Question> allQuestions = questionRepository.findByCategory(category);
@@ -29,50 +28,44 @@ public class QuestionServiceImpl implements IQuestionService {
     }
 
 
-
-    public ResponseEntity<List<Question>> getAllQuestions()
-    {
+    public ResponseEntity<List<Question>> getAllQuestions() {
         try {
             return new ResponseEntity<>(questionRepository.findAll(), HttpStatus.OK);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<List<Question>> getQuestionsByCategory(String category) {
-        return new ResponseEntity<>(questionRepository.findByCategory(category),HttpStatus.OK);
+        return new ResponseEntity<>(questionRepository.findByCategory(category), HttpStatus.OK);
     }
 
     public ResponseEntity<List<Question>> getQuestionsByLevel(String difficultylevel) {
-        return new ResponseEntity<>(questionRepository.findBydifficultylevel(difficultylevel),HttpStatus.OK);
+        return new ResponseEntity<>(questionRepository.findBydifficultylevel(difficultylevel), HttpStatus.OK);
     }
 
     public ResponseEntity<String> addQuestion(Question question) {
-        if(question!=null)
-        {
+        if (question != null) {
             questionRepository.save(question);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    public ResponseEntity<String> deleteQuestion(Integer id) {
+    public void deleteQuestion(String id) {
         questionRepository.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
-    public boolean existById(Integer id)
-    {
+    public boolean existById(String id) {
         return questionRepository.existsById(id);
     }
 
-    public ResponseEntity<String> updateQuestion( Integer id, Question question) {
-        Optional<Question> optionalQuestion = questionRepository.findById(id);
+    public Question updateQuestion(String id, Question question) {
+        Question existQuestion = questionRepository.findById(id).get();
 
-        if (optionalQuestion.isPresent()) {
-            Question existQuestion = optionalQuestion.get();
-            //Question existQuestion = questionRepository.findById(id);
+        if (existQuestion.getId()!= "") {
             existQuestion.setCategory(question.getCategory());
             existQuestion.setDifficultylevel(question.getDifficultylevel());
             existQuestion.setOption1(question.getOption1());
@@ -81,9 +74,7 @@ public class QuestionServiceImpl implements IQuestionService {
             existQuestion.setOption4(question.getOption4());
             existQuestion.setQuestion_title(question.getQuestion_title());
             existQuestion.setRight_answer(question.getRight_answer());
-            questionRepository.save(existQuestion);
-            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return questionRepository.save(existQuestion) ;
     }
 }

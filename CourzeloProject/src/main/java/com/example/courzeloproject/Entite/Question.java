@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 public class Question {
     @Id
-    private int id;
+    private String id;
     private String category;
     private String difficultylevel;
     private String option1;

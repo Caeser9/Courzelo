@@ -17,7 +17,7 @@ import java.util.Set;
 @Data
 public class Quiz {
     @Id
-    private int id;
+    private String id;
     private String title;
     private String category;
     private int duree;

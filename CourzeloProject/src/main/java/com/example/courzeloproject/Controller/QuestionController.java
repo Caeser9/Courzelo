@@ -36,13 +36,13 @@ public class QuestionController {
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<String> deleteQuestion(@PathVariable("id") Integer id)
+    public void deleteQuestion(@PathVariable("id") String id)
     {
-        return questionService.deleteQuestion(id);
+         questionService.deleteQuestion(id);
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<String> updateQuestion(@PathVariable("id") Integer id,@RequestBody Question question)
+    public Question updateQuestion(@PathVariable("id") String id,@RequestBody Question question)
     {
         return questionService.updateQuestion(id,question);
     }

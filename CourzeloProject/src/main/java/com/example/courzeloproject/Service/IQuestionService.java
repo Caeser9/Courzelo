@@ -11,9 +11,9 @@ public interface IQuestionService {
     public ResponseEntity<List<Question>> getQuestionsByCategory(String category);
     public ResponseEntity<List<Question>> getQuestionsByLevel(String difficultylevel);
     public ResponseEntity<String> addQuestion(Question question);
-    public ResponseEntity<String> deleteQuestion(Integer id);
-    public boolean existById(Integer id);
-    public ResponseEntity<String> updateQuestion( Integer id, Question question);
+    public void deleteQuestion(String id);
+
+    public Question updateQuestion( String id, Question question);
 
 
 

@@ -35,7 +35,7 @@ public class QuizServiceImpl implements IQuizService{
 
     */
 
-   public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(Integer id) {
+   public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(String id) {
 
        Optional<Quiz> optionalQuiz = quizRepository.findById(id);
        if (optionalQuiz.isPresent()) {

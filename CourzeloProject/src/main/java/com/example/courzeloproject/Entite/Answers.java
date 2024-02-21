@@ -12,6 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 public class Answers {
     @Id
-    private Integer id;
+    private String id;
     private String response;
 }
