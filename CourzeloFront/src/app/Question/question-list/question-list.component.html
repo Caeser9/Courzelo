@@ -1,0 +1,95 @@
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+
+
+
+        <!--Dashbord Student -->
+        <div class="page-content">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Profile Details -->
+                    <div class="col-xl-12 col-md-12" >
+                        <div class="settings-widget">
+                            <div class="settings-inner-blk p-0">
+                                <div class="comman-space pb-0">
+                                    <div
+                                        class="filter-grp ticket-grp d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <h3>Questions List</h3>
+                                        </div>
+                                        <div class="ticket-btn-grp">
+                                            <a href="javascript:void(0);" data-bs-toggle="modal">Ajouter Question</a>
+                                        </div>
+                                    </div>
+                                    <div class="settings-tickets-blk table-responsive" >
+
+                                        <!-- Referred Users-->
+                                        <table class="table table-nowrap mb-0" >
+                                            <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Category</th>
+                                                    <th>Difficultylevel</th>
+                                                    <th>Right Answer</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let q of questions">
+                                                <tr>
+                                                    <td><a href="javascript:void(0);">{{q.question_title}}</a></td>
+                                                    <td>{{q.category}} </td>
+                                                    <td><span class="badge info-low">{{q.difficultylevel}}</span></td>
+                                                    <td><span class="text-success">{{q.right_answer}}</span></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <!-- /Referred Users-->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Profile Details -->
+
+                </div>
+            </div>
+        </div>
+        <!-- /Dashbord Student -->
+
+
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- Deposit Modal -->
+    <div class="modal-styles modal fade" id="depositMethod" tabindex="-1" aria-labelledby="addpaymentMethod"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addpaymentMethod">Deposit Method</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i
+                            class="fa-regular fa-circle-xmark"></i></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Deposit Modal -->
+
+    <!-- jQuery -->
+    <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+
+</body>
