@@ -7,4 +7,5 @@ export class course {
     niveau!:string;
     ressource!:Ressource[];
     photo!:string;
+    prix!:any
   }

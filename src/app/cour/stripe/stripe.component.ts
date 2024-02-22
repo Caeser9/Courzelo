@@ -13,6 +13,7 @@ export class StripeComponent implements OnInit {
   amounte: any
   ngOnInit() {
     
+    
     this.loadStripe();
   }
  
@@ -37,7 +38,7 @@ export class StripeComponent implements OnInit {
       description: '2 widgets',
       amount: amount * 100
     });
-    this.http.post<any>(`http://localhost:9000/Courzelou/cour/process-payment/`+amount, {}).subscribe(data => {
+    this.http.post<any>("http://localhost:9000/Courzelou/cour/api/process-payment" ,{}).subscribe(data => {
       this.clientSecret = data;
     });
   }

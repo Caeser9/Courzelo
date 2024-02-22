@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { course } from 'src/app/model/Course';
 import { Observable } from 'rxjs';
+import { Ressource } from '../model/Ressource';
 @Injectable({
   providedIn: 'root'
 })
@@ -33,10 +34,29 @@ export class CourseService {
 
     return this.http.post(uploadUrl, formData);
   }
+  getCourById(id:string ){
+    return this.http.get(`${this.url}/getCourbyid/${id}`);
+  }
+  getRessourceByCourId(id:string){
+    return this.http.get(`${this.url}/getRessourcesByCourId/${id}`);
 
+    
+  }
   getPhoto(photo: string): string{
     const photoUrl = `${this.url}/download/${photo}`;
 
     return `${this.url}/download/${photo}`;
   }
+  affecterRessourceAcour(id:string , ressource:Ressource){
+    return this.http.post(`${this.url}/affecterRessourcesACour/${id}`,ressource);
+  }
+  uploadPhotoRessource(id: string, file: File): Observable<any> {
+    const uploadUrl = `${this.url}/uploadRessource/${id}`;
+
+    const formData: FormData = new FormData();
+    formData.append('photo', file, file.name);
+
+    return this.http.post(uploadUrl, formData);
+  }
+  
 }

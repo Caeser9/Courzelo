@@ -40,7 +40,7 @@
 											<p>Instructor</p>
 										</div>
 										<div class="go-dashboard text-center">
-											<a href="add-course.html" class="btn btn-primary">Create New Course</a>
+											<a  routerLink="add-course" class="btn btn-primary">Create New Course</a>
 										</div>
 									</div>
 								</div>
@@ -216,25 +216,36 @@
 
 													<!-- Referred Users-->
                                                     <div *ngFor=" let c of course">
-                                                        <div *ngIf="c.nomCour==search || search==''">
+                                                        <div *ngIf="c.nomCour==search ||c.description==search || search==''">
 													<table class="table table-nowrap mb-0">
 												     <tbody>
                                                             <tr>
-																<td>
+																<td >
 																	<div class="sell-table-group d-flex align-items-center">
 																		<div class="sell-group-img">
 																			<a href="course-details.html">
-																				<img src="assets/img/course/course-10.jpg" class="img-fluid " alt="">
+																				<img *ngIf="c.photo"
+                                     		   								[src]="getphoto(c.photo)"
+                                       									 alt="Blog Photo" class="img-fluid "> 
 																			</a>
 																		</div>
 																		<div class="sell-tabel-info">
-																			<p><a href="course-details.html"> {{c.nomCour}}</a>
+																			<p> {{c.nomCour}}
+																				<br/>
+																				{{c.description}}
+																			</p>
+																			{{c.prix}}
 																		</div>
+																		
+																		
 																	</div>
 																
-																<td>  <input type="button" value="delete"   class="btn btn-action-delete" (click)="delete(c.idCour)"></td>
-                                                                <td>    <a [routerLink]="'/course-update/' + c.idCour" class="btn btn-success-dark" (click)="modifier(c.idCour)">Modifier</a></td>
-                                                                <td>    <a [routerLink]="'/add-ressource/' + c.idCour" class="btn btn-success-dark" (click)="modifier(c.idCour)">ajouter Ressource</a></td>
+																	<td > 
+																		<input type="button" value="Supprimer" class="btn btn-danger btn-sm" (click)="delete(c.idCour)"></td>
+																		<td > <a  [routerLink]="'/course-update/' + c.idCour" class="btn btn-primary btn-sm" (click)="modifier(c.idCour)">Modifier</a></td>
+																		<td > <a [routerLink]="'/add-ressource/' + c.idCour" class="btn btn-primary btn-sm" (click)="modifier(c.idCour)">Resource</a></td>
+																		<td > <a [routerLink]="'/ressource-materials/' + c.idCour" class="btn btn-primary btn-sm" (click)="modifier(c.idCour)">List</a></td>
+																	
 																
                                                                 
 															</tr>  

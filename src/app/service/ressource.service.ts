@@ -10,11 +10,5 @@ export class RessourceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  uploadRessource(file: File) {
-    const formData = new FormData();
-    formData.append('files', file);
-
-    return this.httpClient.post(this.apiUrl, formData);
   
-  }
 }

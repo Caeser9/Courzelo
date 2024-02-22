@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { HomeComponent } from './shared/home/home.component';
 import { CourseListComponent } from './cour/course-list/course-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddCourseComponent } from './cour/add-course/add-course.component';
@@ -13,19 +12,24 @@ import { CourseDeleteComponent } from './cour/course-delete/course-delete.compon
 import { CourseUpdateComponent } from './cour/course-update/course-update.component';
 import { StripeComponent } from './cour/stripe/stripe.component';
 import { AddRessourceComponent } from './cour/add-ressource/add-ressource.component';
+import { RessourceListComponent } from './cour/ressource-list/ressource-list.component';
+import { RessourceMaterialsComponent } from './cour/ressource-materials/ressource-materials.component';
+import { StructureComponent } from './shared/structure/structure.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    HomeComponent,
     CourseListComponent,
     AddCourseComponent,
     CourseDeleteComponent,
     CourseUpdateComponent,
     StripeComponent,
-    AddRessourceComponent
+    AddRessourceComponent,
+    RessourceListComponent,
+    RessourceMaterialsComponent,
+    StructureComponent
   ],
   imports: [
     BrowserModule,

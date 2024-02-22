@@ -30,13 +30,44 @@
                                 </form>
                             </div>
                             <div class="widget-btn">
-                                <a class="btn btn-black prev_btn">Previous</a>
-                                <a (click)="onUpload()"
-                                    class="btn btn-info-light next_btn">Continue</a>
+
+                                <a (click)="onUploadCourse()"
+                                    class="btn btn-info-light next_btn">upload </a>
                             </div>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>
+        <div class="widget-content multistep-form">
+            <fieldset id="first">
+                <div class="add-course-info">
+                    <div class="add-course-inner-header">
+                        <h4>Basic Information</h4>
+                    </div>
+                    <div class="add-course-form">
+                        <form #f="ngForm" (ngSubmit)="save(f)">
+                            <div class="input-block">
+                                <label class="add-course-label">Ressource Title</label>
+                                <input type="text" class="form-control" placeholder="Ressource Title" required ngModel #l="ngModel" [(ngModel)]="ressource.nomRessource" name="aa">
+                                <div class="alert alert-danger" *ngIf="l.invalid">
+                                    the nomCour is a required field !
+                                
+                                </div>
+
+                            </div>
+                            
+                           
+                            
+                            <button [disabled]="f.invalid" class="btn btn-success-dark" type="submit" (click)="affecterRessourceAcour()">modifier</button>
+                        </form>
+                    </div>
+                    <div class="widget-btn">
+                        <a class="btn btn-black">Back</a>
+                        <a class="btn btn-info-light next_btn">Ajouter Ressource</a>
+                    </div>
+                </div>
+            </fieldset>
     </div>
+    

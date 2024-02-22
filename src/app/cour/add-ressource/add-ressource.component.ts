@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { RessourceService } from 'src/app/service/ressource.service';
 import { course } from 'src/app/model/Course';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from 'src/app/service/course.service';
 import { Ressource } from "src/app/model/Ressource";
 import { HttpEventType, HttpResponse } from '@angular/common/http';
@@ -13,27 +13,16 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
   styleUrls: ['./add-ressource.component.css']
 })
 export class AddRessourceComponent {
- /* @ViewChild('fileInput') fileInput!: ElementRef;
-  ressourceData!: Uint8Array;
-
-  constructor(private reessourceService: RessourceService) { }
-
-  ngOnInit() { }
-
-  ajouter() {
-    const file = this.fileInput.nativeElement.files[0];
-    this.reessourceService.uploadRessource(file).subscribe((response) => {
-      console.log(response);
-    }, (error) => {
-      console.error(error);
-    });
+  generateRandomString = (num: number | undefined) => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result1 = Math.random().toString(36).substring(0, num);
+    return result1;
   }
-
-*/
+ num!:number
 course!:course
 id!:any
 ressource: Ressource = new Ressource();
-constructor(private ac:ActivatedRoute,private courseService:CourseService,private ressourceService: RessourceService) {
+constructor(private ac:ActivatedRoute,private courseService:CourseService,private ressourceService: RessourceService,private router: Router) {
 
 }
 
@@ -43,18 +32,7 @@ ngOnInit(){
 }
 save(f:NgForm){
   console.log(this.course.niveau)
-}/*
-modifier(){
-  console.log(this.id)
-  this.courseService.modifierCourse(this.id,this.course).subscribe(
-    () => {
-      alert("Cour modifier !!");
-    },
-    (error) => {
-      console.error("Erreur lors de l'ajout de la course :", error);
-    }
-  );
-}*/
+}
 selectedFile: File | null = null;
 onFileSelected(event: any): void {
   const fileInput = event.target as HTMLInputElement;
@@ -66,19 +44,61 @@ onFileSelected(event: any): void {
   }
 }
 
-onUpload(): void {
+onUploadCourse(): void {
   if (this.selectedFile) {
-    // Use the BlogService to upload the file
+    
     console.log(this.id);
     this.courseService.uploadPhoto(this.id, this.selectedFile).subscribe(
       (event: any) => {
         if (event.type === HttpEventType.UploadProgress) {
+         
           // Handle progress event
         } else if (event instanceof HttpResponse) {
           console.log('File is completely uploaded!', event);
           // Check the actual response and status here
+         
         }
-      },
+      } ,
+      (error: any) => {
+        console.error('Error uploading file:', error);
+      }
+    );
+
+  }
+}
+
+affecterRessourceAcour() {
+   
+
+  this.ressource.idRessource = this.generateRandomString(8);
+  console.log(this.ressource.nomRessource, "le id de ressource est " + this.ressource.idRessource);
+
+  return this.courseService.affecterRessourceAcour(this.id, this.ressource).subscribe(
+    () => {
+      alert("Ressource ajouté !!");
+      this.router.navigate(['/delete-course']);
+    },
+    (error) => {
+      console.error("Erreur lors de l'ajout de la Ressource :", error);
+    }
+  );
+}
+
+onUploadRessource(): void {
+  if (this.selectedFile) {
+    
+    console.log(this.id);
+    this.courseService.uploadPhoto(this.ressource.idRessource, this.selectedFile).subscribe(
+      (event: any) => {
+        if (event.type === HttpEventType.UploadProgress) {
+         
+          // Handle progress event
+        } else if (event instanceof HttpResponse) {
+          console.log('File is completely uploaded!', event);
+          // Check the actual response and status here
+         
+        }
+      } ,
       (error: any) => {
         console.error('Error uploading file:', error);
       }

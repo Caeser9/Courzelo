@@ -11,7 +11,8 @@ import { CourseService } from 'src/app/service/course.service';
 export class CourseListComponent implements OnInit {
   constructor(private CourseService:CourseService){}
   course!:any
-  listeCourse!:course[]
+  listeCourse!:course[];
+  search="";
   ngOnInit() {
     this.course=new course();
     this.course=this.CourseService.getCourse().subscribe((data) => {
@@ -21,8 +22,11 @@ export class CourseListComponent implements OnInit {
       console.error("Erreur lors de la récupération des données :", error);
     }
   );
-      
+     
    
+  }
+  getphoto(photo :string){
+    return this.CourseService.getPhoto(photo);
   }
 
   afficher(){
