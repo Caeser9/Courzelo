@@ -27,7 +27,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class CourServiceImpl implements ICourService{
+public class CourServiceImpl implements ICourService {
     @Value("${file.upload-dir}")
     private String uploadDir;
     @Autowired
@@ -36,29 +36,28 @@ public class CourServiceImpl implements ICourService{
     IUserRepository iUserRepository;
     @Autowired
     IRessourceRepository iRessourceRepository;
+
     @Override
     public Cour ajouterCour(Cour c) {
         String idc = RandomStringUtils.randomAlphabetic(10);
         c.setIdCour(idc);
         Date date = new Date();
         c.setDate(date);
-        List<Ressource> ressourceList=new ArrayList<>();
-        ressourceList=c.getRessourceList();
+        List<Ressource> ressourceList = new ArrayList<>();
+        ressourceList = c.getRessourceList();
         iRessourceRepository.saveAll(ressourceList);
         return iCourRepository.save(c);
     }
 
     @Override
-    public Cour modifierCour(Cour c ,String idc) {
-        log.info("***************************************************"+c.getNomCour());
-        Cour co=new Cour();
-        co=iCourRepository.findById(idc).get();
+    public Cour modifierCour(Cour c, String idc) {
+        log.info("***************************************************" + c.getNomCour());
+        Cour co = new Cour();
+        co = iCourRepository.findById(idc).get();
         co.setNomCour(c.getNomCour());
         co.setDescription(c.getDescription());
         co.setPrix(c.getPrix());
-        for(Ressource res:co.getRessourceList()){
-            co.getRessourceList().add(res);
-        }
+
         return iCourRepository.save(co);
 
 
@@ -66,7 +65,7 @@ public class CourServiceImpl implements ICourService{
 
     @Override
     public void supprimerCour(String id) {
-       Cour c=iCourRepository.findById(id).get();
+        Cour c = iCourRepository.findById(id).get();
         iCourRepository.delete(c);
     }
 
@@ -78,9 +77,9 @@ public class CourServiceImpl implements ICourService{
 
     @Override
     public List<Cour> findAllByOrderByDateDesc() {
-       for(Cour c:iCourRepository.findAllByOrderByDateDesc()){
-           log.info("le nom est \n"+c.getNomCour());
-       }
+        for (Cour c : iCourRepository.findAllByOrderByDateDesc()) {
+            log.info("le nom est \n" + c.getNomCour());
+        }
         return iCourRepository.findAllByOrderByDateDesc();
     }
 
@@ -88,12 +87,14 @@ public class CourServiceImpl implements ICourService{
     public List<Cour> findAllByNomCour(String nom) {
         return iCourRepository.findAllByNomCour(nom);
     }
+
     private String generateNewFileName(String originalFileName) {
         // You can customize this method to generate a unique file name.
         // For example, appending a timestamp or using a UUID.
         String timestamp = String.valueOf(System.currentTimeMillis());
         return timestamp + "_" + originalFileName;
     }
+
     @Override
     public String storeFile(MultipartFile file, String idCour) {
         String originalFileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -111,13 +112,18 @@ public class CourServiceImpl implements ICourService{
 
             Cour cour = iCourRepository.findById(idCour).get();
             cour.setPhoto(newFileName);
-            iCourRepository.save(cour); // Save the updated blog entity
+            iCourRepository.save(cour);
 
             return newFileName;
         } catch (IOException e) {
             throw new RuntimeException("Failed to store file: " + newFileName, e);
         }
     }
+
+
+
+
+
 
     @Override
     public Resource loadFileAsResource(String fileName) {
@@ -139,6 +145,50 @@ public class CourServiceImpl implements ICourService{
     public Cour getCCourByid(String id) {
         return iCourRepository.findById(id).get();
     }
+
+    @Override
+    public Cour affecterRessourcesACour(Ressource r, String idc) {
+        Cour co = iCourRepository.findById(idc).get();
+
+            if (iRessourceRepository.existsById(r.getIdRessource())) {
+                co.getRessourceList().add(r);
+                log.info("yessss");
+            }
+           else{
+             co.getRessourceList().add(r);
+            iRessourceRepository.save(r);
+                log.info("yessss shway");
+
+            }
+
+        return iCourRepository.save(co);
+    }
+
+    @Override
+    public String storeFileRessource(MultipartFile file, String idRessource) {
+            String originalFileName = StringUtils.cleanPath(file.getOriginalFilename());
+            String newFileName = generateNewFileName(originalFileName);
+
+            Path uploadPath = Paths.get(uploadDir);
+
+            try {
+                if (Files.notExists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                Path filePath = uploadPath.resolve(newFileName);
+                Files.copy(file.getInputStream(), filePath);
+
+                Ressource ressource = iRessourceRepository.findById(idRessource).get();
+                ressource.setPhoto(newFileName);
+                iRessourceRepository.save(ressource);
+
+                return newFileName;
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to store file: " + newFileName, e);
+            }
+        }
+
 
 
 }

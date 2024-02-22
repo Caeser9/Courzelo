@@ -1,6 +1,7 @@
 package com.example.mongonew.services;
 
 import com.example.mongonew.entities.Cour;
+import com.example.mongonew.entities.Ressource;
 import com.example.mongonew.entities.User;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,4 +18,6 @@ public interface ICourService {
     public String storeFile(MultipartFile file, String blogCode);
     public Resource loadFileAsResource(String fileName);
     public Cour getCCourByid(String id);
+    public Cour affecterRessourcesACour(Ressource r , String idc);
+    public String storeFileRessource(MultipartFile file, String idRessource);
 }

@@ -4,6 +4,7 @@ import com.example.mongonew.entities.Cour;
 import com.example.mongonew.entities.Ressource;
 import com.example.mongonew.entities.User;
 import com.example.mongonew.repository.ICourRepository;
+import com.example.mongonew.repository.IRessourceRepository;
 import com.example.mongonew.services.ICourService;
 import com.example.mongonew.services.IRessourceService;
 import com.stripe.Stripe;
@@ -31,8 +32,10 @@ public class CourController {
     ICourService iCourService;
 @Autowired
     IRessourceService iRessourceService;
-@Autowired
-ICourRepository iCourRepository;
+    @Autowired
+    ICourRepository iCourRepository;
+    @Autowired
+    IRessourceRepository iRessourceRepository;
     private final String stripeSecretKey ="sk_test_51K1TBAIBKkiTlXRIgX1qQhWhoWBv4IYaWpIXb0dml7OZjZtwjaxMtiILLjoEXupBoon5Zk810WAOkQvVYncB5C61009SjLwRZU";
     @PostMapping("/ajouterCour")
     public Cour ajouterCour( @RequestBody  Cour c) {
@@ -98,12 +101,24 @@ ICourRepository iCourRepository;
         log.info("bien ajoutée");
         return ResponseEntity.ok().body(fileName);
     }
-
+    @PostMapping("/uploadRessource/{id}")
+    public ResponseEntity<String>  storeFileRessource(@RequestParam("photo") MultipartFile file,@PathVariable("id") String idRessource) {
+        String fileName = iCourService.storeFile(file,idRessource);
+        Ressource r=iRessourceRepository.findById(idRessource).get();
+        r.setPhoto(fileName);
+        log.info("bien ajoutée");
+        return ResponseEntity.ok().body(fileName);
+    }
     @GetMapping("/download/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
         Resource resource = iCourService.loadFileAsResource(fileName);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
+    }
+
+@PostMapping("/affecterRessourcesACour/{idc}")
+    public Cour affecterRessourcesACour( @RequestBody  Ressource res ,@PathVariable("idc") String idc) {
+        return iCourService.affecterRessourcesACour(res,idc);
     }
     }

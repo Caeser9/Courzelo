@@ -19,6 +19,7 @@ public class Ressource {
     @Id
     private String idRessource;
     private String nomRessource;
+    private String photo;
     @DBRef
     private Cour cour;
 

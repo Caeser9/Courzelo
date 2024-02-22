@@ -2,6 +2,7 @@ package com.example.mongonew.services;
 
 import com.example.mongonew.entities.Ressource;
 import com.example.mongonew.repository.IRessourceRepository;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ public class RessourceServiceImpl implements IRessourceService {
     IRessourceRepository iRessourceRepository;
     @Override
     public Ressource ajouterRessource(Ressource ressource) {
+
         return iRessourceRepository.save(ressource);
 
     }
