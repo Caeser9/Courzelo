@@ -1,6 +1,7 @@
 package com.example.courzeloproject.Controller;
 
 import com.example.courzeloproject.Entite.Blog;
+import com.example.courzeloproject.Service.IInteractionsService;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import com.example.courzeloproject.Entite.Interactions;
@@ -8,6 +9,7 @@ import com.example.courzeloproject.Repository.BlogRepository;
 import com.example.courzeloproject.Service.BlogService;
 import com.example.courzeloproject.Service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.convert.ReadingConverter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,8 @@ public class BlogRestController {
 
     @Autowired
     private IBlogService iBlogService;
+    @Autowired
+    private IInteractionsService iInteractionsService;
     @PostMapping("/addBlogwithInter")
     public String AddBlogWithInteractions(@RequestBody Blog blog){
         iBlogService.addBlogWithInteractions(blog);
@@ -61,12 +65,31 @@ public class BlogRestController {
         return ResponseEntity.ok().body(fileName);
     }
 
-    @GetMapping("/download/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
+    @GetMapping("/download/{fileName}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable("fileName") String fileName) {
         Resource resource = iBlogService.loadFileAsResource(fileName);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
+
     }
+    /*@PostMapping("/addinteraction/{id}")
+    public ResponseEntity<Blog> addInteraction(@PathVariable("id") String blogCode,@RequestBody List<Interactions> interaction) {
+        Blog updatedBlog =iBlogService.addComment(blogCode,interaction);
+        return ResponseEntity.ok(updatedBlog);
+
+    }*/
+    @PostMapping("/addinteraction/{id}")
+    public ResponseEntity<Blog> addInteraction(@PathVariable("id") String blogCode,@RequestBody Interactions interaction) {
+        Blog updatedBlog = iBlogService.addInteractionToBlog(blogCode, interaction);
+        return ResponseEntity.ok(updatedBlog);
+    }
+        @GetMapping("/getinteractions/{id}")
+    public ResponseEntity<List<Interactions>> getComments(@PathVariable("id") String blogId) {
+        List<Interactions> comments = iInteractionsService.getAllInteractions(blogId);
+        return ResponseEntity.ok(comments);
+    }
+
+
 }
 

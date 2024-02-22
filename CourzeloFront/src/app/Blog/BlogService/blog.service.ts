@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {HttpClient}from "@angular/common/http";
 import { Blog } from '../BlogClass/blog';
+import { Interactions } from '../InteractionsClass/interactions';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +23,13 @@ export class BlogService {
   deleteBlog(id: string): Observable<any> {  
     return this.http.delete(`${this.baseUrl}/deleteBlog/${id}`, { responseType: 'text' });  
   }  
-  
   getBlog(id: string): Observable<Blog> {  
     return this.http.get<Blog>(`${this.baseUrl}/getDetailsBlog/${id}`);  
   }  
+  getComment(id: string): Observable<Interactions> {  
+    return this.http.get<Interactions>(`${this.baseUrl}/getinteractions/${id}`);  
+  }  
+  
   
   updateBlog(id: string, blog: Blog): Observable<Object> {  
     return this.http.put(`${this.baseUrl}/modifierBlog/${id}`, blog);  
@@ -39,11 +43,19 @@ export class BlogService {
 
     return this.http.post(uploadUrl, formData);
   }
+  downloadFile(fileName: string): Observable<Blob> {
+    const url = `${this.baseUrl}/download/${fileName}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
   getPhoto(photo: string): string{
     const photoUrl = `${this.baseUrl}/download/${photo}`;
 
     return `${this.baseUrl}/download/${photo}`;
+  }
+  addComment(id: string,comment: any): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post(`${this.baseUrl}`+`/addinteraction/${id}`, comment, { headers });
   }
     
 

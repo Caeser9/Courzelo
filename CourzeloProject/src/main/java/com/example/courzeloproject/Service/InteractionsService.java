@@ -7,6 +7,7 @@ import com.example.courzeloproject.Repository.InteractionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,5 +32,9 @@ public class InteractionsService implements IInteractionsService{
             blogRepository.save(associatedBlog);
             interactionsRepository.deleteById(id);
         }
+    }
+    public List<Interactions> getAllInteractions(String idBlog) {
+
+        return interactionsRepository.findInteractionsByBlogBlogCode(idBlog);
     }
 }

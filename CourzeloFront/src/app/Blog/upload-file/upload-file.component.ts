@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../BlogService/blog.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '../BlogClass/blog';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 
@@ -14,7 +14,7 @@ export class UploadFileComponent implements OnInit {
   private blogId: string = 'blog1'; // Replace with the actual blogId
   selectedFile: File | null = null;
 
-  constructor(private blogService: BlogService, private route: ActivatedRoute) { }
+  constructor(private blogService: BlogService, private route: ActivatedRoute, private router: Router) { }
   ngOnInit(): void {
     // Retrieve the blogCode from the route parameters
     this.route.params.subscribe(params => {
@@ -38,20 +38,23 @@ export class UploadFileComponent implements OnInit {
     if (this.selectedFile) {
       // Use the BlogService to upload the file
       console.log(this.blogId);
+  
       this.blogService.uploadPhoto(this.blogId, this.selectedFile).subscribe(
         (event: any) => {
           if (event.type === HttpEventType.UploadProgress) {
-            // Handle progress event
+            // const percentDone = Math.round((100 * event.loaded) / event.total);
+            // console.log(`File is ${percentDone}% uploaded.`);
           } else if (event instanceof HttpResponse) {
             console.log('File is completely uploaded!', event);
-            // Check the actual response and status here
+            
           }
         },
         (error: any) => {
-          console.error('Error uploading file:', error);
+          console.error('Error uploading file:', error);          
         }
       );
-
+      
     }
   }
+  
 }

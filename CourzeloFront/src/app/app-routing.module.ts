@@ -7,6 +7,9 @@ import { ListBlogComponent } from './Blog/list-blog/list-blog.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { UploadFileComponent } from './Blog/upload-file/upload-file.component';
 import { UpdateBlogComponent } from './Blog/update-blog/update-blog.component';
+import { BlogDetailsComponent } from './Blog/blog-details/blog-details.component';
+import { BlogGridsComponent } from './Blog/blog-grids/blog-grids.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
 
 const routes: Routes = [
   {path:"navbar",component:NavbarComponent},
@@ -15,7 +18,11 @@ const routes: Routes = [
   {path: "listBlog", component: ListBlogComponent},
   {path: "dashboard", component: UserDashboardComponent},
   {path:"upload/:id", component:UploadFileComponent},
-  {path:"updateBlog/:id", component: UpdateBlogComponent}
+  {path:"updateBlog/:id", component: UpdateBlogComponent},
+  {path: "detailsBlog/:id", component: BlogDetailsComponent},
+  {path:"blogsGrids", component: BlogGridsComponent},
+  { path: '**', pathMatch: 'full',  
+        component: NotFoundComponent }, 
 
 ];
 

@@ -14,8 +14,11 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BlogService } from './Blog/BlogService/blog.service';
 import { UploadFileComponent } from './Blog/upload-file/upload-file.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { UpdateBlogComponent } from './Blog/update-blog/update-blog.component';
+import { BlogDetailsComponent } from './Blog/blog-details/blog-details.component';
+import { BlogGridsComponent } from './Blog/blog-grids/blog-grids.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +29,11 @@ import { UpdateBlogComponent } from './Blog/update-blog/update-blog.component';
     ListBlogComponent,
     UserDashboardComponent,
     UploadFileComponent,
-    UpdateBlogComponent,    
+    UpdateBlogComponent,
+    BlogDetailsComponent,
+    BlogGridsComponent,
+    NotFoundComponent,
+    ServerErrorComponent,  
     
   ],
   imports: [
@@ -35,9 +42,13 @@ import { UpdateBlogComponent } from './Blog/update-blog/update-blog.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CKEditorModule
+    BrowserModule,
+    CKEditorModule,
+    
   ],
   providers: [BlogService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  
+}

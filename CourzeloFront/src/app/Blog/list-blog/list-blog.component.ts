@@ -31,6 +31,7 @@ export class ListBlogComponent implements OnInit{
     // Construct the image URL based on the backend API endpoint
     return this.blogService.getPhoto(blog.photo);
     
+    
   }
   deleteBlog(blog: Blog): void {
     

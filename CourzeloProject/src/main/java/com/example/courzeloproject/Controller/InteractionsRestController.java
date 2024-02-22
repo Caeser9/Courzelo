@@ -13,11 +13,7 @@ public class InteractionsRestController {
     @Autowired
     private IInteractionsService iInteractionsService;
 
-    @PostMapping("/addInter")
-    public String AddInteraction(@RequestBody Interactions interactions){
-        iInteractionsService.addInteraction(interactions);
-        return "Added Successfully";
-    }
+    
     @DeleteMapping("deteInter/{id}")
     public String deleteInteraction(@PathVariable("id") String id){
         iInteractionsService.deleteInteraction(id);

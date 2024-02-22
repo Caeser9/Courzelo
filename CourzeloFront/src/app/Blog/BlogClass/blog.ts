@@ -1,3 +1,5 @@
+import { Interactions } from "../InteractionsClass/interactions";
+
 export class Blog {
     
     blogCode!: string;
@@ -6,4 +8,6 @@ export class Blog {
     domaine! : string;
     contenu! : string;
     photo! : string;
+    interactions!: Interactions[];
+    
 }

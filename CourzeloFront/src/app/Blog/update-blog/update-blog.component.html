@@ -12,9 +12,9 @@
                             <div class="settings-menu p-0">
                                 <div class="profile-bg">
                                     <h5>Beginner</h5>
-                                    <img src="assets/img/instructor-profile-bg.jpg" alt>
+                                    <img src="/src/img/instructor-profile-bg.jpg" alt>
                                     <div class="profile-img">
-                                        <a href="instructor-profile.html"><img src="assets/img/user/user15.jpg" alt></a>
+                                        <a href="instructor-profile.html"><img src="/src/img/user/user15.jpg" alt></a>
                                     </div>
                                 </div>
                                 <div class="profile-group">
@@ -149,8 +149,8 @@
                                                         <div class="input-block">
                                                             <label class="add-course-label">Blog
                                                                 Content</label>
-                                                            <input type="text" class="form-control"
-                                                                [(ngModel)]="blog.contenu" name="Content" required>
+                                                            
+                                                                <ckeditor [editor]="Editor" [(ngModel)]="blog.contenu" name="contenu"></ckeditor>
                                                         </div>
 
 
@@ -185,19 +185,19 @@
     </div>
 
     <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="assets/js/jquery-3.7.1.min.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
+    <script src="/src/js/jquery-3.7.1.min.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
 
-    <script src="assets/js/bootstrap.bundle.min.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
+    <script src="/src/js/bootstrap.bundle.min.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
 
-    <script src="assets/plugins/feather/feather.min.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
+    <script src="/src/plugins/feather/feather.min.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
 
-    <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js"
+    <script src="/src/plugins/theia-sticky-sidebar/ResizeSensor.js"
         type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
-    <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"
+    <script src="/src/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"
         type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
 
-    <script src="assets/plugins/apexchart/apexcharts.min.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
-    <script src="assets/plugins/apexchart/chart-data.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
+    <script src="/src/plugins/apexchart/apexcharts.min.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
+    <script src="/src/plugins/apexchart/chart-data.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
 
     <script src="assets/js/script.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
     <script src="../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"

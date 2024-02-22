@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '../BlogClass/blog';
 import { map, of, switchMap } from 'rxjs';
 import { BlogService } from '../BlogService/blog.service';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-update-blog',
@@ -13,6 +14,7 @@ import { BlogService } from '../BlogService/blog.service';
 export class UpdateBlogComponent {
   blog!: Blog;
   feedback: any = {};
+  public Editor = ClassicEditor as any;
 
   constructor(private blogService: BlogService, private route: ActivatedRoute, private router: Router,
               private http: HttpClient) {

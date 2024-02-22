@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Blog } from 'src/app/Blog/BlogClass/blog';
 
 @Component({
   selector: 'app-navbar',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  
 }

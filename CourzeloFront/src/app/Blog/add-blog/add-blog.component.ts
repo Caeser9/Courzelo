@@ -4,8 +4,6 @@ import { Blog } from '../BlogClass/blog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import * as BalloonEditor from '@ckeditor/ckeditor5-build-balloon';
-
 
 @Component({
   selector: 'app-add-blog',
@@ -13,8 +11,6 @@ import * as BalloonEditor from '@ckeditor/ckeditor5-build-balloon';
   styleUrls: ['./add-blog.component.css']
 })
 export class AddBlogComponent implements OnInit {
-  
-
   Blogsaveform = new FormGroup({
     titreBlog: new FormControl('', [Validators.required, Validators.minLength(5)]),
     dateBlog: new FormControl(),
@@ -29,8 +25,10 @@ export class AddBlogComponent implements OnInit {
     domaine: '',
     contenu: '',
     photo: '',
+    interactions:[],
   };
   submitted = false;
+  public Editor = ClassicEditor as any;
 
   constructor(private blogService: BlogService, private router: Router) { }
 
@@ -40,29 +38,22 @@ export class AddBlogComponent implements OnInit {
     }
 
     const data = {
-
       titreBlog: this.Blogsaveform.get('titreBlog')!.value,
       dateBlog: this.Blogsaveform.get('dateBlog')!.value,
       domaine: this.Blogsaveform.get('domaine')!.value,
       contenu: this.Blogsaveform.get('contenu')!.value
     };
 
-
-    this.blogService.createBlog(data)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.submitted = true;
-          this.router.navigateByUrl(`/upload/${res.blogCode}`);
-          console.log("ahawa: ",res.blogCode)
-
-        },
-        error: (e) => console.error(e)
-      });
-
+    this.blogService.createBlog(data).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.submitted = true;
+        this.router.navigateByUrl(`/upload/${res.blogCode}`);
+        console.log("ahawa: ", res.blogCode);
+      },
+      error: (e) => console.error(e)
+    });
   }
-  
-  
 
   newBlog(): void {
     this.submitted = false;
@@ -73,10 +64,10 @@ export class AddBlogComponent implements OnInit {
       domaine: '',
       contenu: '',
       photo: '',
+      interactions:[],
     };
   }
 
   ngOnInit(): void {
   }
-  public Editor = BalloonEditor;
 }

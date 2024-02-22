@@ -21,6 +21,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -73,6 +75,7 @@ public class BlogService implements IBlogService{
 
     @Override
     public Blog addOnlyBlog(Blog blog) {
+        Calendar cal = Calendar.getInstance();
         blog.setDateBlog(LocalDate.now());
         return blogRepository.save(blog);
     }
@@ -123,6 +126,40 @@ public class BlogService implements IBlogService{
         } catch (MalformedURLException e) {
             throw new RuntimeException("File not found: " + fileName, e);
         }
+    }
+
+    /*@Override
+    public Blog addComment(String blogId, List<Interactions> comment) {
+        Blog blog = blogRepository.findById(blogId).orElse(null);
+
+        if (blog != null) {
+            if (blog.getInteractions() == null) {
+                blog.setInteractions(new ArrayList<>());
+            }
+            // Ajouter le nouveau commentaire à la liste existante
+            blog.getInteractions().addAll(comment);
+            return blogRepository.save(blog);
+        }
+        return null;
+    }*/
+    @Override
+    public Blog addInteractionToBlog(String blogId, Interactions interaction) {
+        Blog blog = blogRepository.findById(blogId).orElse(null);
+
+        if (blog != null) {
+            if (blog.getInteractions() == null) {
+                blog.setInteractions(new ArrayList<>());
+
+            }
+            interaction.setBlog(blog);
+            Interactions savedInteraction = interactionsRepository.save(interaction);
+            blog.getInteractions().add(savedInteraction);
+            blogRepository.save(blog);
+
+            return blog;
+        }
+
+        return null;
     }
 
 }
