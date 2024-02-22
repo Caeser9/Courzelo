@@ -14,7 +14,6 @@ import { StripeComponent } from './cour/stripe/stripe.component';
 import { AddRessourceComponent } from './cour/add-ressource/add-ressource.component';
 import { RessourceListComponent } from './cour/ressource-list/ressource-list.component';
 import { RessourceMaterialsComponent } from './cour/ressource-materials/ressource-materials.component';
-import { StructureComponent } from './shared/structure/structure.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +28,7 @@ import { StructureComponent } from './shared/structure/structure.component';
     AddRessourceComponent,
     RessourceListComponent,
     RessourceMaterialsComponent,
-    StructureComponent
+  
   ],
   imports: [
     BrowserModule,
