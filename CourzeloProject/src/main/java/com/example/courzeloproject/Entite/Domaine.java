@@ -18,9 +18,10 @@ import java.io.Serializable;
 @Document("Domaine")
 public class Domaine implements Serializable {
     @Id
-    private int id ;
+    private String id ;
     private String nom;
     private String description;
+    private String  photo;
 
 
 }
