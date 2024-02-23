@@ -1,25 +1,51 @@
-<div class="course-card">
-    <div *ngFor=" let r of ressource">
-    <h6 class="cou-title">
-        
-        <a class="collapsed" data-bs-toggle="collapse" href="#collapseOne" aria-expanded="false">{{r.nomRessource}}</a>
-    </h6>
-    <div id="collapseOne" class="card-collapse collapse" style="">
-        <ul>
-            <li>
-                <p><img src="" alt="" class="me-2">ssdfq</p>
-                <div>
-                    <a href="javascript:void(0);">Preview</a>
-                    <span>02:53</span>
+<div class="row">
+    <div class="col-md-12">
+        <div class="settings-widget">
+            <div class="settings-inner-blk p-0">
+                <div class="sell-course-head comman-space">
+                    <h3>Best Selling Courses</h3>
                 </div>
-            </li>
-            
-        </ul>
-    </div>
-</div>
-</div>
-
-    
+                
+                <div class="comman-space pb-0">
+                    <div class="settings-tickets-blk course-instruct-blk table-responsive">
 
 
-<!-- /Course Content -->
+                        <!-- Referred Users-->
+                        <div *ngFor=" let r of ressource">
+                        <table class="table table-nowrap mb-0">
+                         <tbody>
+                                <tr>
+                                    <td >
+                                        <div class="sell-table-group d-flex align-items-center">
+                                            <div class="sell-group-img">
+                                                <a href="course-details.html">
+                                                     {{r.nomRessource}}
+                                                </a>
+                                            </div>
+                                            <div class="sell-tabel-info">
+                                                
+                                            </div>
+                                            
+                                    
+                                        </div>
+                                    
+                                        <td > 
+                                            <input type="button" value="Supprimer" class="btn btn-danger btn-sm" (click)="DeleteRessource(r.idRessource)"></td>
+                               <td > <a  [routerLink]="'/course-update/' " class="btn btn-primary btn-sm" >Modifier</a></td>
+                               <td > <a [routerLink]="'/add-ressource/' " class="btn btn-primary btn-sm" >Resource</a></td>
+                               <td > <a [routerLink]="'/ressource-materials/' " class="btn btn-primary btn-sm" >List</a></td>
+                                        
+                                    
+                                    
+                                </tr>  
+                            </tbody>
+                         </table>
+                        </div>
+                         </div>
+                          </div>
+                        <!-- /Referred Users-->	
+                   </div>									
+                </div>
+            </div>
+        </div>
+
