@@ -1,6 +1,8 @@
 package com.example.mongonew.services;
 
+import com.example.mongonew.entities.Cour;
 import com.example.mongonew.entities.Ressource;
+import com.example.mongonew.repository.ICourRepository;
 import com.example.mongonew.repository.IRessourceRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Service
 public class RessourceServiceImpl implements IRessourceService {
@@ -20,12 +23,41 @@ public class RessourceServiceImpl implements IRessourceService {
 
     @Autowired
     IRessourceRepository iRessourceRepository;
+    @Autowired
+    ICourRepository iCourRepository;
     @Override
     public Ressource ajouterRessource(Ressource ressource) {
 
         return iRessourceRepository.save(ressource);
 
     }
+
+    @Override
+    public List<Ressource> getRessource() {
+        return iRessourceRepository.findAll();
+    }
+
+    @Override
+    public void supprimerRessource(String idr) {
+       Ressource r= iRessourceRepository.findById(idr).get();
+         iRessourceRepository.delete(r);
+    }
+
+    @Override
+    public Ressource modifierRessource(Ressource r, String idr) {
+
+        Ressource res = iRessourceRepository.findById(idr).get();
+        res.setNomRessource(r.getNomRessource());
+        return iRessourceRepository.save(res);
+    }
+
+    @Override
+    public List<Ressource> getRessourcesByCourId(String id) {
+            Cour cour = iCourRepository.findById(id).get();
+            return cour.getRessourceList(); // Suppose que getRessources() est une méthode qui retourne le tableau de ressources
+        }
+
+
 
     @Override
     public String uploadImage(Model model, MultipartFile file) {

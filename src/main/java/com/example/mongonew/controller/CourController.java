@@ -55,6 +55,10 @@ public class CourController {
     public Cour getCCourByid(@PathVariable("id") String id) {
         return iCourService.getCCourByid(id);
     }
+    @GetMapping("/getRessourcesByCourId/{id}")
+    public List<Ressource> getRessourcesByCourId(@PathVariable("id") String id) {
+        return iRessourceService.getRessourcesByCourId(id);
+    }
     @PostMapping("/ajouterRessource")
     public Ressource ajouterRessource( @RequestBody Ressource ressource)
     {
@@ -121,4 +125,9 @@ public class CourController {
     public Cour affecterRessourcesACour( @RequestBody  Ressource res ,@PathVariable("idc") String idc) {
         return iCourService.affecterRessourcesACour(res,idc);
     }
+    @DeleteMapping("/supprimerRessource/{id}")
+    public void supprimerRessource( @PathVariable("id") String id) {
+        iRessourceService.supprimerRessource(id);
+    }
+
     }
