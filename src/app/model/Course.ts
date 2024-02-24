@@ -8,4 +8,5 @@ export class course {
     ressource!:Ressource[];
     photo!:string;
     prix!:any
+    note!: number | null; 
   }

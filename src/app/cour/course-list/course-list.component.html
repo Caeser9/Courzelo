@@ -82,7 +82,7 @@
                                     <a href="course-details.html">
                                         <img *ngIf="c.photo"
                                         [src]="getphoto(c.photo)"
-                                        alt="Blog Photo" class="img-fluid "> 
+                                         class="img-fluid "> 
                                     </a>
                                     <div class="price">
                                         <h3>${{c.prix}}<span>$99.00</span></h3>
@@ -101,17 +101,14 @@
                                             <p>12+ Lesson</p>
                                         </div>
                                         <div class="course-view d-flex align-items-center">
-                                            <img src="assets/img/icon/icon-02.svg" alt="">
-                                            <p>{{ c.niveau}}</p>
+                                             <p>{{ c.niveau}}</p>
                                         </div>
                                     </div>
                                     <div class="rating">							
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span class="d-inline-block average-rating"><span>4.0</span> (15)</span>
+                                        <span> 
+                                            <ngb-rating [max]="5"  ngModel="ratingcontrol"   ></ngb-rating>
+
+                                            </span> 
                                     </div>
                                     <div class="course-group d-flex mb-0">
                                         <div class="course-group-img d-flex">
@@ -316,73 +313,25 @@
                             <div class="latest-head">
                                 <h4 class="card-title">Latest Courses</h4>
                             </div>
+                            <div *ngFor="let courseR of courseRecente">
                             <ul class="latest-posts">
                                 <li>
                                     <div class="post-thumb">
                                         <a href="course-details.html">
-                                            <img class="img-fluid" src="assets/img/blog/blog-01.jpg" alt="">
-                                        </a>
+                                            <img *ngIf="courseR.photo"
+                                            [src]="getphoto(courseR.photo)" >                                  
+                                             </a>
                                     </div>
                                     <div class="post-info free-color">
                                         <h4>
-                                            <a href="course-details.html">Introduction LearnPress – LMS plugin</a>
+                                            <a href="course-details.html">{{courseR.nomCour}}</a>
                                         </h4>
-                                        <p>FREE</p>
+                                        <p>{{courseR.prix}}</p>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="post-thumb">
-                                        <a href="course-details.html">
-                                            <img class="img-fluid" src="assets/img/blog/blog-02.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="post-info">
-                                        <h4>
-                                            <a href="course-details.html">Become a PHP Master and Make Money</a>
-                                        </h4>
-                                        <p>$200</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/blog/blog-03.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="post-info free-color">
-                                        <h4>
-                                            <a href="blog-details.html">Learning jQuery Mobile for Beginners</a>
-                                        </h4>
-                                        <p>FREE</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-thumb">
-                                        <a href="course-details.html">
-                                            <img class="img-fluid" src="assets/img/blog/blog-01.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="post-info">
-                                        <h4>
-                                            <a href="course-details.html.html">Improve Your CSS Workflow with SASS</a>
-                                        </h4>
-                                        <p>$200</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-thumb ">
-                                        <a href="course-details.html">
-                                            <img class="img-fluid" src="assets/img/blog/blog-02.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="post-info free-color">
-                                        <h4>
-                                            <a href="course-details.html">HTML5/CSS3 Essentials in 4-Hours</a>
-                                        </h4>
-                                        <p>FREE</p>
-                                    </div>
-                                </li>
+                               
                             </ul>
+                        </div>
                         </div>
                     </div>
                     <!-- /Latest Posts -->

@@ -14,6 +14,8 @@ import { StripeComponent } from './cour/stripe/stripe.component';
 import { AddRessourceComponent } from './cour/add-ressource/add-ressource.component';
 import { RessourceListComponent } from './cour/ressource-list/ressource-list.component';
 import { RessourceMaterialsComponent } from './cour/ressource-materials/ressource-materials.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RatingComponent } from './cour/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -28,13 +30,20 @@ import { RessourceMaterialsComponent } from './cour/ressource-materials/ressourc
     AddRessourceComponent,
     RessourceListComponent,
     RessourceMaterialsComponent,
-  
+    RatingComponent,
+   
+
+    
+     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
+    
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
