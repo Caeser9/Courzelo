@@ -6,6 +6,7 @@ import com.example.mongonew.entities.User;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ICourService {
@@ -20,4 +21,6 @@ public interface ICourService {
     public Cour getCCourByid(String id);
     public Cour affecterRessourcesACour(Ressource r , String idc);
     public String storeFileRessource(MultipartFile file, String idRessource);
+    List<Cour> findCoursByDateGreaterThan();
+
 }

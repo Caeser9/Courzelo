@@ -21,6 +21,8 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -189,6 +191,14 @@ public class CourServiceImpl implements ICourService {
             }
         }
 
+    @Override
+    public List<Cour> findCoursByDateGreaterThan() {
+        LocalDate dateActuelleMoins20Jours = LocalDate.now().minusDays(3);
+
+        Date dateMoins20Jours = Date.from(dateActuelleMoins20Jours.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        return iCourRepository.findByDateGreaterThan(dateMoins20Jours);
+    }
 
 
 }

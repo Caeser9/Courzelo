@@ -13,4 +13,5 @@ public interface ICourRepository extends MongoRepository<Cour,String> {
     public List<Cour> findByDateYearBetween (int d1 , int d2);
     List<Cour> findAllByOrderByDateDesc();
     List<Cour> findAllByNomCour(String  nom);
+    List<Cour> findByDateGreaterThan(Date date);
 }

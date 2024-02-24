@@ -13,6 +13,7 @@ import com.stripe.param.PaymentIntentCreateParams;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -129,5 +131,8 @@ public class CourController {
     public void supprimerRessource( @PathVariable("id") String id) {
         iRessourceService.supprimerRessource(id);
     }
-
+    @GetMapping("/findCoursByDateGreaterThan")
+    public List<Cour> findCoursByDateGreaterThan() {
+        return iCourService.findCoursByDateGreaterThan();
+    }
     }
