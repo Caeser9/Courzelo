@@ -9,11 +9,14 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './shared/home/home.component';
 import { ListDomaineComponent } from './domaine/list-domaine/list-domaine.component';
-import { AjoutDomaineComponent } from './ajout-domaine/ajout-domaine.component';
+import { AjoutDomaineComponent } from './domaine/ajout-domaine/ajout-domaine.component';
 import { DeleteDomaineComponent } from './domaine/delete-domaine/delete-domaine.component';
 import { UpdateDomaineComponent } from './domaine/update-domaine/update-domaine.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PhotoComponent } from './photo/photo.component';
+
+import { AddCommentaireComponent } from './commentaire/add-commentaire/add-commentaire.component';
+import { ListeCommentaireComponent } from './commentaire/liste-commentaire/liste-commentaire.component';
 
 
 
@@ -28,7 +31,10 @@ import { PhotoComponent } from './photo/photo.component';
     AjoutDomaineComponent,
     DeleteDomaineComponent,
     UpdateDomaineComponent,
-    PhotoComponent
+    PhotoComponent,
+  
+    AddCommentaireComponent,
+        ListeCommentaireComponent
   ],
   imports: [
     BrowserModule,

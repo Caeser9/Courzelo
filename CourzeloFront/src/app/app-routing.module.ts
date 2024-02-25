@@ -5,8 +5,10 @@ import { HomeComponent } from './shared/home/home.component';
 import { ListDomaineComponent } from './domaine/list-domaine/list-domaine.component';
 import { UpdateDomaineComponent } from './domaine/update-domaine/update-domaine.component';
 import { DeleteDomaineComponent } from './domaine/delete-domaine/delete-domaine.component';
-import { AjoutDomaineComponent } from './ajout-domaine/ajout-domaine.component';
+import { AjoutDomaineComponent } from './domaine/ajout-domaine/ajout-domaine.component';
 import { PhotoComponent } from './photo/photo.component';
+import { AddCommentaireComponent } from './commentaire/add-commentaire/add-commentaire.component';
+import { ListeCommentaireComponent } from './commentaire/liste-commentaire/liste-commentaire.component';
 
 const routes: Routes = [
   {path:"navbar",component:NavbarComponent},
@@ -15,7 +17,9 @@ const routes: Routes = [
   { path: 'addDomaine', component:AjoutDomaineComponent},
   { path: 'update-domaine/:id', component:UpdateDomaineComponent},
   { path: 'deleteDomain/:id', component:DeleteDomaineComponent},
-  { path: 'uploadimg/:id', component:PhotoComponent}
+  { path: 'uploadimg/:id', component:PhotoComponent},
+  { path: 'addCommentaire', component:AddCommentaireComponent},
+  { path: 'commentaires', component:ListeCommentaireComponent},
 
 
 

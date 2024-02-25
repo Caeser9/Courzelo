@@ -10,4 +10,5 @@ public class CourzeloProjectApplication {
         SpringApplication.run(CourzeloProjectApplication.class, args);
     }
 
+
 }
