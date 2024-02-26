@@ -1,6 +1,8 @@
 <body>
+
     <div class="main-wrapper">
-        <div class="page-content instructor-page-content">
+
+        <div class="page-content">
             <div class="container">
                 <div class="row">
 
@@ -20,7 +22,7 @@
                                         <p>Instructor</p>
                                     </div>
                                     <div class="go-dashboard text-center">
-                                        <a href="add-course.html" class="btn btn-primary">Create New Course</a>
+                                        <a routerLink="/addBlog" class="btn btn-primary">Create New Blog</a>
                                     </div>
                                 </div>
                             </div>
@@ -29,17 +31,13 @@
                             <div class="settings-menu">
                                 <h3>DASHBOARD</h3>
                                 <ul>
+
                                     <li class="nav-item active">
-                                        <a href="instructor-dashboard.html" class="nav-link">
-                                            <i class="feather-home"></i> My Dashboard
+                                        <a routerLink="/listBlog" class="nav-link">
+                                            <i class="feather-book"></i> My Blogs
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="instructor-course.html" class="nav-link">
-                                            <i class="feather-book"></i> My Courses
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a href="instructor-reviews.html" class="nav-link">
                                             <i class="feather-star"></i> Reviews
                                         </a>
@@ -68,12 +66,12 @@
                                         <a href="instructor-tickets.html" class="nav-link">
                                             <i class="feather-server"></i> Support Tickets
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
-                                <div class="instructor-title">
+                                <!-- <div class="instructor-title">
                                     <h3>ACCOUNT SETTINGS</h3>
-                                </div>
-                                <ul>
+                                </div> -->
+                                <!-- <ul>
                                     <li class="nav-item">
                                         <a href="instructor-edit-profile.html" class="nav-link ">
                                             <i class="feather-settings"></i> Edit Profile
@@ -114,7 +112,7 @@
                                             <i class="feather-power"></i> Sign Out
                                         </a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </div>
                         </div>
                     </div>
@@ -122,138 +120,114 @@
 
                     <div class="col-xl-9 col-lg-8 col-md-12">
                         <div class="row">
-                            <div class="col-md-4 d-flex">
-                                <div class="card instructor-card w-100">
-                                    <div class="card-body">
-                                        <div class="instructor-inner">
-                                            <h6>REVENUE</h6>
-                                            <h4 class="instructor-text-success">$467.34</h4>
-                                            <p>Earning this month</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 d-flex">
-                                <div class="card instructor-card w-100">
-                                    <div class="card-body">
-                                        <div class="instructor-inner">
-                                            <h6>STUDENTS ENROLLMENTS</h6>
-                                            <h4 class="instructor-text-info">12,000</h4>
-                                            <p>New this month</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 d-flex">
-                                <div class="card instructor-card w-100">
-                                    <div class="card-body">
-                                        <div class="instructor-inner">
-                                            <h6>COURSES RATING</h6>
-                                            <h4 class="instructor-text-warning">4.80</h4>
-                                            <p>Rating this month</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card instructor-card">
-                                    <div class="card-header">
-                                        <h4>Earnings</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="instructor_chart"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card instructor-card">
-                                    <div class="card-header">
-                                        <h4>Order</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="order_chart"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-12">
                                 <div class="settings-widget">
                                     <div class="settings-inner-blk p-0">
                                         <div class="sell-course-head comman-space">
-                                            <h3>Best Selling Courses</h3>
+                                            <h3>My Blogs </h3>
+                                            <p>Manage your blogs and its update like interactions, delete and insight.
+                                            </p>
                                         </div>
                                         <div class="comman-space pb-0">
+                                            <div class="instruct-search-blk">
+                                                <div class="show-filter choose-search-blk">
+                                                    <form action="#">
+                                                        <div class="row gx-2 align-items-center">
+                                                            <div class="col-md-6 col-item">
+                                                                <div class=" search-group">
+                                                                    <i class="feather-search"></i>
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="Search our courses">
+                                                                </div>
+                                                                <a (click)="approveAllBlogs()"
+                                                                        class="btn btn-success">Approve All</a>
+                                                            </div>
+
+                                                            <div class="col-md-6 col-lg-6 col-item">
+                                                                <div class="input-block select-form mb-0">
+                                                                    
+                                                                    <select class="form-select select" name="sellist1">
+                                                                        <option>Choose</option>
+                                                                        <option>Angular</option>
+                                                                        <option>React</option>
+                                                                        <option>Node</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                             <div class="settings-tickets-blk course-instruct-blk table-responsive">
 
-                                                <table class="table table-nowrap mb-0">
+                                                <table class="table table-nowrap mb-2">
+
                                                     <thead>
                                                         <tr>
-                                                            <th>COURSES</th>
-                                                            <th>SALES</th>
-                                                            <th>AMOUNT</th>
+                                                            <th>Blogs</th>
+                                                            <th>Likes</th>
+                                                            <th>Comments</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
+                                                        <tr *ngFor="let blog of blogs; let i = index;">
                                                             <td>
                                                                 <div class="sell-table-group d-flex align-items-center">
                                                                     <div class="sell-group-img">
-                                                                        <a href="course-details.html">
-                                                                            <img src="assets/img/course/course-10.jpg"
-                                                                                class="img-fluid " alt>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="sell-tabel-info">
+
+                                                                        <img *ngIf="blog.photo"
+                                                                            [src]="getBlogPhotoUrl(blog)"
+                                                                            alt="Blog Photo" class="img-fluid ">
 
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>34</td>
-                                                            <td>$3,145.23</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="sell-table-group d-flex align-items-center">
-                                                                    <div class="sell-group-img">
-                                                                        <a href="course-details.html">
-                                                                            <img src="assets/img/course/course-11.jpg"
-                                                                                class="img-fluid " alt>
-                                                                        </a>
-                                                                    </div>
                                                                     <div class="sell-tabel-info">
-                                                                        <p><a href="course-details.html">Wordpress for
-                                                                                Beginners - Master Wordpress Quickly</a>
+                                                                        <p><a
+                                                                                [routerLink]="['/detailsBlog/', blog.blogCode]">
+                                                                                {{blog.titreBlog}}
+                                                                            </a>
                                                                         </p>
+
+                                                                        <div
+                                                                            class="course-info d-flex align-items-center border-bottom-0 pb-0">
+                                                                            <div
+                                                                                class="rating-img d-flex align-items-center">
+                                                                                <img src="assets/img/icon/icon-01.svg"
+                                                                                    alt>
+                                                                                <p>{{blog.domaine}}</p>
+                                                                            </div>
+                                                                            <div
+                                                                                class="course-view d-flex align-items-center">
+                                                                                <img src="assets/img/icon/timer-start.svg"
+                                                                                    alt>
+                                                                                <p>{{blog.dateBlog}}</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td>34</td>
-                                                            <td>$3,145.23</td>
-                                                        </tr>
-                                                        <tr>
                                                             <td>
-                                                                <div class="sell-table-group d-flex align-items-center">
-                                                                    <div class="sell-group-img">
-                                                                        <a href="course-details.html">
-                                                                            <img src="assets/img/course/course-12.jpg"
-                                                                                class="img-fluid " alt>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="sell-tabel-info">
-                                                                        <p><a href="course-details.html">Sketch from A
-                                                                                to Z (2022): Become an app designer</a>
-                                                                        </p>
-                                                                    </div>
+                                                                <p><a href="course-details.html">
+                                                                        {{blog.blogCode}}
+                                                                    </a>
+                                                                </p>
+                                                            </td>
+                                                            <td>
+                                                                <!-- <button (click)="deleteBlog(blog)"
+                                                                    class="btn btn-danger">Delete</button>
+                                                                <div class="go-dashboard text-center">
+
+                                                                    <button (click)="navigateToUpdate(blog.blogCode)"
+                                                                        class="btn btn-primary">Update</button>
+                                                                </div> -->
+
+                                                                <div
+                                                                    class="profile-share d-flex align-items-center justify-content-center">
+                                                                    <a (click)="approveBlog(blog.blogCode)"
+                                                                        class="btn btn-success">Approve</a>
+                                                                    <a (click)="deleteBlog(blog)"
+                                                                        class="btn btn-danger">Delete</a>
                                                                 </div>
                                                             </td>
-                                                            <td>34</td>
-                                                            <td>$3,145.23</td>
-                                                        </tr>
                                                     </tbody>
                                                 </table>
 
@@ -273,21 +247,20 @@
 
 
     <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="assets/js/jquery-3.7.1.min.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
+    <script src="assets/js/jquery-3.7.1.min.js" type="dfcfb3dcda4aeddb1b95665d-text/javascript"></script>
 
-    <script src="assets/js/bootstrap.bundle.min.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
+    <script src="assets/js/bootstrap.bundle.min.js" type="dfcfb3dcda4aeddb1b95665d-text/javascript"></script>
 
-    <script src="assets/plugins/feather/feather.min.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
+    <script src="assets/plugins/select2/js/select2.min.js" type="dfcfb3dcda4aeddb1b95665d-text/javascript"></script>
+
+    <script src="assets/plugins/feather/feather.min.js" type="dfcfb3dcda4aeddb1b95665d-text/javascript"></script>
 
     <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js"
-        type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
+        type="dfcfb3dcda4aeddb1b95665d-text/javascript"></script>
     <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"
-        type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
+        type="dfcfb3dcda4aeddb1b95665d-text/javascript"></script>
 
-    <script src="assets/plugins/apexchart/apexcharts.min.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
-    <script src="assets/plugins/apexchart/chart-data.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
-
-    <script src="assets/js/script.js" type="3c06c95822b092a85bfd0cdf-text/javascript"></script>
+    <script src="assets/js/script.js" type="dfcfb3dcda4aeddb1b95665d-text/javascript"></script>
     <script src="../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
-        data-cf-settings="3c06c95822b092a85bfd0cdf-|49" defer></script>
+        data-cf-settings="dfcfb3dcda4aeddb1b95665d-|49" defer></script>
 </body>

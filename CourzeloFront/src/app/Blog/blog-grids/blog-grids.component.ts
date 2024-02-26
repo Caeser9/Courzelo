@@ -17,7 +17,7 @@ export class BlogGridsComponent {
     this.fetchBlogs();
   }
   fetchBlogs(): void {
-    this.blogService.getBlogList()
+    this.blogService.getAprovedBlogs()
       .subscribe({
         next: (blogs) => {
           this.blogs = blogs;

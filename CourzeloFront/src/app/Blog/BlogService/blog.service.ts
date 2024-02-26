@@ -14,6 +14,12 @@ export class BlogService {
   getBlogList(): Observable<any> {  
     return this.http.get(`${this.baseUrl}`+'/getAllBlogs');  
   }  
+  getToAprovedBlogs(): Observable<any> {  
+    return this.http.get(`${this.baseUrl}`+'/getAllUnapprovedBlogs');  
+  }  
+  getAprovedBlogs(): Observable<any> {  
+    return this.http.get(`${this.baseUrl}`+'/getAprovedBlogs');  
+  }  
   
   createBlog(blogData: any): Observable<any> {
     const headers = { 'Content-Type': 'application/json' };
@@ -26,6 +32,7 @@ export class BlogService {
   getBlog(id: string): Observable<Blog> {  
     return this.http.get<Blog>(`${this.baseUrl}/getDetailsBlog/${id}`);  
   }  
+ 
   getComment(id: string): Observable<Interactions> {  
     return this.http.get<Interactions>(`${this.baseUrl}/getinteractions/${id}`);  
   }  
@@ -56,6 +63,22 @@ export class BlogService {
   addComment(id: string,comment: any): Observable<any> {
     const headers = { 'Content-Type': 'application/json' };
     return this.http.post(`${this.baseUrl}`+`/addinteraction/${id}`, comment, { headers });
+  }
+  addReply(id: string,reply: any): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post(`${this.baseUrl}`+`/addReponse/${id}`, reply, { headers });
+  }
+  approveBlog(id: string): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.put(`${this.baseUrl}`+`/approveBlog/${id}`,{ headers });
+  }
+  approveAllBlogs(): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.put(`${this.baseUrl}`+`/approveAll`,{ headers });
+  }
+  getReplies(interactionId: string): Observable<Interactions[]> {
+    const url = `${this.baseUrl}/getReplies/${interactionId}`;
+    return this.http.get<Interactions[]>(url);
   }
     
 

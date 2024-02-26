@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface InteractionsRepository extends MongoRepository<Interactions, String> {
     List<Interactions> findInteractionsByBlogBlogCode(String blogCode);
+
 }

@@ -7,6 +7,8 @@ import com.example.courzeloproject.Repository.InteractionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,4 +39,15 @@ public class InteractionsService implements IInteractionsService{
 
         return interactionsRepository.findInteractionsByBlogBlogCode(idBlog);
     }
+    public List<Interactions> getReplies(String interactionId) {
+
+        Optional<Interactions> interaction = interactionsRepository.findById(interactionId);
+
+        if (interaction.isPresent()) {
+            return interaction.get().getReplay();  // Assuming getReplay() returns the list of replies
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
 }

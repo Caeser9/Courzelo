@@ -25,6 +25,7 @@ export class AddBlogComponent implements OnInit {
     domaine: '',
     contenu: '',
     photo: '',
+    status:false,
     interactions:[],
   };
   submitted = false;
@@ -64,6 +65,7 @@ export class AddBlogComponent implements OnInit {
       domaine: '',
       contenu: '',
       photo: '',
+      status:false,
       interactions:[],
     };
   }

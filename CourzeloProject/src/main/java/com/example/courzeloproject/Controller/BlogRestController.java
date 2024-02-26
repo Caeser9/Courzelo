@@ -42,9 +42,24 @@ public class BlogRestController {
         return iBlogService.addOnlyBlog(blog);
     }
 
-    @GetMapping("/getAllBlogs")
+    @GetMapping("/getAllUnapprovedBlogs")
+    public List<Blog> showAllUnapprovedBlogs(){
+        return iBlogService.getAllUnaprovedBlogs();
+    } @GetMapping("/getAllBlogs")
     public List<Blog> showAllBlogs(){
         return iBlogService.getAllBlogs();
+    }
+    @GetMapping("/getAprovedBlogs")
+    public List<Blog> showAllAprovedBlogs(){
+        return iBlogService.getAllAprovedBlogs();
+    }
+    @PutMapping("/approveBlog/{id}")
+    public Blog approveBlog(@PathVariable("id") String id){
+        return iBlogService.ApproveBlog(id);
+    }
+    @PutMapping("/approveAll")
+    public List<Blog> approveAllBlogs(){
+        return iBlogService.ApproveAllBlogs();
     }
     @GetMapping("/getDetailsBlog/{id}")
     public Blog detailsBlog(@PathVariable("id") String id){
@@ -59,19 +74,19 @@ public class BlogRestController {
         iBlogService.deleteBlog(id);
         return "Blog Deleted";
     }
+    //upload image
     @PostMapping("/upload/{id}")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("photo") MultipartFile file,@PathVariable("id") String blogCode) {
-        String fileName = iBlogService.storeFile(file,blogCode);
-        return ResponseEntity.ok().body(fileName);
-    }
+    public Blog handleFileUpload(@RequestParam("photo") MultipartFile file,@PathVariable("id") String blogCode) {
 
+        return iBlogService.storeFile(file,blogCode);
+    }
+    //affichage image
     @GetMapping("/download/{fileName}")
     public ResponseEntity<Resource> downloadFile(@PathVariable("fileName") String fileName) {
         Resource resource = iBlogService.loadFileAsResource(fileName);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
-
     }
     /*@PostMapping("/addinteraction/{id}")
     public ResponseEntity<Blog> addInteraction(@PathVariable("id") String blogCode,@RequestBody List<Interactions> interaction) {
@@ -79,15 +94,25 @@ public class BlogRestController {
         return ResponseEntity.ok(updatedBlog);
 
     }*/
+
+        @GetMapping("/getinteractions/{id}")
+    public ResponseEntity<List<Interactions>> getComments(@PathVariable("id") String blogId) {
+        List<Interactions> comments = iInteractionsService.getAllInteractions(blogId);
+        return ResponseEntity.ok(comments);
+    }   @GetMapping("/getReplies/{id}")
+    public ResponseEntity<List<Interactions>> getReplies(@PathVariable("id") String commentId) {
+        List<Interactions> comments = iInteractionsService.getReplies(commentId);
+        return ResponseEntity.ok(comments);
+    }
     @PostMapping("/addinteraction/{id}")
     public ResponseEntity<Blog> addInteraction(@PathVariable("id") String blogCode,@RequestBody Interactions interaction) {
         Blog updatedBlog = iBlogService.addInteractionToBlog(blogCode, interaction);
         return ResponseEntity.ok(updatedBlog);
     }
-        @GetMapping("/getinteractions/{id}")
-    public ResponseEntity<List<Interactions>> getComments(@PathVariable("id") String blogId) {
-        List<Interactions> comments = iInteractionsService.getAllInteractions(blogId);
-        return ResponseEntity.ok(comments);
+    @PostMapping("/addReponse/{id}")
+    public ResponseEntity<Interactions> addReponse(@PathVariable("id") String commentId,@RequestBody Interactions reply) {
+        Interactions updatedReplies = iBlogService.addReply(commentId, reply);
+    return ResponseEntity.ok(updatedReplies);
     }
 
 

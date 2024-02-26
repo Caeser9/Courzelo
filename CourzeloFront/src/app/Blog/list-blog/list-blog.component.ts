@@ -8,10 +8,13 @@ import { Router } from '@angular/router';
   templateUrl: './list-blog.component.html',
   styleUrls: ['./list-blog.component.css']
 })
-export class ListBlogComponent implements OnInit{
+export class ListBlogComponent implements OnInit {
   blogs: Blog[] = [];
+  filteredBlogs: Blog[] = [];
+  searchInput: string = '';
+  sortBy: keyof Blog = 'blogCode';
 
-  constructor(private blogService: BlogService ,private router : Router ) {}
+  constructor(private blogService: BlogService, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchBlogs();
@@ -21,29 +24,54 @@ export class ListBlogComponent implements OnInit{
       .subscribe({
         next: (blogs) => {
           this.blogs = blogs;
+          this.filteredBlogs = this.blogs;
+          this.sortBlogs();
         },
         error: (error) => {
           console.error(error);
         }
       });
-  }  
+  }
+  sortBlogs(): void {
+    // Sort the blogs array based on the selected field and direction
+    this.blogs.sort((a, b) => {
+      if (a[this.sortBy] < b[this.sortBy]) {
+        return 1;
+      } else if (a[this.sortBy] > b[this.sortBy]) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  
+  // Update the sorting field and call sortBlogs
+  onSortChange(): void {
+    this.sortBlogs();
+  }
   getBlogPhotoUrl(blog: Blog): string {
-    // Construct the image URL based on the backend API endpoint
     return this.blogService.getPhoto(blog.photo);
-    
-    
   }
   deleteBlog(blog: Blog): void {
-    
+
     this.blogService.deleteBlog(blog.blogCode).subscribe(() => {
-      
+
       this.blogs = this.blogs.filter((b) => b.blogCode !== blog.blogCode);
     });
+    this.fetchBlogs();
   }
   navigateToUpdate(blogId: string): void {
     this.router.navigate(['/updateBlog/', blogId]);
   }
   navigateToAddBlog() {
     this.router.navigate(['/addBlog']);
+  }
+  onSearch(): void {
+    console.log('Search Input:', this.searchInput);
+    
+    this.filteredBlogs = this.blogs.filter(blog =>
+      blog.titreBlog.toLowerCase().includes(this.searchInput.toLowerCase())||blog.domaine.toLowerCase().includes(this.searchInput.toLowerCase()) ||blog.dateBlog.toLowerCase().includes(this.searchInput.toLowerCase())     
+    );
+    console.log('All Blogs:', this.blogs);
   }
 }

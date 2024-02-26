@@ -8,6 +8,7 @@ export class Blog {
     domaine! : string;
     contenu! : string;
     photo! : string;
+    status! : boolean;
     interactions!: Interactions[];
     
 }

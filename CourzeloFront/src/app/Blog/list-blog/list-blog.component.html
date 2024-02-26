@@ -131,27 +131,30 @@
                                         <div class="comman-space pb-0">
                                             <div class="instruct-search-blk">
                                                 <div class="show-filter choose-search-blk">
-                                                    <form action="#">
-                                                        <div class="row gx-2 align-items-center">
-                                                            <div class="col-md-6 col-item">
-                                                                <div class=" search-group">
-                                                                    <i class="feather-search"></i>
-                                                                    <input type="text" class="form-control"
-                                                                        placeholder="Search our courses">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6 col-lg-6 col-item">
-                                                                <div class="input-block select-form mb-0">
-                                                                    <select class="form-select select" name="sellist1">
-                                                                        <option>Choose</option>
-                                                                        <option>Angular</option>
-                                                                        <option>React</option>
-                                                                        <option>Node</option>
-                                                                    </select>
-                                                                </div>
+
+                                                    <div class="row gx-2 align-items-center">
+                                                        <div class="col-md-6 col-item">
+                                                            <div class=" search-group">
+                                                                <i class="feather-search"></i>
+                                                                <input type="text" class="form-control"
+                                                                    [(ngModel)]="searchInput" placeholder="Search blog"
+                                                                    (input)="onSearch()">
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                        <div class="col-md-6 col-lg-6 col-item">
+                                                            <div class="input-block select-form mb-0">
+                                                                <select class="form-select select" id="sortBy"
+                                                                    [(ngModel)]="sortBy" (change)="onSortChange()">
+                                                                    <option value="blogCode">Choose</option>
+                                                                    <option value="dateBlog">Date</option>
+                                                                    <option value="domaine">Domaines</option>
+                                                                    <option value="titreBlog">Titres </option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                             <div class="settings-tickets-blk course-instruct-blk table-responsive">
@@ -160,12 +163,12 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Blogs</th>
-                                                            <th>Likes</th>
+                                                            <th>Status</th>
                                                             <th>Comments</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let blog of blogs; let i = index;">
+                                                        <tr *ngFor="let blog of filteredBlogs">
                                                             <td>
                                                                 <div class="sell-table-group d-flex align-items-center">
                                                                     <div class="sell-group-img">
@@ -176,7 +179,8 @@
 
                                                                     </div>
                                                                     <div class="sell-tabel-info">
-                                                                        <p><a [routerLink]="['/detailsBlog/', blog.blogCode]">
+                                                                        <p><a
+                                                                                [routerLink]="['/detailsBlog/', blog.blogCode]">
                                                                                 {{blog.titreBlog}}
                                                                             </a>
                                                                         </p>
@@ -200,10 +204,11 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <p><a href="course-details.html">
-                                                                        {{blog.blogCode}}
-                                                                    </a>
-                                                                </p>
+                                                                <span class="badge info-low"
+                                                                    *ngIf="blog.status==true">Approved</span>
+                                                                <span class="badge info-high"
+                                                                    *ngIf="blog.status==false">In progress</span>
+
                                                             </td>
                                                             <td>
                                                                 <!-- <button (click)="deleteBlog(blog)"
@@ -218,7 +223,7 @@
                                                                     class="profile-share d-flex align-items-center justify-content-center">
                                                                     <a (click)="navigateToUpdate(blog.blogCode)"
                                                                         class="btn btn-success">Update</a>
-                                                                    <a  (click)="deleteBlog(blog)"
+                                                                    <a (click)="deleteBlog(blog)"
                                                                         class="btn btn-danger">Delete</a>
                                                                 </div>
                                                             </td>

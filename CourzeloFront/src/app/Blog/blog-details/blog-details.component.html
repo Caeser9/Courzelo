@@ -5,8 +5,8 @@
 
                 <div class="blog" *ngIf="blog">
                     <div class="blog-image">
-                        <a href="blog-details.html"><img class="img-fluid" *ngIf="blog" [src]="getBlogPhotoUrl(blog)"
-                                alt="Post Image"></a>
+                        <a [routerLink]="['/detailsBlog/', blog.blogCode]"><img class="img-fluid" *ngIf="blog"
+                                [src]="getBlogPhotoUrl(blog.photo)" alt="Post Image"></a>
                     </div>
                     <div class="blog-info clearfix">
                         <div class="post-left">
@@ -26,10 +26,6 @@
                     <h3 class="blog-title">{{blog.titreBlog}}</h3>
                     <div class="blog-content" *ngIf="interaction">
                         <div [innerHTML]="blog.contenu"></div>
-                        <!-- <div >
-                            <p >comments:  </p>
-
-                        </div> -->
                         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
                             rel="stylesheet">
                         <div class="container bootdey">
@@ -40,35 +36,87 @@
                                         <div class="media-block">
 
                                             <div class="card review-sec" *ngFor="let comment of comments">
-                                                <div class="card-body">
-                                                    <h5 class="subs-title">Reviews</h5>
-                                                    <div class="instructor-wrap">
-                                                        <div class="about-instructor">
-                                                            <!-- <div class="abt-instructor-img">
-                                                                <a href="instructor-profile.html"><img src="assets/img/user/user1.jpg"
-                                                                        alt="img" class="img-fluid"></a>
-                                                            </div> -->
-                                                            <div class="instructor-detail">
-                                                                <h5><a href="instructor-profile.html">{{comment.id}}</a>
-                                                                </h5>
-                                                                <p>UX/UI Designer</p>
+                                                <div class="comman-space bdr-bottom-line">
+                                                    <div class="instruct-review-blk ">
+                                                        <div class="review-item">
+                                                            <div class="instructor-wrap border-0 m-0">
+                                                                <div class="about-instructor">
+
+                                                                    <div class="instructor-detail">
+                                                                        <h5><a
+                                                                                href="instructor-profile.html">User 1</a>
+                                                                        </h5>
+                                                                        <p>UX/UI Designer</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="rating">
+                                                                    <i class="fas fa-star filled"></i>
+                                                                    <i class="fas fa-star filled"></i>
+                                                                    <i class="fas fa-star filled"></i>
+                                                                    <i class="fas fa-star filled"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="rating">
-                                                            <i class="fas fa-star filled"></i>
-                                                            <i class="fas fa-star filled"></i>
-                                                            <i class="fas fa-star filled"></i>
-                                                            <i class="fas fa-star filled"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <span class="d-inline-block average-rating">4.5 Instructor
-                                                                Rating</span>
+                                                            <p class="rev-info">“ {{comment.commentaire}} “
+                                                            </p>
+                                                            <a href="javascript:void(0);" class="btn btn-reply"
+                                                                (click)="toggleReplyInput(comment.id)"><i
+                                                                    class="feather-corner-up-left"></i> Reply</a>
                                                         </div>
                                                     </div>
-                                                    <p class="rev-info">“ {{comment.commentaire}} “</p>
-                                                    <a href="javascript:void(0);" class="btn btn-reply"><i
-                                                            class="feather-corner-up-left"></i> Reply</a>
+                                                </div>
+                                                <div *ngIf="comment.replay && comment.replay.length > 0">
+                                                    <div class="comman-space bdr-bottom-line"
+                                                        *ngFor="let reply of comment.replay">
+                                                        <div class="instruct-review-blk ">
+                                                            <div class="review-item">
+                                                                <div class="instructor-wrap border-0 m-0">
+                                                                    <div class="about-instructor">
+
+                                                                        <div class="instructor-detail">
+                                                                            <h5><a
+                                                                                    href="instructor-profile.html">User 2</a>
+                                                                            </h5>
+                                                                            <p>UX/UI Designer</p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <p class="rev-info">“ {{ reply.commentaire}} “
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="chat-window">
+                                                    <div class="chat-cont-right"
+                                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;"
+                                                        *ngIf="showReplyInput[comment.id]">
+                                                        <div class="chat-footer" style="width: 150%;">
+                                                            <div class="input-group">
+                                                                <div class="btn-file btn">
+                                                                    <i class="fa fa-paperclip"></i>
+                                                                    <input type="file">
+                                                                </div>
+                                                                <form (ngSubmit)="addReply(comment.id)">
+                                                                    <input type="text"
+                                                                        class="input-msg-send form-control" name="reply"
+                                                                        [(ngModel)]="replyText"
+                                                                        placeholder="Add a reply">
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary msg-send-btn rounded-pill"><img
+                                                                            src="/assets/img/send-icon.svg"
+                                                                            alt="interaction"></button>
+                                                                </form>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+
+
 
                                             <!-- <div class="input-block">
                                                 <textarea rows="4" class="form-control" placeholder="Your Comments"
@@ -80,18 +128,24 @@
                                             </div> -->
 
                                             <div class="chat-window">
-                                                <div class="chat-cont-right" style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                                <div class="chat-cont-right"
+                                                    style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
                                                     <div class="chat-footer" style="width: 150%;">
                                                         <div class="input-group">
                                                             <div class="btn-file btn">
                                                                 <i class="fa fa-paperclip"></i>
                                                                 <input type="file">
                                                             </div>
-                                                            <input type="text" class="input-msg-send form-control" name="commentaire"
-                                                                placeholder="Type your message here..." [(ngModel)]="interaction.commentaire">
+                                                            <input type="text" class="input-msg-send form-control"
+                                                                name="commentaire"
+                                                                placeholder="Type your message here..."
+                                                                [(ngModel)]="interaction.commentaire">
                                                             <button (click)="addInteraction()" type="submit"
                                                                 class="btn btn-primary msg-send-btn rounded-pill"><img
-                                                                    src="/assets/img/send-icon.svg" alt=""></button>
+                                                                    src="/assets/img/send-icon.svg"
+                                                                    alt="interaction"></button>
+
+
                                                         </div>
                                                     </div>
                                                 </div>

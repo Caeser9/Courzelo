@@ -45,9 +45,9 @@ export class UploadFileComponent implements OnInit {
             // const percentDone = Math.round((100 * event.loaded) / event.total);
             // console.log(`File is ${percentDone}% uploaded.`);
           } else if (event instanceof HttpResponse) {
-            console.log('File is completely uploaded!', event);
-            
+            console.log('File is completely uploaded!', event);           
           }
+          this.router.navigateByUrl(`/listBlog`);
         },
         (error: any) => {
           console.error('Error uploading file:', error);          

@@ -1,5 +1,6 @@
 export class Interactions {
-    id! : String;
-    commentaire!: String;
+    id! : string;
+    commentaire!: string;
+    replay!:Interactions[];
     
 }

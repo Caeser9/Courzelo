@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection ="interactions")
+@Document(collection = "interactions")
 public class Interactions {
     @Id
     private String id;
@@ -28,6 +28,11 @@ public class Interactions {
     @JsonIgnore
     @DBRef
     private Blog blog;
+    @DBRef
+    List<Interactions> replay;
+    @JsonIgnore
+    @DBRef
+    Interactions parentInteraction;
 
 
 }

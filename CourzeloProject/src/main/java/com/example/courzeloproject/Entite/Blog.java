@@ -31,7 +31,7 @@ public class Blog {
     private String domaine;
     @NotBlank
     private String contenu;
-
+    private Boolean status ;
     private String  photo;
     @JsonIgnore
     @DBRef

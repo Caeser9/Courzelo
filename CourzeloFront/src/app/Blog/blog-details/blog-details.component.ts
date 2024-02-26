@@ -17,14 +17,23 @@ export class BlogDetailsComponent implements OnInit {
   interaction: Interactions = {
     id: '',
     commentaire: '',
+    replay:[],
   };
   submitted = false;
+  replies: Interactions[] = [];
+  currentCommentId: string | null = null;
+  replyText: string = '';
+  showReplyInput: { [key: string]: boolean } = {};
+  currentCommentReplies: Interactions[]=[];
 
   constructor(private blogService: BlogService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getBlogById();
     this.getCommentaires();
+    // this.getRepliesForComment(this.currentCommentId!);
+
+
   }
 
   getBlogPhotoUrl(photoName: any): string {
@@ -48,11 +57,12 @@ export class BlogDetailsComponent implements OnInit {
   }
   getCommentaires(): void {
     const blogId = this.route.snapshot.paramMap.get('id');
+    
     if (blogId) {
       this.blogService.getComment(blogId).subscribe(
         (comments) => {
           this.comments = Array.isArray(comments) ? comments : [];
-          
+
           console.log(this.comments);
         },
         (error) => {
@@ -61,25 +71,7 @@ export class BlogDetailsComponent implements OnInit {
       );
     }
   }
-  // getBlogByIdAndComments(): void {
-  //   const blogId = this.route.snapshot.paramMap.get('id');
-  //   if (blogId) {
-  //     this.blogService.getBlog(blogId).pipe(
-  //       concatMap(blog => this.blogService.getComment(blogId).pipe(
-  //         map(comments => Array.isArray(comments) ? comments : [])
-  //       ))
-  //     ).subscribe(
-  //       ([blog, comments]) => {
-  //         this.blog = blog;
-  //         this.comments = comments;
-  //       },
-  //       (error) => {
-  //         console.error(error);
-  //       }
-  //     );
-  //   }
-  // }
-
+  
   addInteraction(): void {
     const blogId = this.route.snapshot.paramMap.get('id');
     if (blogId) {
@@ -96,20 +88,66 @@ export class BlogDetailsComponent implements OnInit {
       );
     }
   }
-  // getComments(): void {
-  //   const blogId = this.route.snapshot.paramMap.get('id');
-  //   if (blogId) {
-  //     this.blogService.getComment(blogId).subscribe(
-  //       (comments) => {
-  //         this.interaction = comments;
-  //         console.log(comments.commentaire)
+  toggleReplyInput(commentId: string): void {
+    this.showReplyInput[commentId] = !this.showReplyInput[commentId];
+    this.currentCommentId = this.showReplyInput[commentId] ? commentId : null;
+  }
+
+  getRepliesForComment(commentId: string): void {
+    if (commentId) {
+      this.blogService.getReplies(commentId).subscribe(
+        (replies) => {
+          this.currentCommentReplies = Array.isArray(replies) ? replies : [];
+          console.log("hedhy"+this.currentCommentReplies);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+  // addReply(): void {
+  //   const commentId = this.currentCommentId;
+  //   if (commentId) {
+  //     const reply: Interactions = {
+  //       id: uuid.v4(),
+  //       commentaire: this.replyText, // Set the text from the replyText property
+  //     };
+
+  //     this.blogService.addReply(commentId, reply).subscribe(
+  //       (response) => {
+  //         console.log('Réponse ajoutée avec succès', response);
+  //         this.replyText = ''; // Clear the replyText
+  //         this.getCommentaires();
+  //         this.getRepliesForComment(commentId); // Update the list of replies for the parent comment
   //       },
   //       (error) => {
-  //         console.error(error);
+  //         console.error('Erreur lors de l\'ajout de la réponse', error);
   //       }
   //     );
   //   }
   // }
+  addReply(commentId: string): void {
+    if (commentId) {
+      const reply: Interactions = {
+        id: uuid.v4(),
+        commentaire: this.replyText,
+        replay: [],  // Ensure that each reply has its own array for potential nested replies
+      };
 
+      // Assuming your server-side logic correctly associates the reply with the selected comment
+      this.blogService.addReply(commentId, reply).subscribe(
+        (response) => {
+          console.log('Réponse ajoutée avec succès', response);
+          this.replyText = '';
+          this.getCommentaires();
+          this.getRepliesForComment(commentId);
+        },
+        (error) => {
+          console.error('Erreur lors de l\'ajout de la réponse', error);
+        }
+      );
+    }
+  }
 }
 
