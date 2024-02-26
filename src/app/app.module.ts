@@ -15,8 +15,9 @@ import { AddRessourceComponent } from './cour/add-ressource/add-ressource.compon
 import { RessourceListComponent } from './cour/ressource-list/ressource-list.component';
 import { RessourceMaterialsComponent } from './cour/ressource-materials/ressource-materials.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RatingComponent } from './cour/rating/rating.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,8 +30,7 @@ import { RatingComponent } from './cour/rating/rating.component';
     StripeComponent,
     AddRessourceComponent,
     RessourceListComponent,
-    RessourceMaterialsComponent,
-    RatingComponent,
+    RessourceMaterialsComponent
    
 
     
@@ -42,6 +42,9 @@ import { RatingComponent } from './cour/rating/rating.component';
     HttpClientModule,
     FormsModule,
     NgbModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatButtonModule,
     
     
   ],

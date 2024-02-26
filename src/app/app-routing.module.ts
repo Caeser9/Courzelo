@@ -10,6 +10,7 @@ import { AddRessourceComponent } from './cour/add-ressource/add-ressource.compon
 import { RessourceListComponent } from './cour/ressource-list/ressource-list.component';
 import { RessourceMaterialsComponent } from './cour/ressource-materials/ressource-materials.component';
 
+
 const routes: Routes = [
   {path:"courselist",component:CourseListComponent},
   {path:"add-course",component:AddCourseComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:"course-stripe" ,component:StripeComponent},
   {path:"add-ressource/:id" ,component:AddRessourceComponent},
   {path:"ressource-list/:id",component:RessourceListComponent},
-  {path:"ressource-materials/:id",component:RessourceMaterialsComponent}
+  {path:"ressource-materials/:id",component:RessourceMaterialsComponent},
+
 
 
 ];
