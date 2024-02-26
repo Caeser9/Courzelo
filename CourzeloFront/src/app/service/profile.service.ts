@@ -40,7 +40,7 @@ export class ProfileService {
     return this.httpClient.post(`${this.profileURL}/addProfile`, profile, httpOptions);
   }
 
-  getProfileById(id: number) {
+  getProfileById(id: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.tokenStorageService.getToken(),
@@ -49,7 +49,7 @@ export class ProfileService {
     };
     return this.httpClient.get(`${this.profileURL}/getProfile/${id}`, httpOptions)
   }
-  modifyProfile( profile: Profile) {
+  modifyProfile( id: any, profile: Profile) {
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.tokenStorageService.getToken(),
@@ -57,7 +57,7 @@ export class ProfileService {
       })
     };
 
-    return this.httpClient.put(`${this.profileURL}/modify-profile`, profile, httpOptions).pipe(
+    return this.httpClient.put(`${this.profileURL}/modify-profile/${id}`, profile, httpOptions).pipe(
       tap(() => {
         this.refreshRequired.next();
       })

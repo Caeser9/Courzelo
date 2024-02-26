@@ -36,8 +36,8 @@
                             <form action="https://dreamslms.dreamstechnologies.com/html/instructor-dashboard.html"
                              [formGroup]="loginForm" (ngSubmit)="login()"  *ngIf="!isLoggedIn">
                                 <div class="input-block">
-                                    <label class="form-control-label">Username</label>
-                                    <input id="username" [(ngModel)]="user.username" type="email" class="form-control" placeholder="Enter your email Username" formControlName="username">
+                                    <label class="form-control-label">Email</label>
+                                    <input id="username" [(ngModel)]="user.username" type="email" class="form-control" placeholder="Enter your email " formControlName="username">
                                     <div class="invalid-feedback">
                                         {{
                                         loginForm.get("username").hasError("required")

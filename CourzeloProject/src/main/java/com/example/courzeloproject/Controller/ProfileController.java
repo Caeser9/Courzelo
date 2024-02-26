@@ -37,8 +37,8 @@ public class ProfileController {
     public void removeProfile(@PathVariable("profile-id") String bId) {
         profileService.deleteProfile(bId);
     }
-    @PutMapping("/modify-profile")
-    public Profile modifyBloc(@RequestBody Profile p) {
-       return profileService.updateProfile(p);
+    @PutMapping("/modify-profile/{id}")
+    public Profile modifyBloc(@RequestBody Profile p,@PathVariable("id") String id) {
+       return profileService.updateProfile(id,p);
     }
 }

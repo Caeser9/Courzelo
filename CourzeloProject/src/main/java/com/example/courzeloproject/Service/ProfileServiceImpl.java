@@ -25,8 +25,15 @@ public class ProfileServiceImpl implements IProfileService{
     }
 
     @Override
-    public Profile updateProfile(Profile p) {
-        return repo.save(p);
+    public Profile updateProfile(String id , Profile profile) {
+        Profile existingProfile = this.repo.findById(id).get();
+
+        existingProfile.setFirstName(profile.getFirstName());
+        existingProfile.setLastName(profile.getLastName());
+        existingProfile.setAddress(profile.getAddress());
+        existingProfile.setPhone(profile.getPhone());
+        existingProfile.setUser(profile.getUser());
+        return this.repo.save(existingProfile) ;
     }
 
     @Override

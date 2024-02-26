@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit{
 }
 login(){
   console.log(this.user)
-  this.authService.signInWithId(this.user).subscribe(
+  this.authService.signinWithEmail(this.user).subscribe(
     (data) =>{
       this.user = data;
       
@@ -45,21 +45,21 @@ login(){
         this.isLoggedIn = true;
         this.isLoginFailed = false;
            
-        if (this.user.roles == ERole.ROLE_ADMIN) {
+     ///   if (this.user.roles == ERole.ROLE_ADMIN) {
           console.log("wsel lena ")
           this.profileService.getProfileByIdUser(this.user.id).subscribe(
             (data) => {
               this.profile = data  
               console.log("Profile", data)
               if (this.profile != null) {
-                this.router.navigate([`/home`])
+                this.router.navigate([`/editProfile/`])
               } else {
-                this.router.navigate([`/navbar`])
+                this.router.navigate([`/addProfile/`])
               }
   
             })
 
-            }//lena nkamel el routee 
+          //  }//lena nkamel el routee 
     }
   },
     (error) => {

@@ -143,7 +143,7 @@
                                                 <div class="input-block">
                                                     <label class="form-control-label">First Name</label>
                                                     <input type="text" class="form-control" placeholder="Enter your first Name" formControlName="firstName" required
-                                                        [(ngModel)]="profileUser!.firstName" pInputText
+                                                        [(ngModel)]="profile!.firstName" pInputText
                                                         [ngClass]="!profileForm.controls['firstName'].valid && profileForm.controls['firstName']?.touched?'ng-invalid ng-dirty':''">
                                                 </div>
                                                 
@@ -161,7 +161,7 @@
                                                 <div class="input-block">
                                                     <label class="form-control-label">Last Name</label>
                                                     <input type="text" class="form-control" placeholder="Enter your last Name" formControlName="lastName" required
-                                                        [(ngModel)]="profileUser.lastName"
+                                                        [(ngModel)]="profile.lastName"
                                                         [ngClass]="!profileForm.controls['lastName'].valid && profileForm.controls['lastName']?.touched?'ng-invalid ng-dirty':''">
                                                     </div>
                                                     <small class="text-red-500"
@@ -177,7 +177,7 @@
                                                 <div class="input-block">
                                                     <label class="form-control-label">Phone</label>
                                                     <input type="text" class="form-control" placeholder="Enter your Phone" formControlName="phone" required
-                                                        [(ngModel)]="profileUser.phone"
+                                                        [(ngModel)]="profile.phone"
                                                         [ngClass]="!profileForm.controls['phone'].valid && profileForm.controls['phone']?.touched?'ng-invalid ng-dirty':''">
                                                 </div>
                                                 <small class="text-red-500" *ngIf="!profileForm.controls['phone'].valid && profileForm.controls['phone']?.touched "
@@ -210,14 +210,14 @@
                                                 <div class="input-block">
                                                     <label class="form-control-label">Address</label>
                                                     <input type="text" class="form-control" placeholder="Address" formControlName="address" required
-                                                        [(ngModel)]="profileUser.address"
+                                                        [(ngModel)]="profile.address"
                                                         [ngClass]="!profileForm.controls['address'].valid && profileForm.controls['address']?.touched?'ng-invalid ng-dirty':''">
                                                 </div>
                                             </div>
 
       
                                             <div class="update-profile">
-                                                <button type="button" class="btn btn-primary"  (click)="updateProfile(profileUser)">Update Profile</button>
+                                                <button type="button" class="btn btn-primary"  (click)="addProfile()">add Profile</button>
                                             </div>
                                         </div>
                                     </form>

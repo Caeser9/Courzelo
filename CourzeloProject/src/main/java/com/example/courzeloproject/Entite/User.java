@@ -3,10 +3,7 @@ package com.example.courzeloproject.Entite;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,6 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class User {
 
     @Id
@@ -37,29 +35,28 @@ public class User {
     @Size(max = 120)
     private String password;
 
-//    @NotBlank
-//    @Size(max = 120)
-//    private String nom;
-//
-//    @NotBlank
-//    @Size(max = 120)
-//    private String prenom;
-//
-//    @NotBlank
-//    @Size(max = 120)
-//    private Date dateNaissance;
-
-//    @NotBlank
-//    @Size(max = 120)
-//    private String Photo;
-
-
     @DBRef
     private Set<Role> roles = new HashSet<>();
+
+    private String verificationCode;
+
+    private String resetPasswordToken;
+    private boolean enabled;
+    private boolean active;
 
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
+        this.password = password;
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String identification, String password, boolean dummy) {
+        this.username = identification;
         this.password = password;
     }
 }

@@ -15,8 +15,18 @@ import java.util.List;
 public class UserController {
     @Autowired
     IUserService userService ;
+
     @GetMapping("/formateurs/{role}")
     public List<User> getFormateur(@PathVariable("role") String role){
         return userService.getUserByRole(role) ;
     }
+    @GetMapping("/connect/{verificationCode}")
+    public String verifyUser(@PathVariable String verificationCode) {
+        if (userService.verify(verificationCode)) {
+            return "verify_success";
+        } else {
+            return "verify_fail";
+        }
+    }
+
 }

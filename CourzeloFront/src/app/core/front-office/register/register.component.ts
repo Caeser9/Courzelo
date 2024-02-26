@@ -30,7 +30,6 @@ export class RegisterComponent implements OnInit {
       confirmPassword:[''],
     }
     
-    //nzidhaa wa9et nzid confirmer mot de passe 
     ,
       {
         validator: MustMatch('password', 'confirmPassword')
@@ -42,17 +41,16 @@ export class RegisterComponent implements OnInit {
   register() {
   console.log(this.user.password)
     this.user.roles = [ERole.ROLE_PARTICIPANT]
-    this.authService.signupWithUsername(this.user).subscribe(
-
+    console.log(this.user)
+    this.authService.signupWithEmail(this.user).subscribe(
       (data) => {
 
        console.log("kdhee el user " , this.user)
-        this._routes.navigate(['/navbar']);
+        this._routes.navigate(['/verify-code']);
 
       },
       (error) => {
-       console.log("mamchetech");
-
+       console.log("erreur register .component")
       }
     );
   }

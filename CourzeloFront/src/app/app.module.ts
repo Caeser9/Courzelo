@@ -14,6 +14,8 @@ import { EditProfileComponent } from './core/back-office/User/edit-profile/edit-
 import { SideBarComponent } from './shared/side-bar/side-bar.component';
 import { AdminListComponent } from './core/back-office/User/admin-list/admin-list.component';
 import { StudentListComponent } from './core/back-office/User/student-list/student-list.component';
+import { AddProfileComponent } from './core/back-office/User/add-profile/add-profile.component';
+import { TwoWayFactorPageComponent } from './core/front-office/two-way-factor-page/two-way-factor-page.component';
 
 
 
@@ -28,7 +30,9 @@ import { StudentListComponent } from './core/back-office/User/student-list/stude
     EditProfileComponent,
     SideBarComponent,
     StudentListComponent,
-    AdminListComponent
+    AdminListComponent,
+    AddProfileComponent,
+    TwoWayFactorPageComponent
     
   ],
   imports: [

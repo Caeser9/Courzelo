@@ -46,15 +46,14 @@ export class EditProfileComponent implements OnInit{
 
   }
 
-  modifyProfile(profileModifided = new Profile()) {
+  updateProfile(profileModifided = new Profile()) {
     profileModifided.user.id = this.user.id
-    this.profileService.modifyProfile(profileModifided).subscribe(
+    console.log("Profil modifier =",profileModifided)
+    this.profileService.modifyProfile(this.profileUser.id,profileModifided).subscribe(
       () => {
-
 
         this.router.navigate(['/home']);
        
-
       },
       (error) => {
        console.log("matbadalech")
