@@ -1,5 +1,6 @@
 package com.example.courzeloproject.Controller;
 
+import com.example.courzeloproject.Entite.ERole;
 import com.example.courzeloproject.Entite.Profile;
 import com.example.courzeloproject.Entite.User;
 import com.example.courzeloproject.Service.IProfileService;
@@ -16,9 +17,9 @@ public class UserController {
     @Autowired
     IUserService userService ;
 
-    @GetMapping("/formateurs/{role}")
-    public List<User> getFormateur(@PathVariable("role") String role){
-        return userService.getUserByRole(role) ;
+    @GetMapping("/{role}")
+    public List<User> getFormateur(@PathVariable("role") ERole role){
+        return userService.getUsersByRole(role) ;
     }
     @GetMapping("/connect/{verificationCode}")
     public String verifyUser(@PathVariable String verificationCode) {

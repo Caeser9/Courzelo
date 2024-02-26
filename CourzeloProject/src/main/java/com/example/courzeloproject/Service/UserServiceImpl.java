@@ -1,11 +1,14 @@
 package com.example.courzeloproject.Service;
 
+import com.example.courzeloproject.Entite.ERole;
+import com.example.courzeloproject.Entite.Role;
 import com.example.courzeloproject.Entite.User;
 import com.example.courzeloproject.Repository.UserRepo;
 import com.example.courzeloproject.dto.MailDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,8 +32,23 @@ public class UserServiceImpl implements IUserService{
     public void deleteUser(User u){
         repo.delete(u);
     }
-    public List<User> getUserByRole(String role){
-        return repo.findAllByRoles(role);
+//    public List<User> getUserByRole(String role){
+//        return repo.findByRolesName(role);
+//    }
+    public List<User> getUsersByRole(ERole roleName) {
+        List<User> users = repo.findAll();
+        List<User> usersWithRole = new ArrayList<>();
+
+        for (User user : users) {
+            for (Role role : user.getRoles()) {
+                if (role.getName().equals(roleName)) {
+                    usersWithRole.add(user);
+                    break; // Exit the inner loop once the role is found
+                }
+            }
+        }
+
+        return usersWithRole;
     }
 
     public void activerUser(String idUser) {
