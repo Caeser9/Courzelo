@@ -30,10 +30,17 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.0.0</version>
         </dependency>
+        <!-- gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version> <!-- Utilisez la dernière version disponible -->
+        </dependency>
+
         <dependency>
             <groupId>com.stripe</groupId>
             <artifactId>stripe-java</artifactId>
-            <version>20.43.0</version> <!-- Vérifiez la dernière version sur le site de Stripe -->
+            <version>24.17.0</version> <!-- Vérifiez la dernière version sur le site de Stripe -->
         </dependency>
 
         <dependency>

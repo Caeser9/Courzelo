@@ -8,7 +8,10 @@ import com.example.mongonew.repository.IRessourceRepository;
 import com.example.mongonew.services.ICourService;
 import com.example.mongonew.services.IRessourceService;
 import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
 import com.stripe.model.PaymentIntent;
+import com.stripe.param.ChargeCreateParams;
 import com.stripe.param.PaymentIntentCreateParams;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +33,23 @@ import java.util.List;
 @RequestMapping("/cour")
 @CrossOrigin("http://localhost:4200")
 public class CourController {
-@Autowired
+    @Autowired
     ICourService iCourService;
-@Autowired
+    @Autowired
     IRessourceService iRessourceService;
     @Autowired
     ICourRepository iCourRepository;
     @Autowired
     IRessourceRepository iRessourceRepository;
-    private final String stripeSecretKey ="sk_test_51K1TBAIBKkiTlXRIgX1qQhWhoWBv4IYaWpIXb0dml7OZjZtwjaxMtiILLjoEXupBoon5Zk810WAOkQvVYncB5C61009SjLwRZU";
+    private final String stripeSecretKey = "sk_test_51K1TBAIBKkiTlXRIgX1qQhWhoWBv4IYaWpIXb0dml7OZjZtwjaxMtiILLjoEXupBoon5Zk810WAOkQvVYncB5C61009SjLwRZU";
+
     @PostMapping("/ajouterCour")
-    public Cour ajouterCour( @RequestBody  Cour c) {
+    public Cour ajouterCour(@RequestBody Cour c) {
         return iCourService.ajouterCour(c);
     }
 
     @DeleteMapping("/supprimerCour/{id}")
-    public void supprimerCour( @PathVariable("id") String id) {
+    public void supprimerCour(@PathVariable("id") String id) {
         iCourService.supprimerCour(id);
     }
 
@@ -53,23 +57,26 @@ public class CourController {
     public List<Cour> getCour() {
         return iCourService.getCour();
     }
+
     @GetMapping("/getCourbyid/{id}")
     public Cour getCCourByid(@PathVariable("id") String id) {
         return iCourService.getCCourByid(id);
     }
+
     @GetMapping("/getRessourcesByCourId/{id}")
     public List<Ressource> getRessourcesByCourId(@PathVariable("id") String id) {
         return iRessourceService.getRessourcesByCourId(id);
     }
+
     @PostMapping("/ajouterRessource")
-    public Ressource ajouterRessource( @RequestBody Ressource ressource)
-    {
+    public Ressource ajouterRessource(@RequestBody Ressource ressource) {
         return iRessourceService.ajouterRessource(ressource);
     }
+
     @PutMapping("/modifierCour/{idc}")
 
-    public Cour modifierCour( @RequestBody Cour c , @PathVariable("idc") String idc) {
-        return iCourService.modifierCour(c , idc);
+    public Cour modifierCour(@RequestBody Cour c, @PathVariable("idc") String idc) {
+        return iCourService.modifierCour(c, idc);
     }
 
 
@@ -77,10 +84,12 @@ public class CourController {
     public List<Cour> findAllByOrderByDateDesc() {
         return iCourService.findAllByOrderByDateDesc();
     }
+
     @GetMapping("/findAllByNomCour")
     public List<Cour> findAllByNomCour(String nom) {
         return iCourService.findAllByNomCour(nom);
     }
+
     @PostMapping("/process-payment")
     public ResponseEntity<String> processPayment() {
         Stripe.apiKey = stripeSecretKey;
@@ -98,23 +107,26 @@ public class CourController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
     @PostMapping("/upload/{id}")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("photo") MultipartFile file,@PathVariable("id") String courId) {
-        String fileName = iCourService.storeFile(file,courId);
-            Cour c=iCourRepository.findById(courId).get();
-            c.setPhoto(fileName);
+    public ResponseEntity<String> handleFileUpload(@RequestParam("photo") MultipartFile file, @PathVariable("id") String courId) {
+        String fileName = iCourService.storeFile(file, courId);
+        Cour c = iCourRepository.findById(courId).get();
+        c.setPhoto(fileName);
 
         log.info("bien ajoutée");
         return ResponseEntity.ok().body(fileName);
     }
+
     @PostMapping("/uploadRessource/{id}")
-    public ResponseEntity<String>  storeFileRessource(@RequestParam("photo") MultipartFile file,@PathVariable("id") String idRessource) {
-        String fileName = iCourService.storeFile(file,idRessource);
-        Ressource r=iRessourceRepository.findById(idRessource).get();
+    public ResponseEntity<String> storeFileRessource(@RequestParam("photo") MultipartFile file, @PathVariable("id") String idRessource) {
+        String fileName = iCourService.storeFile(file, idRessource);
+        Ressource r = iRessourceRepository.findById(idRessource).get();
         r.setPhoto(fileName);
         log.info("bien ajoutée");
         return ResponseEntity.ok().body(fileName);
     }
+
     @GetMapping("/download/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
         Resource resource = iCourService.loadFileAsResource(fileName);
@@ -123,16 +135,33 @@ public class CourController {
                 .body(resource);
     }
 
-@PostMapping("/affecterRessourcesACour/{idc}")
-    public Cour affecterRessourcesACour( @RequestBody  Ressource res ,@PathVariable("idc") String idc) {
-        return iCourService.affecterRessourcesACour(res,idc);
+    @PostMapping("/affecterRessourcesACour/{idc}")
+    public Cour affecterRessourcesACour(@RequestBody Ressource res, @PathVariable("idc") String idc) {
+        return iCourService.affecterRessourcesACour(res, idc);
     }
+
     @DeleteMapping("/supprimerRessource/{id}")
-    public void supprimerRessource( @PathVariable("id") String id) {
+    public void supprimerRessource(@PathVariable("id") String id) {
         iRessourceService.supprimerRessource(id);
     }
+
     @GetMapping("/findCoursByDateGreaterThan")
     public List<Cour> findCoursByDateGreaterThan() {
         return iCourService.findCoursByDateGreaterThan();
     }
+
+    @PostMapping("/stripe/{amount}")
+    public String payer(@PathVariable("amount") Long amount ) throws StripeException {
+        Stripe.apiKey = "sk_test_51K1TBAIBKkiTlXRIgX1qQhWhoWBv4IYaWpIXb0dml7OZjZtwjaxMtiILLjoEXupBoon5Zk810WAOkQvVYncB5C61009SjLwRZU";
+
+        ChargeCreateParams params =
+                ChargeCreateParams.builder()
+                        .setAmount(amount)
+                        .setCurrency("usd")
+                        .setSource("tok_visa")
+                        .build();
+
+        Charge charge = Charge.create(params);
+return "success";
     }
+}
