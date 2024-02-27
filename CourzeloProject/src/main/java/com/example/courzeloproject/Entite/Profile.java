@@ -29,9 +29,5 @@ public class Profile {
 
     @DBRef
     private User user;
-
-
-
-
-
+    
 }

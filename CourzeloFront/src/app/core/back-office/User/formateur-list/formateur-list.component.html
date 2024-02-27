@@ -37,25 +37,26 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="show-filter add-course-info">
-                                        <form action="#">
+                                       
                                             <div class="row gx-2 align-items-center">
                                                 <div class="col-md-6 col-item">
                                                     <div class=" search-group">
                                                         <i class="feather-search"></i>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Search our courses">
+                                                            placeholder="Search our courses"  [(ngModel)]="searchInput" 
+                                                            (input)="onSearch()">
                                                     </div>
                                                 </div>
 
                                             </div>
-                                        </form>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- /Filter -->
 
-                        <div class="row" *ngFor="let f of formateur">
+                        <div class="row" *ngFor="let f of filteredFormateur">
 
                             <!-- Instructor List -->
                             <div class="col-lg-12 d-flex">
