@@ -1,5 +1,6 @@
 package com.example.mongonew.controller;
 
+import com.example.mongonew.VideosConfig.StreamingService;
 import com.example.mongonew.entities.Cour;
 import com.example.mongonew.entities.Ressource;
 import com.example.mongonew.entities.User;
@@ -22,6 +23,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,6 +43,8 @@ public class CourController {
     ICourRepository iCourRepository;
     @Autowired
     IRessourceRepository iRessourceRepository;
+    @Autowired
+    private StreamingService service;
     private final String stripeSecretKey = "sk_test_51K1TBAIBKkiTlXRIgX1qQhWhoWBv4IYaWpIXb0dml7OZjZtwjaxMtiILLjoEXupBoon5Zk810WAOkQvVYncB5C61009SjLwRZU";
 
     @PostMapping("/ajouterCour")
@@ -90,23 +94,7 @@ public class CourController {
         return iCourService.findAllByNomCour(nom);
     }
 
-    @PostMapping("/process-payment")
-    public ResponseEntity<String> processPayment() {
-        Stripe.apiKey = stripeSecretKey;
-        PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
-                .setAmount(1090L) // Montant en cents
-                .setCurrency("usd")
-                .build();
-
-        try {
-            PaymentIntent paymentIntent = PaymentIntent.create(params);
-            log.info("paiement success");
-            return ResponseEntity.ok(paymentIntent.getClientSecret());
-        } catch (Exception e) {
-            // Gérer les erreurs
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-    }
+   
 
     @PostMapping("/upload/{id}")
     public ResponseEntity<String> handleFileUpload(@RequestParam("photo") MultipartFile file, @PathVariable("id") String courId) {
@@ -163,5 +151,14 @@ public class CourController {
 
         Charge charge = Charge.create(params);
 return "success";
+    }
+
+
+
+
+
+    @GetMapping(value = "video/{title}", produces = "video/mp4")
+    public Mono<Resource> getVideos(@PathVariable String title) {
+        return service.getVideo(title);
     }
 }
