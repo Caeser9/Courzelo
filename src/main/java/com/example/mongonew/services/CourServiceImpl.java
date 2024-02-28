@@ -1,6 +1,7 @@
 package com.example.mongonew.services;
 
 import com.example.mongonew.entities.Cour;
+import com.example.mongonew.entities.Niveau;
 import com.example.mongonew.entities.Ressource;
 import com.example.mongonew.entities.User;
 import com.example.mongonew.repository.ICourRepository;
@@ -198,6 +199,11 @@ public class CourServiceImpl implements ICourService {
         Date dateMoins20Jours = Date.from(dateActuelleMoins20Jours.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         return iCourRepository.findByDateGreaterThan(dateMoins20Jours);
+    }
+
+    @Override
+    public List<Cour> filterByNiveau(Niveau niveau) {
+        return iCourRepository.findCoursByNiveau(niveau);
     }
 
 

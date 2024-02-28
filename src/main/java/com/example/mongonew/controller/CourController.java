@@ -2,6 +2,7 @@ package com.example.mongonew.controller;
 
 import com.example.mongonew.VideosConfig.StreamingService;
 import com.example.mongonew.entities.Cour;
+import com.example.mongonew.entities.Niveau;
 import com.example.mongonew.entities.Ressource;
 import com.example.mongonew.entities.User;
 import com.example.mongonew.repository.ICourRepository;
@@ -153,12 +154,12 @@ public class CourController {
 return "success";
     }
 
-
-
-
-
     @GetMapping(value = "video/{title}", produces = "video/mp4")
     public Mono<Resource> getVideos(@PathVariable String title) {
         return service.getVideo(title);
+    }
+    @GetMapping("/filterByNiveau/{niveau}")
+    List<Cour> filterByNiveau(@PathVariable("niveau") Niveau niveau){
+        return iCourService.filterByNiveau(niveau);
     }
 }
