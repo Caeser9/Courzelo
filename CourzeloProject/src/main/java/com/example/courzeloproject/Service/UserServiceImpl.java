@@ -17,6 +17,21 @@ public class UserServiceImpl implements IUserService{
     UserRepo repo ;
     @Autowired
     EmailSender emailSender ;
+    private static int counterXXX = 0;
+    private static int counterYYYY = 0;
+    public String generateIdentifier() {
+        String XXX = String.format("%03d", incrementXXX());
+        String YYYY = String.format("%04d", incrementYYYY());
+        return XXX + "Courzelo" + YYYY;
+    }
+
+    private static synchronized int incrementXXX() {
+        return counterXXX++;
+    }
+
+    private static synchronized int incrementYYYY() {
+        return counterYYYY++;
+    }
 
 
     public User addUser(User u){
@@ -96,6 +111,17 @@ public class UserServiceImpl implements IUserService{
 
 
         MailDto mail = new MailDto(toAddress, senderName, lien, subject, content);
+        emailSender.sendEmail(mail);
+    }
+    public void sendInformationEmail(User user) {
+        String toAddress = user.getEmail();
+        String senderName = "Courzelo";
+        String subject = "Veuillez vérifier votre inscription";
+        String content = "Monsieur/Madame ,<br>"
+                + "Bienvenue sur notre plateforme Courzelo ! Votre identifiant est" +
+                " : "+user.getUsername()+" et votre mot de passe est : "+user.getPassword();
+
+        MailDto mail = new MailDto(toAddress, senderName, subject, content);
         emailSender.sendEmail(mail);
     }
 

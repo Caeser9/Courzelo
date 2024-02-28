@@ -7,11 +7,13 @@ import com.example.courzeloproject.Repository.RoleRepo;
 import com.example.courzeloproject.Repository.UserRepo;
 import com.example.courzeloproject.Security.jwt.JwtUtils;
 import com.example.courzeloproject.Service.UserDetailsImpl;
+import com.example.courzeloproject.Service.UserServiceImpl;
 import com.example.courzeloproject.payload.request.LoginRequest;
 import com.example.courzeloproject.payload.request.SignupRequest;
 import com.example.courzeloproject.payload.response.JwtResponse;
 import com.example.courzeloproject.payload.response.MessageResponse;
 import jakarta.validation.Valid;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,6 +41,8 @@ public class FormateurController {
 
     @Autowired
     RoleRepo roleRepository;
+    @Autowired
+    UserServiceImpl userService;
 
     @Autowired
     PasswordEncoder encoder;
@@ -67,18 +71,18 @@ public class FormateurController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
-        }
+    public ResponseEntity<?> registerUserAF(@Valid @RequestBody SignupRequest signUpRequest) {
+            if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse("Error: Username is already taken!"));
+            }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
-        }
+            if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse("Error: Email is already in use!"));
+            }
 
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
@@ -120,10 +124,16 @@ public class FormateurController {
                 }
             });
         }
-
+        user.setUsername(userService.generateIdentifier());
         user.setRoles(roles);
+        String randomCode = RandomStringUtils.random(8,true,true);
+        user.setPassword(randomCode);
         userRepository.save(user);
+        this.userService.sendInformationEmail(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+
+
+
 }
