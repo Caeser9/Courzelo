@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
-import { ERole } from 'src/app/shared/model/role';
 import { User } from 'src/app/shared/model/user.model';
 
 @Component({
-  selector: 'app-add-admin',
-  templateUrl: './add-admin.component.html',
-  styleUrls: ['./add-admin.component.css']
+  selector: 'app-add-formateur',
+  templateUrl: './add-formateur.component.html',
+  styleUrls: ['./add-formateur.component.css']
 })
-export class AddAdminComponent implements OnInit{
+export class AddFormateurComponent {
   user: any = {};
   isLoggedIn: Boolean = false;
   isLoginFailed = false;
@@ -31,7 +30,7 @@ export class AddAdminComponent implements OnInit{
 
 registerAdmin() {
   console.log(this.user.password)
-    this.user.roles = ["admin"]
+    this.user.roles = ["formateur"]
     console.log("user = ",this.user)
     this.authService.signupWithIdentifiant(this.user).subscribe(
       (data) => {
@@ -45,6 +44,4 @@ registerAdmin() {
       }
     );
   }
-  
-
 }

@@ -19,6 +19,7 @@ import { TwoWayFactorPageComponent } from './core/front-office/two-way-factor-pa
 import { FormateurListComponent } from './core/back-office/User/formateur-list/formateur-list.component';
 import { UploadFileComponent } from './core/back-office/User/upload-file/upload-file.component';
 import { AddAdminComponent } from './core/back-office/User/add-admin/add-admin.component';
+import { AddFormateurComponent } from './core/back-office/User/add-formateur/add-formateur.component';
 
 
 
@@ -38,7 +39,8 @@ import { AddAdminComponent } from './core/back-office/User/add-admin/add-admin.c
     TwoWayFactorPageComponent,
     FormateurListComponent,
     UploadFileComponent,
-    AddAdminComponent
+    AddAdminComponent,
+    AddFormateurComponent
     
   ],
   imports: [

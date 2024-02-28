@@ -43,27 +43,29 @@
 											<a  [routerLink]="['/editProfile']" class="nav-link">
 												<i class="feather-settings"></i> Edit Profile
 											</a>
-                                            
+											
 										</li>
-                                        <li class="nav-item">
-											<a href="setting-student-referral.html" class="nav-link">
+										<li class="nav-item">
+											<a  [routerLink]="['/addAdmin']" class="nav-link">
 												<i class="feather-user-plus"></i> Add Admin
 											</a>
 										</li>
-                                        <!--
-
-                                       
 										<li class="nav-item">
-											<a href="setting-student-security.html" class="nav-link">
-												<i class="feather-user"></i> Security
+											<a  [routerLink]="['/addFormateur']" class="nav-link">
+												<i class="feather-user-plus"></i> Add Fomateur
+											</a>
+										</li>                                 
+										<li class="nav-item">
+											<a  [routerLink]="['/admin-list']" class="nav-link">
+												<i class="feather-book"></i> Admin List
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="setting-student-social-profile.html" class="nav-link">
-												<i class="feather-refresh-cw"></i> Social Profiles
+											<a [routerLink]="['/formateur-list']" class="nav-link">
+												<i class="feather-book"></i> Instructor List
 											</a>
 										</li>
-										<li class="nav-item">
+										 <!--<li class="nav-item">
 											<a href="setting-student-notification.html" class="nav-link">
 												<i class="feather-bell"></i> Notifications
 											</a>
@@ -127,12 +129,13 @@
 											<h4>Personal Details</h4>
 											<p>Edit your personal information and address.</p>
 										</div>
-										<form action="#">
+										<form action="#"   [formGroup]="AdminForm" >
 											<div class="row">
 												<div class="col-lg-6">
 													<div class="input-block">
 														<label class="form-control-label">Email</label>
-														<input type="text" class="form-control" placeholder="Enter your Email">
+														<input type="text" class="form-control" placeholder="Enter your Email"
+                                                        [(ngModel)]="user.email"  formControlName="email">
 													</div>
 												</div>
 
@@ -151,7 +154,7 @@
                                             -->	
 
 												<div class="update-profile">
-													<button type="button" class="btn btn-success">Add</button>
+													<button type="button" class="btn btn-success" (click)="registerAdmin()">Add</button>
 												</div>
 											</div>
 										</form>

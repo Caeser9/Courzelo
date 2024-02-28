@@ -15,7 +15,7 @@ export class AuthServiceService {
   signInWithId(user: User) {
     return this.http.post(`${this.apiURL}auth/signin`, user);
   }
-  signupWithUsername(user: User) {
+  signupWithIdentifiant(user: User) {
     return this.http.post(`${this.apiURL}auth/signup`, user);
   }
   getUserByVerificationCode(verificationCode: any) {

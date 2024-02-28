@@ -83,6 +83,9 @@ public class FormateurController {
                         .badRequest()
                         .body(new MessageResponse("Error: Email is already in use!"));
             }
+            //generation du mdp
+        String randomCode = RandomStringUtils.random(8,true,true);
+        signUpRequest.setPassword(randomCode);
 
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
@@ -126,10 +129,9 @@ public class FormateurController {
         }
         user.setUsername(userService.generateIdentifier());
         user.setRoles(roles);
-        String randomCode = RandomStringUtils.random(8,true,true);
-        user.setPassword(randomCode);
+
         userRepository.save(user);
-        this.userService.sendInformationEmail(user);
+        this.userService.sendInformationEmail(user,randomCode);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

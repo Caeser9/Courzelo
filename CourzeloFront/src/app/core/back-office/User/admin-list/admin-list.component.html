@@ -38,6 +38,7 @@
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="d-flex align-items-center">
+											
 										
 											<div class="show-result">
 												<h4>Showing 1-9 of 50 results</h4>
@@ -47,22 +48,20 @@
 								</div>
 							</div>
 							<!-- /Filter -->
-							
-							<div class="row" *ngFor=" let a of admin">
-								<div class="col-lg-3 col-md-6 d-flex">
+			
+							<div class="row" *ngFor=" let admin of usersWithProfiles">
+								<div class="col-lg-3 col-md-6 d-flex" >
 									<div class="student-box flex-fill">
 										<div class="student-img">
-											<a href="student-profile.html">
-												<img class="img-fluid" alt="Students Info" src="assets/img/user/user1.jpg">
-											</a>
+											<img class="img-fluid" alt="" src="assets/img/students/student-02.jpg">
 										</div>
 										<div class="student-content pb-0">												
-											<h5><a href="student-profile.html">{{a.email}}</a></h5>
-                                         
+											<h6><a href="student-profile.html">{{admin.user.email}}</a></h6>
+											<h6><a href="student-profile.html">Identifiant : {{admin.user.username}}</a></h6>
 										
 											<div class="loc-blk d-flex align-items-center justify-content-center">
 												<img src="assets/img/students/loc-icon.svg" class="me-1" alt="">
-												<p>{{a.email}}</p>
+											
 											</div>
 										</div>
 									</div>

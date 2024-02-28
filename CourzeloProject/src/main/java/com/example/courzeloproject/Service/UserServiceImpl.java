@@ -113,13 +113,13 @@ public class UserServiceImpl implements IUserService{
         MailDto mail = new MailDto(toAddress, senderName, lien, subject, content);
         emailSender.sendEmail(mail);
     }
-    public void sendInformationEmail(User user) {
+    public void sendInformationEmail(User user,String code) {
         String toAddress = user.getEmail();
         String senderName = "Courzelo";
         String subject = "Veuillez vérifier votre inscription";
         String content = "Monsieur/Madame ,<br>"
                 + "Bienvenue sur notre plateforme Courzelo ! Votre identifiant est" +
-                " : "+user.getUsername()+" et votre mot de passe est : "+user.getPassword();
+                " : "+user.getUsername()+" et votre mot de passe est : "+code;
 
         MailDto mail = new MailDto(toAddress, senderName, subject, content);
         emailSender.sendEmail(mail);
