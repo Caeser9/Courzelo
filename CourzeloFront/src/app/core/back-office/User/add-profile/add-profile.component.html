@@ -119,7 +119,9 @@
                                     <h3>Profile Details</h3>
                                     <p>You have full control to manage your own account setting.</p>
                                 </div>
-                                <div class="course-group mb-0 d-flex">
+                        <!--
+
+                              <div class="course-group mb-0 d-flex">
                                     <div class="course-group-img d-flex align-items-center">
                                         <a href="student-profile.html"><img src="assets/img/user/user11.jpg" alt="" class="img-fluid"></a>
                                         <div class="course-name">
@@ -131,13 +133,13 @@
                                         <a href="javascript:void(0);" class="btn btn-success">Update</a>
                                         <a href="javascript:void(0);" class="btn btn-danger">Delete</a>
                                     </div>
-                                </div>
+                                </div> --> 
                                 <div class="checkout-form personal-address add-course-info ">
-                                    <div class="personal-info-head">
-                                        <h4>Personal Details</h4>
-                                        <p>Edit your personal information and address.</p>
-                                    </div>
-                                    <form action="#" [formGroup]="profileForm">
+
+                                    <form action="#" [formGroup]="profileForm" >
+                                        <div class="input-block">
+                                            <label class="add-course-label">Profile cover image</label>
+                                        </div>
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="input-block">
@@ -217,7 +219,7 @@
 
       
                                             <div class="update-profile">
-                                                <button type="button" class="btn btn-primary"  (click)="addProfile()">add Profile</button>
+                                                <button type="button" class="btn btn-primary" (click)="addProfile()">UploadImage</button>
                                             </div>
                                         </div>
                                     </form>

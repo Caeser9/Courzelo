@@ -64,4 +64,24 @@ export class ProfileService {
     );
 
   }
+  //image api : w9efettt lenaaa
+  uploadPhoto(id: string, file: File): Observable<any> {
+    const uploadUrl = `${this.profileURL}/upload/${id}`;
+
+    const formData: FormData = new FormData();
+    formData.append('photo', file, file.name);
+
+    return this.httpClient.post(uploadUrl, formData);
+  }
+
+  downloadFile(fileName: string): Observable<Blob> {
+    const url = `${this.profileURL}/download/${fileName}`;
+    return this.httpClient.get(url, { responseType: 'blob' });
+  }
+
+  getPhoto(photo: string): string{
+    const photoUrl = `${this.profileURL}/download/${photo}`;
+
+    return `${this.profileURL}/download/${photo}`;
+  }
 }

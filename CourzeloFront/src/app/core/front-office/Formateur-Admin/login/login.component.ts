@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit{
 }
 login(){
   console.log(this.user)
-  this.authService.signinWithEmail(this.user).subscribe(
+  this.authService.signInWithId(this.user).subscribe(
     (data) =>{
       this.user = data;
       

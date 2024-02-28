@@ -85,7 +85,6 @@ public class ParticipantController {
         User user = new User(signupEmailRequest.getEmail(),
                 encoder.encode(signupEmailRequest.getPassword()));
 
-
         Set<ERole> strRoles = signupEmailRequest.getRole();
         Set<Role> roles = new HashSet<>();
         Role userRole = roleRepository.findByName(ERole.ROLE_PARTICIPANT)

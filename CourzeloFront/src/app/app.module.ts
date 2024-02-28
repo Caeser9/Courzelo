@@ -17,6 +17,8 @@ import { StudentListComponent } from './core/back-office/User/student-list/stude
 import { AddProfileComponent } from './core/back-office/User/add-profile/add-profile.component';
 import { TwoWayFactorPageComponent } from './core/front-office/two-way-factor-page/two-way-factor-page.component';
 import { FormateurListComponent } from './core/back-office/User/formateur-list/formateur-list.component';
+import { UploadFileComponent } from './core/back-office/User/upload-file/upload-file.component';
+import { AddAdminComponent } from './core/back-office/User/add-admin/add-admin.component';
 
 
 
@@ -34,7 +36,9 @@ import { FormateurListComponent } from './core/back-office/User/formateur-list/f
     AdminListComponent,
     AddProfileComponent,
     TwoWayFactorPageComponent,
-    FormateurListComponent
+    FormateurListComponent,
+    UploadFileComponent,
+    AddAdminComponent
     
   ],
   imports: [

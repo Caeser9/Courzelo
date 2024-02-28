@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
       (data) => {
 
        console.log("kdhee el user " , this.user)
-        this._routes.navigate(['/verify-code']);
+       // this._routes.navigate(['/verify-code']);
 
       },
       (error) => {

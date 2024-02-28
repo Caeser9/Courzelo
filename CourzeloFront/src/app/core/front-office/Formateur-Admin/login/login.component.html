@@ -2,9 +2,9 @@
 
     <!-- Main Wrapper -->
     <div class="main-wrapper log-wrap">
-    
+
         <div class="row">
-        
+
             <!-- Login Banner -->
             <div class="col-md-6 login-bg">
                 <div class="owl-carousel login-slide owl-theme">
@@ -13,32 +13,34 @@
                             <img src="assets/img/login-img.png" class="img-fluid" alt="Logo">
                         </div>
                         <div class="mentor-course text-center">
-                            <h2>Welcome to <br>Courzelo.</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                            <h2>Welcome to <br>administration area .</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
                         </div>
                     </div>
 
                 </div>
             </div>
             <!-- /Login Banner -->
-            
-            <div class="col-md-6 login-wrap-bg">		
-            
+
+            <div class="col-md-6 login-wrap-bg">
+
                 <!-- Login -->
                 <div class="login-wrapper">
                     <div class="loginbox">
                         <div class="w-100">
                             <div class="img-logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-          
+
                             </div>
-                            <h1>administration area</h1>
+
                             <h1>Sign into Your Account</h1>
                             <form action="https://dreamslms.dreamstechnologies.com/html/instructor-dashboard.html"
-                             [formGroup]="loginForm" (ngSubmit)="login()"  *ngIf="!isLoggedIn">
+                                [formGroup]="loginForm" (ngSubmit)="login()" *ngIf="!isLoggedIn">
                                 <div class="input-block">
-                                    <label class="form-control-label">Email</label>
-                                    <input id="username" [(ngModel)]="user.username" type="email" class="form-control" placeholder="Enter your email " formControlName="username">
+                                    <label class="form-control-label">identifier</label>
+                                    <input id="username" [(ngModel)]="user.username" type="email" class="form-control"
+                                        placeholder="Enter your identifier  " formControlName="username">
                                     <div class="invalid-feedback">
                                         {{
                                         loginForm.get("username").hasError("required")
@@ -56,9 +58,11 @@
 
                                 <div class="input-block">
                                     <label class="form-control-label">Password</label>
-   
+
                                     <div class="pass-group">
-                                        <input type="password" class="form-control pass-input" placeholder="Enter your password" formControlName="password" id="password" [(ngModel)]="user.password">
+                                        <input type="password" class="form-control pass-input"
+                                            placeholder="Enter your password" formControlName="password" id="password"
+                                            [(ngModel)]="user.password">
                                         <div class="invalid-feedback">
                                             {{
                                             loginForm.get("password").hasError("required")
@@ -76,10 +80,11 @@
 
                                 </div>
                                 <div class="forgot">
-                                    <span><a class="forgot-link" href="forgot-password.html">Forgot Password ?</a></span>
+                                    <span><a class="forgot-link" href="forgot-password.html">Forgot Password
+                                            ?</a></span>
                                 </div>
                                 <div class="remember-me">
-                                    <label class="custom_check mr-2 mb-0 d-inline-flex remember-me"> Remember me  
+                                    <label class="custom_check mr-2 mb-0 d-inline-flex remember-me"> Remember me
                                         <input type="checkbox" name="radio">
                                         <span class="checkmark"></span>
                                     </label>
@@ -88,32 +93,33 @@
                                     Bad credentials !
                                 </div>
                                 <div class="d-grid">
-                                    <button class="btn btn-primary btn-start" type="submit" [disabled]="loginForm.invalid">Sign In</button>
+                                    <button class="btn btn-primary btn-start" type="submit"
+                                        [disabled]="loginForm.invalid">Sign In</button>
                                 </div>
                             </form>
                         </div>
                     </div>
-   
+
                 </div>
                 <!-- /Login -->
-                
+
             </div>
-            
+
         </div>
-       
-   </div>
-   <!-- /Main Wrapper -->
-  
+
+    </div>
+    <!-- /Main Wrapper -->
+
     <!-- jQuery -->
     <script src="assets/js/jquery-3.7.1.min.js"></script>
-    
+
     <!-- Bootstrap Core JS -->
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 
     <!-- Owl Carousel -->
-    <script src="assets/js/owl.carousel.min.js"></script>	
-    
+    <script src="assets/js/owl.carousel.min.js"></script>
+
     <!-- Custom JS -->
     <script src="assets/js/script.js"></script>
-    
+
 </body>

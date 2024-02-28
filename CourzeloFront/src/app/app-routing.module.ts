@@ -11,6 +11,8 @@ import { SideBarComponent } from './shared/side-bar/side-bar.component';
 import { AddProfileComponent } from './core/back-office/User/add-profile/add-profile.component';
 import { TwoWayFactorPageComponent } from './core/front-office/two-way-factor-page/two-way-factor-page.component';
 import { FormateurListComponent } from './core/back-office/User/formateur-list/formateur-list.component';
+import { UploadFileComponent } from './core/back-office/User/upload-file/upload-file.component';
+import { AddAdminComponent } from './core/back-office/User/add-admin/add-admin.component';
 
 
 const routes: Routes = [
@@ -20,11 +22,16 @@ const routes: Routes = [
   {path:"navbar",component:NavbarComponent},
   {path:"sidebar",component:SideBarComponent},
   {path:"home",component:HomeComponent},
+
   {path:"addProfile",component:AddProfileComponent},
   {path:"editProfile",component:EditProfileComponent},
+  {path:"upload/:id", component:UploadFileComponent},
 
   {path:"formateur-list",component:FormateurListComponent} ,   
-  {path:"admin-list",component:AdminListComponent}
+  {path:"admin-list",component:AdminListComponent},
+
+  {path:"addAdmin",component:AddAdminComponent},
+
 
 
 ];

@@ -1,3 +1,4 @@
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,6 +16,7 @@ export class AddProfileComponent implements OnInit{
   user: User;
   profile = new Profile();
   profileForm: FormGroup;
+  selectedFile: File | null = null;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -28,6 +30,7 @@ export class AddProfileComponent implements OnInit{
         phone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(/^-?(0|[1-9]\d*){8}$/)]],
         address: ['', [Validators.required, Validators.minLength(8)]],
         email: ['', [Validators.required, Validators.email]],
+        photo: [''],
   
       });
       this.user = this.tokenStorageService.getUser()
@@ -42,13 +45,11 @@ export class AddProfileComponent implements OnInit{
     addProfile() {
 
       this.profileService.addProfile(this.profile).subscribe(
-        (data) => {
-  
-       
-  
-          this.router.navigate(['/home']);
-  
-  
+        (data : Profile) => {
+          
+          this.router.navigateByUrl(`/upload/${data.id}`);
+          console.log("ahawa: ", data.id);
+          
         },
         (error) => {
          console.log("Problème servunu lors de l'ajout de profile")

@@ -115,29 +115,29 @@
                     <div class="col-xl-9 col-md-8">	
                         <div class="settings-widget profile-details">
                             <div class="settings-menu p-0">
-                                <div class="profile-heading">
-                                    <h3>Profile Details</h3>
-                                    <p>You have full control to manage your own account setting.</p>
-                                </div>
-                                <div class="course-group mb-0 d-flex">
-                                    <div class="course-group-img d-flex align-items-center">
-                                        <a href="student-profile.html"><img src="assets/img/user/user11.jpg" alt="" class="img-fluid"></a>
-                                        <div class="course-name">
-                                            <h4><a href="student-profile.html">Your avatar</a></h4>
-                                            <p>PNG or JPG no bigger than 800px wide and tall.</p>
-                                        </div>
-                                    </div>
-                                    <div class="profile-share d-flex align-items-center justify-content-center">
-                                        <a href="javascript:void(0);" class="btn btn-success">Update</a>
-                                        <a href="javascript:void(0);" class="btn btn-danger">Delete</a>
-                                    </div>
-                                </div>
+              
                                 <div class="checkout-form personal-address add-course-info ">
-                                    <div class="personal-info-head">
-                                        <h4>Personal Details</h4>
-                                        <p>Edit your personal information and address.</p>
-                                    </div>
+                         
                                     <form action="#" [formGroup]="profileForm">
+                                        <div class="profile-heading">
+                                            <h3>Profile Details</h3>
+                                            <p>You have full control to manage your own account setting.</p>
+                                        </div>
+                                        <div class="course-group mb-0 d-flex">
+                                            <div class="course-group-img d-flex align-items-center">
+                                                <img *ngIf="profileUser.photo"
+                                                [src]="getProfilePhotoUrl(profileUser)"
+                                                alt="profile Photo" class="img-fluid ">
+                                                <div class="course-name">
+                                                    <h4><a href="student-profile.html">Your avatar</a></h4>
+                                                    <p>PNG or JPG no bigger than 800px wide and tall.</p>
+                                                </div>
+                                            </div>
+                                            <div class="profile-share d-flex align-items-center justify-content-center">
+                                                <a href="javascript:void(0);" class="btn btn-success"   [routerLink]="['/upload/', profileUser.id]">Update</a>
+                                               <!-- <a href="javascript:void(0);" class="btn btn-danger">Delete</a> -->
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="input-block">

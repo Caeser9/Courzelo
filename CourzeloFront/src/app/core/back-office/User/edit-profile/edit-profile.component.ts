@@ -45,12 +45,14 @@ export class EditProfileComponent implements OnInit{
       });
 
   }
-
+  getProfilePhotoUrl(p: Profile): string {
+    return this.profileService.getPhoto(p.photo);
+  }
   updateProfile(profileModifided = new Profile()) {
     profileModifided.user.id = this.user.id
     console.log("Profil modifier =",profileModifided)
     this.profileService.modifyProfile(this.profileUser.id,profileModifided).subscribe(
-      () => {
+      (data) => {
 
         this.router.navigate(['/home']);
        
