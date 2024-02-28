@@ -10,10 +10,11 @@ import { Router } from '@angular/router';
 })
 export class UserDashboardComponent implements OnInit {
   blogs: Blog[] = [];
-
+  loadingBlogs = true
   constructor(private blogService: BlogService, private router: Router) { }
 
   ngOnInit(): void {
+    this.loadingBlogs = false
     this.fetchBlogs();
   }
   fetchBlogs(): void {
@@ -43,9 +44,10 @@ export class UserDashboardComponent implements OnInit {
       this.blogs = this.blogs.filter((b) => b.blogCode !== blogId);
     });
 
-    this.blogService.getBlogList().subscribe(updatedBlogs => {
+    this.blogService.getToAprovedBlogs().subscribe(updatedBlogs => {
       
       this.blogs = updatedBlogs;
+      
     });
   }
   approveAllBlogs(): void {

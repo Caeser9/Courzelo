@@ -15,5 +15,6 @@ import java.util.List;
 public class User {
     @Id
     private String id;
+    private String Email;
 
 }

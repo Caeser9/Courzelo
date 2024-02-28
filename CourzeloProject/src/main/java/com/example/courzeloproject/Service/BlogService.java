@@ -2,8 +2,11 @@ package com.example.courzeloproject.Service;
 
 import com.example.courzeloproject.Entite.Blog;
 import com.example.courzeloproject.Entite.Interactions;
+import com.example.courzeloproject.Entite.User;
 import com.example.courzeloproject.Repository.BlogRepository;
 import com.example.courzeloproject.Repository.InteractionsRepository;
+import com.example.courzeloproject.Repository.UserRepository;
+import com.example.courzeloproject.dto.MailDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -33,12 +36,19 @@ public class BlogService implements IBlogService {
     @Autowired
     BlogRepository blogRepository;
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    IEmailService iEmailService;
+    @Autowired
     InteractionsRepository interactionsRepository;
 
     @Override
     public Blog addBlogWithInteractions(Blog blog) {
+
         Blog savedBlog = blogRepository.save(blog);
         savedBlog.setInteractions(blog.getInteractions());
+
         blogRepository.save(savedBlog);
         for (Interactions interaction : blog.getInteractions()) {
             interaction.setBlog(savedBlog);
@@ -91,32 +101,37 @@ public class BlogService implements IBlogService {
 
     @Override
     public Blog addOnlyBlog(Blog blog) {
+        User user1 = userRepository.getUsersById("user1");
+        User user2 = userRepository.getUsersById("user2");
         Calendar cal = Calendar.getInstance();
         blog.setDateBlog(LocalDate.now());
         blog.setStatus(false);
+        blog.setUser(user1);
+        //sendAddedBlogEmail(user2);
         return blogRepository.save(blog);
     }
 
     @Override
     public Blog ApproveBlog(String id) {
         Blog blogToApprove = blogRepository.findBlogByBlogCode(id);
-
-        if (blogToApprove.getStatus() == true) {
-
-        }
+        User user = userRepository.getUsersById("user1");
         blogToApprove.setStatus(true);
+        //sendApprovedEmail(user);
         return blogRepository.save(blogToApprove);
     }
 
     @Override
     public List<Blog> ApproveAllBlogs() {
         List<Blog> blogsToApprove = blogRepository.findAll();
+        User user = userRepository.getUsersById("user1");
         for (Blog blog : blogsToApprove) {
             if (!blog.getStatus()) {
                 blog.setStatus(true);
                 blogRepository.save(blog);
+                //sendApprovedEmail(user);
             }
         }
+
         return blogsToApprove;
     }
 
@@ -206,6 +221,29 @@ public class BlogService implements IBlogService {
         }
 
         return null;
+    }
+
+    public void sendApprovedEmail(User user) {
+        String toAddress = user.getEmail();
+        String senderName = "EDULINK";
+        String subject = "Blog Approvement";
+        String content = "Hello, "
+                + "This email sent to inform you that your blog has been approved. " ;
+
+
+        MailDto mail = new MailDto(toAddress, senderName, subject, content);
+        iEmailService.sendEmail(mail);
+    }
+    public void sendAddedBlogEmail(User user) {
+        String toAddress = user.getEmail();
+        String senderName = "EDULINK";
+        String subject = "Blog Added";
+        String content = "Hello, "
+                + "This email sent to inform you that there is a new added blog to check ." ;
+
+
+        MailDto mail = new MailDto(toAddress, senderName, subject, content);
+        iEmailService.sendEmail(mail);
     }
 }
 

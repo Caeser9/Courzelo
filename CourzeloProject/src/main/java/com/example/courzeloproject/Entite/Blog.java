@@ -33,7 +33,7 @@ public class Blog {
     private String contenu;
     private Boolean status ;
     private String  photo;
-    @JsonIgnore
+
     @DBRef
     User user;
     @DBRef
