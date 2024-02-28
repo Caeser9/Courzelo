@@ -94,7 +94,7 @@ public class CourController {
         return iCourService.findAllByNomCour(nom);
     }
 
-   
+
 
     @PostMapping("/upload/{id}")
     public ResponseEntity<String> handleFileUpload(@RequestParam("photo") MultipartFile file, @PathVariable("id") String courId) {
