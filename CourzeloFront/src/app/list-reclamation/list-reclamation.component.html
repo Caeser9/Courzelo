@@ -1,0 +1,39 @@
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="support-wrap">
+                    <h5>Liste des réclamations</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Titre</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let reclamation of reclamationList">
+                                <td>{{ reclamation?.reclamationId }}</td>
+                                <td>{{ reclamation?.titre }}</td>
+                                <td>{{ reclamation?.description }}</td>
+                                <td>{{ reclamation?.dateReclamation }}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm" (click)="updateReclamation(reclamation)">
+                                        Modifier
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" (click)="deleteReclamation(reclamation?.reclamationId)">
+                                        Supprimer
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="reclamationList.length === 0">Aucune réclamation trouvée.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
