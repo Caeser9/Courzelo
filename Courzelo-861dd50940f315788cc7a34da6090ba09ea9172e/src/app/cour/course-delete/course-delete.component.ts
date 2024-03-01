@@ -11,6 +11,8 @@ export class CourseDeleteComponent implements OnInit {
   search="";
   course!:any
   idc!:String
+  selectedNiveau: string = '';
+
   listeCourse!:course[]
   ngOnInit() {
     this.course=new course();
@@ -67,4 +69,25 @@ trier(){
   getphoto(photo :string){
     return this.CourseService.getPhoto(photo);
   }
+  filterByNiveau(){
+    this.course=new course();
+    this.course=this.CourseService.filterByNiveau(this.selectedNiveau).subscribe((data) => {
+      this.course = data;
+    },
+    (error) => {
+      console.error("Erreur lors de la récupération des données :", error);
+    }
+  );  }
+
+rechercheMultiCritere(){
+      this.course=new course();
+  this.course=this.CourseService.rechercheMultiCritere(this.search).subscribe((data) => {
+    this.course = data;
+  },
+  (error) => {
+    console.error("Erreur lors de la récupération des données :", error);
+  }
+);
+}
+
 }

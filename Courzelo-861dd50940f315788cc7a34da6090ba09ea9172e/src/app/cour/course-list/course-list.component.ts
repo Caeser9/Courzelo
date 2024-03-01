@@ -16,22 +16,7 @@ export class CourseListComponent implements OnInit {
   search="";
   courseRecente!:any
 
-  ratingcount=0;
-  totalrating=0
-
-  Finalrating:any;
-
-  ratingcontrol=new FormControl(0);
-  GetRating(){
-    this.ratingcount++;
-    this.totalrating +=this.ratingcontrol?.value || 0;
-    
-    this.Finalrating= (this.totalrating/this.ratingcount).toFixed(2)
-    console.log(this.course.note);
-  }
-  
   ngOnInit() {
-    this.course=new course();
     this.course=this.CourseService.getCourse().subscribe((data) => {
       this.course = data;
     },
@@ -39,15 +24,7 @@ export class CourseListComponent implements OnInit {
       console.error("Erreur lors de la récupération des données :", error);
     }
   );
-   this.CourseService.findCoursByDateGreaterThan().subscribe((data) => {
-    this.courseRecente = data;
-  },
-  (error) => {
-    console.error("Erreur lors de la récupération des données :", error);
-  }
-);
- 
-   
+  
   }
   getphoto(photo :string){
     return this.CourseService.getPhoto(photo);
@@ -55,6 +32,16 @@ export class CourseListComponent implements OnInit {
 
   afficher(){
     console.log(this.course);
+  }
+  latestCourse(){
+    this.CourseService.findCoursByDateGreaterThan().subscribe((data) => {
+      this.courseRecente = data;
+      console.log(this.courseRecente)
+    },
+    (error) => {
+      console.error("Erreur lors de la récupération des données :", error);
+    }
+  );
   }
 
 }

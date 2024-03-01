@@ -62,6 +62,19 @@ export class CourseService {
     return this.http.get(`${this.url}/findCoursByDateGreaterThan`);
 
   }
+  filterByNiveau(niveau:string){
+    return this.http.get(`${this.url}/filterByNiveau/${niveau}`);
+  }
+  sendHtmlEmail(email:string , amount:any){
+    return this.http.post(`${this.url}/sendHtmlEmail/${email}/${amount}`,{});
+  }
+  PdfGenerator(amount:any){
+    return this.http.post(`${this.url}/PdfGenerator/${amount}`,{});
 
+  }
+  rechercheMultiCritere(search: String){
+    return this.http.get(`${this.url}/findByNomCourOrDescription/${search}`);
+
+  }
   
 }

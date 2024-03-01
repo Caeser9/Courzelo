@@ -17,6 +17,7 @@ import { RessourceMaterialsComponent } from './cour/ressource-materials/ressourc
 import { ListComponent } from './cour/video/list/list.component';
 import { VideoService } from './service/video.service';
 import {ToastrModule, ToastrService} from 'ngx-toastr';
+import { ChatComponent } from './cour/chat/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {ToastrModule, ToastrService} from 'ngx-toastr';
     RessourceListComponent,
     RessourceMaterialsComponent,
     ListComponent,
+    ChatComponent,
 
 
   ],

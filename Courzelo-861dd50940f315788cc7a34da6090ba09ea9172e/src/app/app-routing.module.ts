@@ -10,6 +10,7 @@ import { AddRessourceComponent } from './cour/add-ressource/add-ressource.compon
 import { RessourceListComponent } from './cour/ressource-list/ressource-list.component';
 import { RessourceMaterialsComponent } from './cour/ressource-materials/ressource-materials.component';
 import { ListComponent } from './cour/video/list/list.component';
+import { ChatComponent } from './cour/chat/chat/chat.component';
 
 const routes: Routes = [
   {path:"courselist",component:CourseListComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path:"ressource-list/:id",component:RessourceListComponent},
   {path:"ressource-materials/:id",component:RessourceMaterialsComponent},
   {path: 'listVideo/:nomVideo', component:ListComponent },
+  {path:'chat',component:ChatComponent}
 
 
 ];

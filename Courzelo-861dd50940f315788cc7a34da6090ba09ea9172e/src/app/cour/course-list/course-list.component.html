@@ -105,10 +105,7 @@
                                         </div>
                                     </div>
                                     <div class="rating">							
-                                        <span> 
-                                            <ngb-rating  ngModel="ratingcontrol"   ></ngb-rating>
-
-                                            </span> 
+                                        
                                     </div>
                                     <div class="course-group d-flex mb-0">
                                         <div class="course-group-img d-flex">
@@ -311,7 +308,8 @@
                     <div class="card post-widget ">
                         <div class="card-body">
                             <div class="latest-head">
-                                <h4 class="card-title">Latest Courses</h4>
+                                <h4 class="card-title"></h4>
+                                <button class="btn-action-method" (click)="latestCourse()">Latest Courses </button>
                             </div>
                             <div *ngFor="let courseR of courseRecente">
                             <ul class="latest-posts">
@@ -321,13 +319,15 @@
                                             <img width="25" height="25" *ngIf="courseR.photo"
                                             [src]="getphoto(courseR.photo)" >                                  
                                              </a>
+                                             <h4>
+                                                <a class="course-link" href="course-details.html">{{courseR.nomCour}}</a>
+                                            </h4>
+                                            <p class="course-price">{{courseR.prix}}</p>
                                     </div>
                                     <div class="post-info free-color">
-                                        <h4>
-                                            <a href="course-details.html">{{courseR.nomCour}}</a>
-                                        </h4>
-                                        <p>{{courseR.prix}}</p>
+                                       
                                     </div>
+                                    
                                 </li>
                                
                             </ul>

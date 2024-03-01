@@ -171,13 +171,26 @@
 									<div class="card instructor-card w-100">
 										<div class="card-body">
 											<div class="instructor-inner">
-                                                <input type="text" [(ngModel)]="search" class="search-box-four" placeholder="Search">
+                                                <input type="text" [(ngModel)]="search" (input)="rechercheMultiCritere()" class="search-box-four" placeholder="Search">
 												
 											</div>
+											
+										</div>
+										<div class="input-block select-form mb-0">
+											<select class="form-control select"[(ngModel)]="selectedNiveau"   (click)="filterByNiveau()" name="niveau">
+												<option value="PREMIERE">PREMIERE</option>
+												<option value="DEUXIEME">DEUXIEME</option>
+												<option value="TROISIEME">TROISIEME</option>
+												<option value="QUATRIEME">QUATRIEME</option>
+												<option value="CINQUIEME">CINQUIEME</option>
+											</select>
 										</div>
 									</div>
+									
 								</div>
+
 							</div>
+							
 							<div class="row">
 								<div class="col-md-12">
 									<div class="card instructor-card">
