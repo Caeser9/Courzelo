@@ -1,5 +1,6 @@
 package com.example.courzeloproject.Entite;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.aot.generate.GenerationContext;
 import org.springframework.data.annotation.Id;
@@ -19,10 +20,15 @@ public class Faculte implements Serializable {
     @Id
 
     private String codeFaculte;
+    @NotBlank
     private String nom;
+    @NotBlank
     private String adresse;
+    @NotBlank
     private int telephone;
+    @NotBlank
     private String description;
+    @NotBlank
     private String photoUrl;
     @DBRef
     Pole pole;
