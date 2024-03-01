@@ -10,7 +10,7 @@ export class CommentaireService {
   private baseUrl = 'http://localhost:8082/Courzelo/Commentaire/addCommentaire'; 
   private baseUrl1 = 'http://localhost:8082/Courzelo/Commentaire/Commentaires'; 
   private baseUrl2 = 'http://localhost:8082/Courzelo/Commentaire/Commentaire'; 
-
+  
 
   constructor(private http: HttpClient) { }
   addCommentaire(commentaire: Commentaire): Observable<Commentaire> {
@@ -37,6 +37,18 @@ getCommentaire(id: string): Observable<Commentaire> {
       return this.http.post(url, reponse);
     }
     
+      sendEmail(email: string, subject: string, corp: string): Observable<any> {
+        const request = {
+          email: email,
+          subject: subject,
+          corp: corp
+        };
+        
+        return this.http.post<any>('http://localhost:8082/Courzelo/send-email', request);
+      }
+    }
+
+    
     
   
-}
+

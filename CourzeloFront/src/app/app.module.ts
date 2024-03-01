@@ -11,12 +11,12 @@ import { HomeComponent } from './shared/home/home.component';
 import { ListDomaineComponent } from './domaine/list-domaine/list-domaine.component';
 import { AjoutDomaineComponent } from './domaine/ajout-domaine/ajout-domaine.component';
 import { DeleteDomaineComponent } from './domaine/delete-domaine/delete-domaine.component';
-import { UpdateDomaineComponent } from './domaine/update-domaine/update-domaine.component';
+import { UpdateDomaineComponent } from './update-domaine/update-domaine.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PhotoComponent } from './photo/photo.component';
 
 import { AddCommentaireComponent } from './commentaire/add-commentaire/add-commentaire.component';
-import { ListeCommentaireComponent } from './commentaire/liste-commentaire/liste-commentaire.component';
+import { ListeCommentaireComponent } from './liste-commentaire/liste-commentaire.component';
 
 
 

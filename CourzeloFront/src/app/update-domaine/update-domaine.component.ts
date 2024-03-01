@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { Domaine } from '../../models/domaine';
+import { Domaine } from '../models/domaine';
 
 import { Location } from '@angular/common';
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { DomaineService } from '../../services/domaine.service';
+import { DomaineService } from '../services/domaine.service';
 
 
 @Component({

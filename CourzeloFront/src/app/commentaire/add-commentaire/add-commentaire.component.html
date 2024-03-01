@@ -792,7 +792,7 @@
 							<div class="add-commentaire-form">
 								<div class="card-body">
 									<h5 class="subs-title">Post A comment</h5>
-									<form [formGroup]="addCommentaireForm" (ngSubmit)="onSubmit()">
+									<form [formGroup]="addCommentaireForm" (ngSubmit)="onSubmit()" >
 										<div class="row">
 											<div class="col-md-6" >
 												<div class="input-block">
@@ -802,22 +802,22 @@
 											</div>
 											<div class="col-md-6">
 												<div class="input-block">
-													<input type="email" class="form-control" placeholder="Email" formControlName="email" id="email">
+													<input type="email"   class="form-control" placeholder="Email" formControlName="email" id="email">
 													<div *ngIf="addCommentaireForm.get('email')?.errors?.['required'] && addCommentaireForm.get('email')?.touched" class="text-danger">Email is required.</div>
 													<div *ngIf="addCommentaireForm.get('email')?.errors?.['email'] && addCommentaireForm.get('email')?.touched" class="text-danger">Invalid email address.</div>
 												</div>
 											</div>
 										</div>
 										<div class="input-block">
-											<input type="email" class="form-control" placeholder="Subject"  formControlName="subject" id="subject">
+											<input type="email"  class="form-control" placeholder="Subject"  formControlName="subject" id="subject">
 											<div *ngIf="addCommentaireForm.get('subject')?.errors?.['required'] && addCommentaireForm.get('subject')?.touched" class="text-danger">Subject is required.</div>
 										</div>
 										<div class="input-block">
-											<textarea rows="4" class="form-control" placeholder="Your Comments" formControlName="corp" id="corp"></textarea>
+											<textarea rows="4"  class="form-control" placeholder="Your Comments" formControlName="corp" id="corp"></textarea>
 											<div *ngIf="addCommentaireForm.get('corp')?.errors?.['required'] && addCommentaireForm.get('corp')?.touched" class="text-danger">Comments is required.</div>
 										</div>
 										<div class="submit-section">
-											<button class="btn submit-btn" type="submit">Submit</button>
+											<button class="btn submit-btn" type="submit" (click)="sendEmail()">Submit</button>
 										</div>
 									</form>
 								</div>
