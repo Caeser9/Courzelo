@@ -7,6 +7,9 @@ import com.example.mongonew.entities.User;
 import com.example.mongonew.repository.ICourRepository;
 import com.example.mongonew.repository.IRessourceRepository;
 import com.example.mongonew.repository.IUserRepository;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPTable;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -205,6 +208,28 @@ public class CourServiceImpl implements ICourService {
     public List<Cour> filterByNiveau(Niveau niveau) {
         return iCourRepository.findCoursByNiveau(niveau);
     }
+    public static void addTableHeader(PdfPTable table) {
+        // Ajouter les en-têtes de colonnes
+        table.addCell("Nom");
+        table.addCell("Date");
+        table.addCell("Montant");
+    }
 
+    public static void addCustomRows(PdfPTable table) {
+        // Exemple de données de clients
+
+        // Ajoutez autant de lignes de clients que nécessaire
+    }
+
+    public static void addRow(PdfPTable table, String name, Date date, Long amount) {
+        // Ajouter une ligne avec les données du client
+        table.addCell(name);
+        table.addCell(date.toString()); // Vous pouvez formater la date selon vos préférences
+        table.addCell(String.valueOf(amount));
+    }
+    public static BaseFont getBaseFont() throws DocumentException, IOException {
+        // Utilisation d'une police de base intégrée
+        return BaseFont.createFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.NOT_EMBEDDED);
+    }
 
 }
