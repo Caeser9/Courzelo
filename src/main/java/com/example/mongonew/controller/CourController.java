@@ -208,7 +208,7 @@ return "success";
                 + "</ul>"
                 + "</div>"
                 + "<div class='footer'>"
-                + "<p>© 2024 Votre Société. Tous droits réservés.</p>"
+                + "<p>© 2024 Courzelou. Tous droits réservés.</p>"
                 + "</div>"
                 + "</div>"
                 + "</body>"
@@ -248,4 +248,8 @@ return "success";
         document.close();
         return "success";
     }
-}
+    @GetMapping("/findByNomCourOrDescription/{recherche}")
+    public List<Cour> findByNomCourOrDescriptions( @PathVariable("recherche") String recherche ) {
+        return iCourService.rechercheCour(recherche);
+    }
+    }

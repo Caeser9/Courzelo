@@ -24,5 +24,6 @@ public interface ICourService {
     public String storeFileRessource(MultipartFile file, String idRessource);
     List<Cour> findCoursByDateGreaterThan();
     List<Cour> filterByNiveau(Niveau niveau);
+   public List<Cour> rechercheCour(String recherche);
 
 }

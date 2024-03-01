@@ -208,6 +208,14 @@ public class CourServiceImpl implements ICourService {
     public List<Cour> filterByNiveau(Niveau niveau) {
         return iCourRepository.findCoursByNiveau(niveau);
     }
+
+    @Override
+    public List<Cour> rechercheCour(String recherche) {
+        return iCourRepository.findByNomCourIgnoreCaseOrDescriptionIgnoreCase(recherche,recherche);
+
+    }
+
+
     public static void addTableHeader(PdfPTable table) {
         // Ajouter les en-têtes de colonnes
         table.addCell("Nom");
