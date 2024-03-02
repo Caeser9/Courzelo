@@ -10,6 +10,9 @@ import { QuestionListComponent } from './Question/question-list/question-list.co
 import { AddQuestionComponent } from './Question/add-question/add-question.component';
 import { UpdateQuestionComponent } from './Question/update-question/update-question.component';
 import { DeleteQuestionComponent } from './Question/delete-question/delete-question.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { DeleteQuestionComponent } from './Question/delete-question/delete-quest
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
+    FormsModule,
     HttpClientModule,
   ],
   providers: [],

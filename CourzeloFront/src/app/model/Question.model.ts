@@ -1,5 +1,5 @@
 export class Question {
-      id : String ;
+      id : string ;
       category: String;;
       difficultylevel: String;
       option1: String;
