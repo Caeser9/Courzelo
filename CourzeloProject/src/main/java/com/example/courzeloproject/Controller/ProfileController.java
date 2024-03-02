@@ -34,8 +34,8 @@ public class ProfileController {
         return profileService.getProfileByid(pId);
     }
 
-    @GetMapping("/getProfileByUser/{profile-id}")
-    public Optional<Profile> getProfileByIdUser(@PathVariable("profile-id") String uId) {
+    @GetMapping("/getProfileByUser/{user-id}")
+    public Optional<Profile> getProfileByIdUser(@PathVariable("user-id") String uId) {
         return profileService.getProfileByIdUser(uId);
     }
     @DeleteMapping("/deleteProfile/{profile-id}")

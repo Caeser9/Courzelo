@@ -1,8 +1,125 @@
 <body>
-
+    
     <!-- Main Wrapper -->
     <div class="main-wrapper">
         <app-navbar></app-navbar>
+        <p-dialog [(visible)]=" updateProfileDialog" [style]="{width: '500px','background-color': '#f0f0f0'}" header="Modifier formateur" [modal]="true"
+        class="p-fluid">
+        <ng-template pTemplate="content">
+            <form [formGroup]="profileForm">
+                <div class="forms ">
+                    <label for="firstName">Nom de l'enseignant</label>
+                    <div class="field">
+                        <span class="login-input-wrapper">
+                            <input type="text" formControlName="firstName" required [(ngModel)]="profile!.firstName"
+                                pInputText placeholder="Entrer votre nom..."
+                                [ngClass]="!profileForm.controls['firstName'].valid && profileForm.controls['firstName']?.touched?'ng-invalid ng-dirty':''" />
+                        </span>
+                        <small class="text-red-500"
+                            *ngIf="!profileForm.controls['firstName'].valid && profileForm.controls['firstName']?.touched "
+                            style="color: #f44336;">
+                            {{ profileForm.get("firstName").hasError("required")? "Ce champ est obligatoire ": ""}}
+                            {{ profileForm.get("firstName").hasError("minlength")? "Veuillez entrer un nom valide!
+                            ": ""}}
+    
+                        </small>
+                    </div>
+                    <label for="lastName">Prénom de l'enseignant</label>
+                    <div class="field">
+                        <span class="login-input-wrapper">
+    
+                            <input type="text" formControlName="lastName" required [(ngModel)]="profile.lastName" pInputText
+                                placeholder="Entrer votre prénom..."
+                                [ngClass]="!profileForm.controls['lastName'].valid && profileForm.controls['lastName']?.touched?'ng-invalid ng-dirty':''" />
+                        </span>
+                        <small class="text-red-500"
+                            *ngIf="!profileForm.controls['lastName'].valid && profileForm.controls['lastName']?.touched "
+                            style="color: #f44336;">
+                            {{ profileForm.get("lastName").hasError("required")? "Ce champ est obligatoire ": ""}}
+                            {{ profileForm.get("lastName").hasError("minlength")? "Veuillez entrer un prénom valide!
+                            ": ""}}
+    
+                        </small>
+                    </div>
+                    <label for="adresse">Adresse</label>
+                    <div class="field">
+                        <span class="login-input-wrapper">
+                            <input type="text" formControlName="address" required [(ngModel)]="profile.address" pInputText
+                                placeholder="Entrer votre prénom..."
+                                [ngClass]="!profileForm.controls['address'].valid && profileForm.controls['address']?.touched?'ng-invalid ng-dirty':''" />
+                        </span>
+                        <small class="text-red-500"
+                            *ngIf="!profileForm.controls['address'].valid && profileForm.controls['address']?.touched "
+                            style="color: #f44336;">
+                            {{ profileForm.get("address").hasError("required")? "Ce champ est obligatoire ": ""}}
+                            {{ profileForm.get("address").hasError("minlength")? "Veuillez entrer une adresse valide!
+                            ": ""}}
+                        </small>
+                    </div>
+    
+                    <label for="phone">Numéro de téléphone:</label>
+                    <div class="field">
+                        <span class="login-input-wrapper">
+    
+                            <input type="text" id="phone" formControlName="phone" required [(ngModel)]="profile.phone"
+                                pInputText placeholder="Entrer votre numéro de téléphone..."
+                                [ngClass]="!profileForm.controls['phone'].valid && profileForm.controls['phone']?.touched?'ng-invalid ng-dirty':''" />
+                        </span>
+                        <small class="text-red-500"
+                            *ngIf="!profileForm.controls['phone'].valid && profileForm.controls['phone']?.touched "
+                            style="color: #f44336;">
+                            {{ profileForm.get("phone").hasError("required")? "Ce champ est obligatoire
+                            ": ""}}
+                            {{ profileForm.get("phone").hasError("pattern") ? "Veuillez entrer un numéro valide
+                            ": ""}}
+                            {{ profileForm.get("phone").hasError("minlength") ? "Le numéro de téléphone doit contenir 8
+                            chiffres
+                            ": ""}}
+                            {{ profileForm.get("phone").hasError("maxlength") ? "Le numéro de téléphone ne doit dépasser 8
+                            chiffres
+                            ": ""}}
+    
+                        </small>
+                    </div>
+       <!--              <label for="email">Email:</label>
+                    <div class="field">
+                        <span class="login-input-wrapper">
+    
+                            <input type="text" id="email" formControlName="email" pInputText [(ngModel)]="profile.email"
+                                placeholder="Entrer votre email..." required
+                                [ngClass]="!profileForm.controls['email'].valid && profileForm.controls['email']?.touched?'ng-invalid ng-dirty':''" />
+                        </span>
+                        <small class="text-red-500"
+                            *ngIf="!profileForm.controls['email'].valid && profileForm.controls['email']?.touched "
+                            style="color: #f44336;">
+                            {{ profileForm.get("email").hasError("required")? "Ce champ est obligatoire
+                            ": ""}}
+                            {{ profileForm.get("email").hasError("minlength")? "Veuillez entrer un nom valide!
+                            ": ""}}
+    
+                        </small>
+                    </div>-->
+    
+                </div>
+            </form>
+    
+    
+    
+    
+    
+    
+    
+    
+        </ng-template>
+    
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text"
+                (click)="updateProfileDialog = false"></button>
+            <button pButton pRipple label="Enregistrer " icon="pi pi-check" class="p-button-text" (click)="updateProfile()"
+                [disabled]="profileForm.invalid"></button>
+        </ng-template>
+    </p-dialog>
+    
         <!-- Breadcrumb -->
         <div class="breadcrumb-bar">
             <div class="container">
@@ -61,13 +178,9 @@
                             <!-- Instructor List -->
                             <div class="col-lg-12 d-flex">
                                 <div class="instructor-list flex-fill">
-                                    <div class="instructor-img">
-                                        <a href="instructor-profile.html">
-                                            <img class="img-fluid" alt="" src="assets/img/user/user11.jpg">
-                                        </a>
-                                    </div>
                                     <div class="instructor-content">
-                                        <h5><a>{{f.email}}</a></h5>
+                                        <h5><a>{{f.username}}</a></h5>
+                                        <h5><a>{{f.email}}</a></h5>                                     
                                         <h6>Instructor</h6>
                                         <div class="instructor-info">
                                             <div class="rating-img d-flex align-items-center">
@@ -92,11 +205,9 @@
                                             </div>
                                             <a href="#rate" class="rating-count"><i class="fa-regular fa-heart"></i></a>
                                         </div>
-                                        <div class="instructor-badge">
-                                            <span class="web-badge">Web Design</span>
-                                            <span class="web-badge">web development</span>
-                                            <span class="web-badge">UI Design</span>
-                                        </div>
+                                        <button pButton class="p-button-rounded p-button-success m-2" type="button" icon="pi pi-pencil"
+                                        pTooltip="Modifier enseignant"
+                                        (click)="updateProfileDialog = true;getProfileByIdUser(f.id)"></button>
                                     </div>
                                 </div>
                             </div>

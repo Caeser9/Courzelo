@@ -20,8 +20,16 @@ import { FormateurListComponent } from './core/back-office/User/formateur-list/f
 import { UploadFileComponent } from './core/back-office/User/upload-file/upload-file.component';
 import { AddAdminComponent } from './core/back-office/User/add-admin/add-admin.component';
 import { AddFormateurComponent } from './core/back-office/User/add-formateur/add-formateur.component';
+import { DialogModule } from 'primeng/dialog';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
-
+import { ToastModule } from 'primeng/toast';
+import { InputTextModule } from 'primeng/inputtext';
+import { PaginatorModule } from 'primeng/paginator';
+import { TooltipModule } from 'primeng/tooltip';
+import { ToolbarModule } from 'primeng/toolbar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -49,7 +57,18 @@ import { AddFormateurComponent } from './core/back-office/User/add-formateur/add
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserModule
+    BrowserModule,
+    DialogModule,
+    PaginatorModule,
+    TableModule,
+    ButtonModule,
+    ToastModule,
+    InputTextModule,
+    TooltipModule,
+    ToolbarModule ,
+    PaginatorModule,
+    BrowserAnimationsModule
+
 
     
   ],

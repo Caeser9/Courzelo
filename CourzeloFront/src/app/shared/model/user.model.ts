@@ -1,3 +1,4 @@
+import { Profile } from "./profile.module";
 import { ERole } from "./role";
 
 export class User {
@@ -6,4 +7,9 @@ export class User {
     username: string;
     password: string;
     roles: [ERole];
+    profile:Profile
+    verificationCode: string;
+    enabled: boolean;
+    active: boolean;
+   // establishmentId: number
 }

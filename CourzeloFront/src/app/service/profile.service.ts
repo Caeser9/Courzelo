@@ -49,6 +49,16 @@ export class ProfileService {
     };
     return this.httpClient.get(`${this.profileURL}/getProfile/${id}`, httpOptions)
   }
+
+  getProfiles() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + this.tokenStorageService.getToken(),
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpClient.get(`${this.profileURL}/getAllProfile`, httpOptions)
+  }
   modifyProfile( id: any, profile: Profile) {
     const httpOptions = {
       headers: new HttpHeaders({
