@@ -9,7 +9,7 @@ import { HomeComponent } from './shared/home/home.component';
 import { LoginComponent } from './core/front-office/Formateur-Admin/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './core/front-office/Formateur-Admin/register/register.component';
+import { RegisterComponent } from './core/front-office/Participant/register/register.component';
 import { EditProfileComponent } from './core/back-office/User/edit-profile/edit-profile.component';
 import { SideBarComponent } from './shared/side-bar/side-bar.component';
 import { AdminListComponent } from './core/back-office/User/admin-list/admin-list.component';
@@ -30,6 +30,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { TooltipModule } from 'primeng/tooltip';
 import { ToolbarModule } from 'primeng/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginParticipantComponent } from './core/front-office/Participant/login-participant/login-participant.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormateurListComponent,
     UploadFileComponent,
     AddAdminComponent,
-    AddFormateurComponent
+    AddFormateurComponent,
+    LoginParticipantComponent,
+
     
   ],
   imports: [

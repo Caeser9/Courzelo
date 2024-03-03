@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { ERole } from 'src/app/shared/model/role';
 import { User } from 'src/app/shared/model/user.model';
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
    // private messageService: MessageService,
    private _routes:Router,
     private formBuilder: FormBuilder) { }
-
+    private messageService: MessageService
 
   ngOnInit(): void {
     this.user = new User();
@@ -39,19 +40,22 @@ export class RegisterComponent implements OnInit {
 
   }
   register() {
-  console.log(this.user.password)
+  
     this.user.roles = [ERole.ROLE_PARTICIPANT]
     console.log(this.user)
     this.authService.signupWithEmail(this.user).subscribe(
       (data) => {
-
-       console.log("kdhee el user " , this.user)
-       // this._routes.navigate(['/verify-code']);
-
+       
+        this._routes.navigate(['/verify-code']);
       },
       (error) => {
        console.log("erreur register .component")
       }
     );
   }
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+
 }

@@ -36,10 +36,10 @@ registerAdmin() {
       (data) => {
 
        console.log("kdhee el user " , this.user)
-       
-
+      
       },
       (error) => {
+        alert("this email already exist !!! ")
        console.log("erreur register .component")
       }
     );

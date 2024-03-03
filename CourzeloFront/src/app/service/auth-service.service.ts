@@ -18,15 +18,17 @@ export class AuthServiceService {
   signupWithIdentifiant(user: User) {
     return this.http.post(`${this.apiURL}auth/signup`, user);
   }
-  getUserByVerificationCode(verificationCode: any) {
-    return this.http.get(`${this.apiURL}user/connect/${verificationCode}`)
-  }
+
 //for student
   signupWithEmail(user: User) {
     return this.http.post(`${this.apiURL}auth/signupWithEmail`, user);
   }
   signinWithEmail(user: User) {
     return this.http.post<any>(`${this.apiURL}auth/signinWithEmail`, user);
+  }
+
+  getUserByVerificationCode(verificationCode: string) {
+    return this.http.get(`${this.apiURL}auth/connect/${verificationCode}`)
   }
 
 }

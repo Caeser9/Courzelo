@@ -10,6 +10,13 @@
                 <div class="forms ">
                     <label for="firstName">Nom de l'enseignant</label>
                     <div class="field">
+                        <div class="sell-group-img">
+
+                            <img *ngIf="profile.photo"
+                                [src]="getProfilePhotoUrl(profile)"
+                                alt="Blog Photo" class="img-fluid ">
+
+                        </div>
                         <span class="login-input-wrapper">
                             <input type="text" formControlName="firstName" required [(ngModel)]="profile!.firstName"
                                 pInputText placeholder="Entrer votre nom..."

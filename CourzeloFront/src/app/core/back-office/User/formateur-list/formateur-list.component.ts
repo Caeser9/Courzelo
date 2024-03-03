@@ -119,5 +119,7 @@ export class FormateurListComponent implements OnInit {
     )
   }
 
-
+  getProfilePhotoUrl(p: Profile): string {
+    return this.profileService.getPhoto(p.photo);
+  }
 }

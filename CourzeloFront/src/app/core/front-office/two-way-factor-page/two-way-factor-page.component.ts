@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { TokenStorageService } from 'src/app/service/token-storage-service.service';
 
@@ -11,8 +12,9 @@ import { TokenStorageService } from 'src/app/service/token-storage-service.servi
 })
 export class TwoWayFactorPageComponent {
   user: any = {};
-  code: "";
+  verificationCode: any;
   isShow = true;
+  private messageService: MessageService
   constructor(
     private authService: AuthServiceService,
     private tokenStorage: TokenStorageService,
@@ -23,15 +25,22 @@ export class TwoWayFactorPageComponent {
 
   
   verfiyCode(){
-    console.log('Code entré:',this.code);
-    this.authService.getUserByVerificationCode(this.code).subscribe(
+    console.log(this.verificationCode);
+    this.authService.getUserByVerificationCode(this.verificationCode).subscribe(
       (data) => {
-        this.user = data;
-        this.router.navigate(['/addProfile']);
+       if(data){
+       
+      //  this.router.navigate(['/login']);
+       }else {
+       // this.authService.de
+       alert("Bad Code ")
+        console.log("tfasakh")
+       // this.router.navigate(['/editProfile']);
+       }
       },
       (error) => {
         //this.router.navigate(['/register']);
-      console.log("mafamechh menou")
+      console.log("mafamechh menou",error)
        
      }
     );

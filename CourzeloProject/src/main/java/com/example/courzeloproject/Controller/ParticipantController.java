@@ -94,7 +94,7 @@ public class ParticipantController {
         String randomCode = RandomStringUtils.random(6,true,true);
         System.out.println("Code de verification = "+ randomCode);
         user.setVerificationCode(randomCode);
-         user.setEnabled(false);
+        user.setEnabled(false);
         userRepository.save(user);
         String siteURL = login + user.getVerificationCode();
         this.userService.sendVerificationEmail(user, siteURL);

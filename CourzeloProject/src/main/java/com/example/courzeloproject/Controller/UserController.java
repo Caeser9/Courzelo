@@ -12,22 +12,30 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api")
 public class UserController {
     @Autowired
     IUserService userService ;
 
-    @GetMapping("/{role}")
+    @GetMapping("/user/{role}")
     public List<User> getFormateur(@PathVariable("role") ERole role){
         return userService.getUsersByRole(role) ;
     }
-    @GetMapping("/connect/{verificationCode}")
-    public String verifyUser(@PathVariable String verificationCode) {
-        if (userService.verify(verificationCode)) {
-            return "verify_success";
-        } else {
-            return "verify_fail";
-        }
+    @GetMapping("/auth/connect/{verificationCode}")
+    public boolean verifyUser(@PathVariable String verificationCode) {
+        return userService.verify(verificationCode) ;
+
     }
+
+//    @PostMapping("/activerUser/{id}")
+//    public void activerUser(@PathVariable Long id) {
+//        userService.activerUser(id);
+//    }
+//
+//    @PostMapping("/desactiverUser/{id}")
+//    public void desactiverUser(@PathVariable Long id) {
+//        userService.desactiverUser(id);
+//    }
+//
 
 }
