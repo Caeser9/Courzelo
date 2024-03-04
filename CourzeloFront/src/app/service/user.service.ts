@@ -22,7 +22,7 @@ export class UserService {
 
 //get All teacher :
 getUser(role: any) {
-  return this.http.get(`${this.apiURL}/${role}`, );
+  return this.http.get(`${this.apiURL}/${role}`, this.httpOptions);
 }
 getUserById(id: number): Observable<User> {
   return this.http.get<User>(`${this.apiURL}/${id}`, this.httpOptions);

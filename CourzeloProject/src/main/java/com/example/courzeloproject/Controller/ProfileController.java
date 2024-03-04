@@ -46,7 +46,7 @@ public class ProfileController {
     public Profile modifyBloc(@RequestBody Profile p,@PathVariable("id") String id) {
        return profileService.updateProfile(id,p);
     }
-    @GetMapping("/download/{fileName}")
+    @GetMapping("/photo/download/{fileName}")
     public ResponseEntity<Resource> downloadFile(@PathVariable("fileName") String fileName) {
         Resource resource = profileService.loadFileAsResource(fileName);
         return ResponseEntity.ok()
@@ -55,7 +55,7 @@ public class ProfileController {
     }
 
     //upload image
-    @PostMapping("/upload/{id}")
+    @PostMapping("/photo/upload/{id}")
     public Profile handleFileUpload(@RequestParam("photo") MultipartFile file,
                                     @PathVariable("id") String pid) {
 

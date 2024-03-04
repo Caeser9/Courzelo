@@ -13,7 +13,12 @@ export class ProfileService {
 
   constructor(private httpClient: HttpClient, private tokenStorageService: TokenStorageService) { }
 
-  
+  httpOptions = {
+    headers: new HttpHeaders({
+        Authorization: 'Bearer ' + this.tokenStorageService.getToken(),
+        'Content-Type': 'application/json'
+    })
+};
   
   private _refreshRequired = new Subject<void>();
   get refreshRequired() {
@@ -76,7 +81,7 @@ export class ProfileService {
   }
   //image api : w9efettt lenaaa
   uploadPhoto(id: string, file: File): Observable<any> {
-    const uploadUrl = `${this.profileURL}/upload/${id}`;
+    const uploadUrl = `${this.profileURL}/photo/upload/${id}`;
 
     const formData: FormData = new FormData();
     formData.append('photo', file, file.name);
@@ -85,13 +90,13 @@ export class ProfileService {
   }
 
   downloadFile(fileName: string): Observable<Blob> {
-    const url = `${this.profileURL}/download/${fileName}`;
-    return this.httpClient.get(url, { responseType: 'blob' });
+    const url = `${this.profileURL}/photo/download/${fileName}`;
+    return this.httpClient.get(url,{ responseType: 'blob' });
   }
 
   getPhoto(photo: string): string{
-    const photoUrl = `${this.profileURL}/download/${photo}`;
+    const photoUrl = `${this.profileURL}/photo/download/${photo}`;
 
-    return `${this.profileURL}/download/${photo}`;
+    return `${this.profileURL}/photo/download/${photo}`;
   }
 }

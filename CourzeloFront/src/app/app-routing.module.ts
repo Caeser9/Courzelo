@@ -15,6 +15,7 @@ import { UploadFileComponent } from './core/back-office/User/upload-file/upload-
 import { AddAdminComponent } from './core/back-office/User/add-admin/add-admin.component';
 import { AddFormateurComponent } from './core/back-office/User/add-formateur/add-formateur.component';
 import { LoginParticipantComponent } from './core/front-office/Participant/login-participant/login-participant.component';
+import { AuthGuard } from './core/Guard/auth.guard';
 
 
 const routes: Routes = [
@@ -27,15 +28,15 @@ const routes: Routes = [
   {path:"sidebar",component:SideBarComponent},
   {path:"home",component:HomeComponent},
 
-  {path:"addProfile",component:AddProfileComponent},
-  {path:"editProfile",component:EditProfileComponent},
-  {path:"upload/:id", component:UploadFileComponent},
+  {path:"addProfile",component:AddProfileComponent, canActivate : [AuthGuard]},
+  {path:"editProfile",component:EditProfileComponent, canActivate : [AuthGuard]},
+  {path:"upload/:id", component:UploadFileComponent, canActivate : [AuthGuard]},
 
-  {path:"formateur-list",component:FormateurListComponent} ,   
-  {path:"admin-list",component:AdminListComponent},
+  {path:"formateur-list",component:FormateurListComponent, canActivate : [AuthGuard]} ,   
+  {path:"admin-list",component:AdminListComponent, canActivate : [AuthGuard]},
 
-  {path:"addAdmin",component:AddAdminComponent},
-  {path:"addFormateur",component:AddFormateurComponent},
+  {path:"addAdmin",component:AddAdminComponent, canActivate : [AuthGuard]},
+  {path:"addFormateur",component:AddFormateurComponent, canActivate : [AuthGuard]},
 
 
 
