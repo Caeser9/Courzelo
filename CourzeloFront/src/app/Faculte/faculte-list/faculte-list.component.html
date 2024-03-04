@@ -21,8 +21,8 @@
                                         <h4><a href="instructor-profile.html">Jenny Wilson</a></h4>
                                         <p>Admin</p>
                                     </div>
-                                    <div class="go-dashboard text-center">
-                                        <a routerLink="/addFaculte" class="btn btn-primary">Create New University</a>
+                                    <div (click)="navigateToAddFaculte(poleId)" class="go-dashboard text-center">
+                                        <a  class="btn btn-primary">Create New University</a>
                                     </div>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
 
                                     <li class="nav-item active">
                                         <a routerLink="/getAllFacultes" class="nav-link">
-                                            <i routerLink="/getAllPoles" class="feather-book"></i> My Universities
+                                            <i routerLink="/getAllFacultes" class="feather-book"></i> My Universities
                                         </a>
                                     </li>
 
@@ -91,7 +91,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let faculte of filteredFaculte; let i = index;">
+                                                        <tr *ngFor="let faculte of facultes; let i = index;">
                                                             <td>
                                                                 <div class="sell-table-group d-flex align-items-center">
                                                                     <div class="sell-group-img">

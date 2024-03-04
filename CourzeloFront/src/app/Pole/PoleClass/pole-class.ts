@@ -6,5 +6,5 @@ export class PoleClass {
     adresse ! : String;
     description ! : String;
     photoUrl ! : String;
-    // facultes ! : Faculte[];
+    facultes ! : Faculte[];
 }

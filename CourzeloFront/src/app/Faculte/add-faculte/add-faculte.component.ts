@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FaculteService } from '../FaculteService/faculte.service';
 import { Faculte } from '../FaculteClass/faculte';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { PoleClass } from 'src/app/Pole/PoleClass/pole-class';
 
 @Component({
   selector: 'app-add-faculte',
@@ -10,6 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-faculte.component.css']
 })
 export class AddFaculteComponent implements OnInit {
+   faculteId: string="";
+  generateRandomString = (num: number | undefined) => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result1 = Math.random().toString(36).substring(0, num);
+    return result1;
+  }
   Facultesaveform= new FormGroup({
     nom: new FormControl('',Validators.required),
     adresse: new FormControl('',Validators.required),
@@ -25,12 +32,13 @@ export class AddFaculteComponent implements OnInit {
     adresse: '',
     telephone: 0,
     description: '',
-    photoUrl: ''
+    photoUrl: '',
+    
    
   };
   submitted = false;
 
-  constructor(private faculteService : FaculteService, private router: Router){}
+  constructor(private faculteService : FaculteService, private router: Router, private route :  ActivatedRoute ){}
   
   saveFaculte():void{
     if(this.Facultesaveform.invalid){
@@ -42,7 +50,7 @@ export class AddFaculteComponent implements OnInit {
         description: this.Facultesaveform.get('description')!.value,
         photoUrl: this.Facultesaveform.get('photoUrl')!.value
       } ;
-      this.faculteService.createFaculte(data).subscribe({
+      this.faculteService.addFaculteToPole(this.faculteId,data).subscribe({
         next: (res)=>{
           console.log(res);
           this.submitted=true;
@@ -60,14 +68,19 @@ export class AddFaculteComponent implements OnInit {
       adresse:'',
       telephone:0,
       description:'',
-      photoUrl:''
+      photoUrl:'',
+      
 
     }
   }
   
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.route.params.subscribe(params => {
+      this.faculteId = params['id'];
+      console.log('Faculte ID:', this.faculteId);
+    });
   }
+  
 
 }

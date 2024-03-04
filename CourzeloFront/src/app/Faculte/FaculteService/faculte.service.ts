@@ -27,10 +27,6 @@ export class FaculteService {
   }  
 
   
-  
-  
-  
-  
   updateFaculte(id: String, faculte: Faculte): Observable<Object> {  
     return this.http.put(`${this.baseUrl}/modifierFaculte/${id}`, faculte);  
   }  
@@ -51,6 +47,13 @@ export class FaculteService {
     const photoUrl = `${this.baseUrl}/downloadfaculte/${photo}`;
 
     return `${this.baseUrl}/downloadfaculte/${photo}`;
+  }
+  addFaculteToPole(id: string,faculte: any): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post(`${this.baseUrl}`+`/addFaculteToPole/${id}`, faculte, { headers });
+  }
+  getFaculteByPoleId(id:string):Observable<Faculte>{
+    return this.http.get<Faculte>(`${this.baseUrl}/getFaculteByPoleId/${id}`);  
   }
 
 }

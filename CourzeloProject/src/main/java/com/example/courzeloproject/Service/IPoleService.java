@@ -1,5 +1,6 @@
 package com.example.courzeloproject.Service;
 
+import com.example.courzeloproject.Entite.Faculte;
 import com.example.courzeloproject.Entite.Pole;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,10 @@ public interface IPoleService {
     String storeFile(MultipartFile file, String poleCode);
 
     Resource loadFileAsResource(String fileName);
+    Pole affecterFaculteApole (Faculte f,String codep);
+
+
+
 
 
 }

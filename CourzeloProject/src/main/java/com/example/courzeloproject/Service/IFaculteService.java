@@ -15,4 +15,7 @@ public interface IFaculteService {
     String storeFile(MultipartFile file, String faculteCode);
 
     Resource loadFileAsResource(String fileName);
+    List<Faculte> getFaculteByPoleId(String codep);
+    Faculte addFaculteToPole(String polec, Faculte faculte) ;
+
 }

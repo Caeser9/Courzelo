@@ -69,12 +69,11 @@ export class PoleListComponent implements OnInit {
   }
   navigateToAddPole() {
     this.router.navigate(['/addPole']);
+
+   
   }
   
-  
-  
-  
-  
+
   onSearch(): void {
     console.log('Search Input:', this.searchInput);
     
@@ -85,8 +84,12 @@ export class PoleListComponent implements OnInit {
     );
     console.log('All Poles:', this.poles);
   }
- }
-  // 
+  navigateToFaculte(poleId: string):void{
+    this.router.navigate(['/getAllFacultes/', poleId]);
+  }
+  }
+ 
+  
   
   
 

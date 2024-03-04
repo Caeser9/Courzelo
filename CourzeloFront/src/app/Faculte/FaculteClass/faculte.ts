@@ -7,6 +7,6 @@ export class Faculte {
     telephone ! : number;
     description ! : String;
     photoUrl ! : String;
-    // pole ! : PoleClass;
+    //  pole ! : PoleClass;
 
 }

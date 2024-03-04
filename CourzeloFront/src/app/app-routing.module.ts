@@ -17,8 +17,8 @@ const routes: Routes = [
   {path:"navbar",component:NavbarComponent},
   {path:"home",component:HomeComponent},
   { path: '', redirectTo: 'getAllFacultes', pathMatch: 'full' },
-  { path: 'getAllFacultes', component: FaculteListComponent },  
-  { path: 'addFaculte', component: AddFaculteComponent },
+  { path: 'getAllFacultes/:id', component: FaculteListComponent },  
+  { path: 'addFaculte/:id', component: AddFaculteComponent },
    
   { path: 'modifierFaculte/:id', component: EditFaculteComponent },  
   { path: 'deleteFaculte', component: DeleteFaculteComponent },   

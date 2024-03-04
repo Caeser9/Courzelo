@@ -23,34 +23,43 @@ export class AddPoleComponent implements OnInit {
      nom: '',
      adresse: '',
      description: '',
-     photoUrl: ''
+     photoUrl: '',
+     facultes :[]
     
    };
    
    submitted = false;
    constructor(private poleservice: PoleServiceService, private router : Router){}
+
+
    savePole():void{
     if(this.Polesaveform.invalid){
       return;
     }
+
+
     const data={
       nom:this.Polesaveform.get("nom")!.value,
       adresse: this.Polesaveform.get("adresse")!.value,
       description: this.Polesaveform.get("description")!.value,
       photoUrl: this.Polesaveform.get("photoUrl")!.value
     };
+
+
    this.poleservice.createPole(data).subscribe({
     next: (res)=>{
       console.log(res);
       this.submitted=true;
       this.router.navigateByUrl(`/uploadPolePhoto/${res.codePole}`);
-      
+       this.router.navigate(['/getAllPoles']);
 
     },
       
     error: (e) => console.error(e)
    });
    }
+
+   
    newPole(): void{
     this.submitted=false;
     this.poleclass = {
@@ -58,7 +67,8 @@ export class AddPoleComponent implements OnInit {
       nom:'',
       adresse:'',
       description:'',
-      photoUrl:''
+      photoUrl:'',
+      facultes :[]
       
     }
   }

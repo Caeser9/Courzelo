@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Faculte } from '../FaculteClass/faculte';
 import { FaculteService } from '../FaculteService/faculte.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-faculte-list',
@@ -9,27 +9,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./faculte-list.component.css']
 })
 export class FaculteListComponent {
+  poleId: string="";
 facultes: Faculte[]=[];
 
 searchQuery: string = '';
 filteredFaculte: Faculte[] = [];
 searchInput: string = '';
  sortBy: keyof Faculte = 'codeFaculte';
-constructor(private faculteservice: FaculteService, private router:Router){}
+constructor(private faculteservice: FaculteService, private router:Router,private route:ActivatedRoute){}
 ngOnInit(): void {
+  this.route.params.subscribe(params => {
+    this.poleId = params['id'];
+    console.log('Pole ID:', this.poleId);
+  });
   this.fetchFacultes();
 }
 fetchFacultes(): void {
-  this.faculteservice.getFaculteList()
-    .subscribe({
-      next: (facultes) => {
-        this.facultes = facultes;
-        this.filteredFaculte = facultes;
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
+  this.faculteservice.getFaculteByPoleId(this.poleId).subscribe(
+    (facultes) => {
+      this.facultes = Array.isArray(facultes) ? facultes : [];
+      this.sortPoles();
+      console.log(this.facultes);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+
+
 }  
 sortPoles(): void {
   // Sort the poles array based on the selected field and direction
@@ -82,7 +89,10 @@ onSearch(): void {
   );
   console.log('All Facultes:', this.facultes);
 }
-
+navigateToAddFaculte(poleId: string) {
+  this.router.navigate(['/addFaculte/',poleId]);
+  console.log("ok");
+}
 
 
 }

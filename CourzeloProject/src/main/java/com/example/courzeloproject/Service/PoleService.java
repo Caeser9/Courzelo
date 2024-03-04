@@ -2,6 +2,7 @@ package com.example.courzeloproject.Service;
 
 import com.example.courzeloproject.Entite.Faculte;
 import com.example.courzeloproject.Entite.Pole;
+import com.example.courzeloproject.Repository.FaculteRepository;
 import com.example.courzeloproject.Repository.PoleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +26,8 @@ import java.util.List;
 public class PoleService implements IPoleService{
     @Autowired
     PoleRepository poleRepository;
+    @Autowired
+    FaculteRepository faculteRepository;
     @Value("${file.upload-dir}")
     private String uploadDir;
     @Override
@@ -98,6 +102,26 @@ public class PoleService implements IPoleService{
             throw new RuntimeException("File not found: " + fileName, e);
         }
     }
+
+    @Override
+    public Pole affecterFaculteApole(Faculte f, String codep) {
+        Pole p=poleRepository.findById(codep).get();
+        if(faculteRepository.existsById(f.getCodeFaculte())){
+            p.getFacultes().add(f);
+            log.info("yes");
+        }
+        else {
+            p.getFacultes().add(f);
+            faculteRepository.save(f);
+            log.info("okay");
+        }
+        return poleRepository.save(p);
+    }
+
+
+
+
+
     private String generateNewFileName(String originalFileName) {
         // You can customize this method to generate a unique file name.
         // For example, appending a timestamp or using a UUID.

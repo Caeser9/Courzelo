@@ -19,6 +19,8 @@ import java.util.List;
 public class PoleController {
     @Autowired
     IPoleService iPoleService;
+    @Autowired
+    IFaculteService iFaculteService;
     @PostMapping("/addPole")
     public Pole AddPole(@RequestBody Pole pole) {
         return iPoleService.addPole(pole);
@@ -54,4 +56,9 @@ public class PoleController {
                 .body(resource);
 
     }
+    @PostMapping("/affecterFaculteApole/{codep}")
+    Pole affecterFaculteApole(@RequestBody Faculte fac,@PathVariable("codep") String codep){
+        return iPoleService.affecterFaculteApole(fac,codep);
+    }
+
 }

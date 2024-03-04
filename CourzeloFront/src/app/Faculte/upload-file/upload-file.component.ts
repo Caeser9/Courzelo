@@ -15,6 +15,8 @@ export class UploadFileComponent implements OnInit {
   selectedFile: File | null = null;
 
   constructor(private faculteSrvice: FaculteService, private route: ActivatedRoute, private router: Router) { }
+  
+  
   ngOnInit(): void {
     // Retrieve the faculteCode from the route parameters
     this.route.params.subscribe(params => {
