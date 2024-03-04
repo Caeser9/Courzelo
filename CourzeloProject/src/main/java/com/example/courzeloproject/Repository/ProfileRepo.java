@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface ProfileRepo extends MongoRepository<Profile,String> {
     @Query("{'user._id': ?0}")
     Optional<Profile> findByIdUser(String userId);
+
+    Profile getProfilesByEmail(String email) ;
 }

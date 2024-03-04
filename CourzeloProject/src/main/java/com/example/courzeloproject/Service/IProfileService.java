@@ -13,6 +13,10 @@ public interface IProfileService {
     public void deleteProfile(String id) ;
     public Profile updateProfile(String id , Profile p) ;
     public List<Profile> getAllProfile () ;
+
+    public Profile getProfilesByEmail(String emailUser) ;
+
+
     public Optional<Profile> getProfileByIdUser (String id_user) ;
     public Profile getProfileByid (String id) ;
     Profile storeFile(MultipartFile file, String Pid);

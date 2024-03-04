@@ -35,6 +35,7 @@ export class AddProfileComponent implements OnInit{
       });
       this.user = this.tokenStorageService.getUser()
       this.profile.user.id = this.user.id;
+      this.profile.email = this.user.email
     }
 
     get profileFormControl() {

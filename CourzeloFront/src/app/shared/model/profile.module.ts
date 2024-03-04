@@ -7,5 +7,6 @@ export class Profile {
     phone: number;
     address: string;
     photo: string;
+    email : string ;
     user = new User();
 }

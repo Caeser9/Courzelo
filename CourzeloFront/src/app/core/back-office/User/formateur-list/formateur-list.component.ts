@@ -18,7 +18,7 @@ export class FormateurListComponent implements OnInit {
   id: any
   profile : any 
   formateur: any
-  searchInput: string = '';
+  FormateurSearch: string = '';
   filteredFormateur: User[] = [];
   constructor(private userService: UserService, 
     private formBuilder: FormBuilder,
@@ -51,10 +51,10 @@ export class FormateurListComponent implements OnInit {
 
 
   onSearch(): void {
-    console.log('Search Input:', this.searchInput);
-
-    this.filteredFormateur = this.profile.filter(user =>
-      user.firstName.toLowerCase().includes(this.searchInput.toLowerCase())
+    console.log('Search Input:', this.FormateurSearch);
+  
+    this.filteredFormateur = this.formateur.filter(user =>
+      user.email.toLowerCase().includes(this.FormateurSearch.toLowerCase()) 
     );
     console.log('All Blogs:', this.formateur);
   }

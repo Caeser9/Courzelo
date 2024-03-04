@@ -55,6 +55,11 @@ public class ProfileServiceImpl implements IProfileService{
     }
 
     @Override
+    public Profile getProfilesByEmail(String emailUser) {
+        return repo.getProfilesByEmail(emailUser);
+    }
+
+    @Override
     public Optional<Profile> getProfileByIdUser(String id_user) {
         return repo.findByIdUser(id_user);
     }

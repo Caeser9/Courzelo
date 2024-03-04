@@ -27,6 +27,7 @@ public class Profile {
 
     private String photo;
 
+    private String email;
     @DBRef
     private User user;
 

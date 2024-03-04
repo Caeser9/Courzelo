@@ -38,6 +38,13 @@ public class ProfileController {
     public Optional<Profile> getProfileByIdUser(@PathVariable("user-id") String uId) {
         return profileService.getProfileByIdUser(uId);
     }
+    @GetMapping("/getProfileByEmail/{user-email}")
+    public Profile getProfilesByEmail(@PathVariable("user-email") String email) {
+        return profileService.getProfilesByEmail(email);
+    }
+
+
+
     @DeleteMapping("/deleteProfile/{profile-id}")
     public void removeProfile(@PathVariable("profile-id") String bId) {
         profileService.deleteProfile(bId);

@@ -12,19 +12,23 @@ import { User } from 'src/app/shared/model/user.model';
 export class AdminListComponent implements OnInit {
   usersWithProfiles: any[] = [];
   admin : any
-  listeAdmin!:User[];
+ 
   profile:any
+  FormateurSearch: string = '';
+  filteredFormateur: User[] = [];
+  formateur: any
   constructor(private userService:UserService,private profileservice:ProfileService){}
 
 
 ngOnInit(): void {
 
-  this.getUsersWithProfiles();
+  this.getAdmins();
 }
 getAdmins(){
   this.admin=new User();
   this.admin=this.userService.getUser("ROLE_ADMIN").subscribe((data) => {
     this.admin = data;
+    this.filteredFormateur = this.admin;
   },
   (error) => {
     console.error("Erreur lors de la récupération des données :", error);
@@ -32,6 +36,16 @@ getAdmins(){
 );
 
 }
+
+onSearch(): void {
+  console.log('Search Input:', this.FormateurSearch);
+
+  this.filteredFormateur = this.admin.filter(user =>
+    user.email.toLowerCase().includes(this.FormateurSearch.toLowerCase()) 
+  );
+  console.log('All admins:', this.admin);
+} 
+
 getProfileByIdUser(id: number) {
   this.profileservice.getProfileByIdUser(this.admin.id).subscribe(
     (data) => {
@@ -44,19 +58,4 @@ getProfilePhotoUrl(p: Profile): string {
   return this.profileservice.getPhoto(p.photo);
 }
 
-getUsersWithProfiles(): void {
-  this.userService.getUser("ROLE_ADMIN").subscribe(users => {
-    // Pour chaque utilisateur, récupérer également son profil
-    if (Array.isArray(users)) {
-      // Pour chaque utilisateur, récupérer également son profil
-      this.usersWithProfiles = users.map((user: any) => {
-        return {
-          user: user,
-          profile: this.profileservice.getProfileByIdUser(user.id)
-        
-        };
-      });
-    }
-  });
-}
 }
