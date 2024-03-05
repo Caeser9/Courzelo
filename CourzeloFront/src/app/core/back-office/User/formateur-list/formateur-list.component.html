@@ -98,9 +98,9 @@
             </ng-template>
 
             <ng-template pTemplate="footer">
-                <button type="button" class="btn btn-success" (click)="updateProfileDialog = false">Save</button>
+                <button type="button" class="btn btn-success" (click)="updateProfileDialog = false">cancel</button>
                 <button type="button" class="btn btn-warn" (click)="updateProfile()"
-                    [disabled]="profileForm.invalid"></button>
+                    [disabled]="profileForm.invalid">Save</button>
             </ng-template>
         </p-dialog>
 
@@ -193,6 +193,7 @@
                                         </div>
 
                                     </div>
+                                    <button type="button" class="btn btn-success" (click)="updateProfileDialog = false">cancel</button>
                                     <button type="button" class="btn btn-success"
                                         (click)="updateProfileDialog = true;getProfileByIdUser(f.id)">Update</button>
                                 </div>

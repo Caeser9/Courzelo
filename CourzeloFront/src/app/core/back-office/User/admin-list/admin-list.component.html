@@ -5,7 +5,102 @@
 		<div class="main-wrapper">
 		
 			<app-navbar></app-navbar>
-           
+			<p-dialog [(visible)]=" updateProfileDialog" [style]="{width: '500px','background-color': '#f0f0f0'}"
+            header="Modifier admin" [modal]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+                <form [formGroup]="profileForm">
+                    <div class="forms ">
+
+                        <label for="firstName">Instructer Name </label>
+                        <div class="field">
+  
+                            <span class="login-input-wrapper">
+                                <input type="text" formControlName="firstName" required [(ngModel)]="profile!.firstName"
+                                    pInputText placeholder="Entrer votre nom..."
+                                    [ngClass]="!profileForm.controls['firstName'].valid && profileForm.controls['firstName']?.touched?'ng-invalid ng-dirty':''" />
+                            </span>
+                            <small class="text-red-500"
+                                *ngIf="!profileForm.controls['firstName'].valid && profileForm.controls['firstName']?.touched "
+                                style="color: #f44336;">
+                                {{ profileForm.get("firstName").hasError("required")? "Ce champ est obligatoire ": ""}}
+                                {{ profileForm.get("firstName").hasError("minlength")? "Veuillez entrer un nom valide!
+                                ": ""}}
+
+                            </small>
+                        </div>
+                        <label for="lastName">Prénom de l'enseignant</label>
+                        <div class="field">
+                            <span class="login-input-wrapper">
+
+                                <input type="text" formControlName="lastName" required [(ngModel)]="profile.lastName"
+                                    pInputText placeholder="Entrer votre prénom..."
+                                    [ngClass]="!profileForm.controls['lastName'].valid && profileForm.controls['lastName']?.touched?'ng-invalid ng-dirty':''" />
+                            </span>
+                            <small class="text-red-500"
+                                *ngIf="!profileForm.controls['lastName'].valid && profileForm.controls['lastName']?.touched "
+                                style="color: #f44336;">
+                                {{ profileForm.get("lastName").hasError("required")? "Ce champ est obligatoire ": ""}}
+                                {{ profileForm.get("lastName").hasError("minlength")? "Veuillez entrer un prénom valide!
+                                ": ""}}
+
+                            </small>
+                        </div>
+                        <label for="adresse">Adresse</label>
+                        <div class="field">
+                            <span class="login-input-wrapper">
+                                <input type="text" formControlName="address" required [(ngModel)]="profile.address"
+                                    pInputText placeholder="Entrer votre prénom..."
+                                    [ngClass]="!profileForm.controls['address'].valid && profileForm.controls['address']?.touched?'ng-invalid ng-dirty':''" />
+                            </span>
+                            <small class="text-red-500"
+                                *ngIf="!profileForm.controls['address'].valid && profileForm.controls['address']?.touched "
+                                style="color: #f44336;">
+                                {{ profileForm.get("address").hasError("required")? "Ce champ est obligatoire ": ""}}
+                                {{ profileForm.get("address").hasError("minlength")? "Veuillez entrer une adresse
+                                valide!
+                                ": ""}}
+                            </small>
+                        </div>
+
+                        <label for="phone">Numéro de téléphone:</label>
+                        <div class="field">
+                            <span class="login-input-wrapper">
+
+                                <input type="text" id="phone" formControlName="phone" required
+                                    [(ngModel)]="profile.phone" pInputText
+                                    placeholder="Entrer votre numéro de téléphone..."
+                                    [ngClass]="!profileForm.controls['phone'].valid && profileForm.controls['phone']?.touched?'ng-invalid ng-dirty':''" />
+                            </span>
+                            <small class="text-red-500"
+                                *ngIf="!profileForm.controls['phone'].valid && profileForm.controls['phone']?.touched "
+                                style="color: #f44336;">
+                                {{ profileForm.get("phone").hasError("required")? "Ce champ est obligatoire
+                                ": ""}}
+                                {{ profileForm.get("phone").hasError("pattern") ? "Veuillez entrer un numéro valide
+                                ": ""}}
+                                {{ profileForm.get("phone").hasError("minlength") ? "Le numéro de téléphone doit
+                                contenir 8
+                                chiffres
+                                ": ""}}
+                                {{ profileForm.get("phone").hasError("maxlength") ? "Le numéro de téléphone ne doit
+                                dépasser 8
+                                chiffres
+                                ": ""}}
+
+                            </small>
+                        </div>
+
+
+                    </div>
+                </form>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button type="button" class="btn btn-success" (click)="updateProfileDialog = false">cancel</button>
+                <button type="button" class="btn btn-warn" (click)="updateProfile()"
+                    [disabled]="profileForm.invalid">Save</button>
+            </ng-template>
+        </p-dialog>        
 			<!-- Breadcrumb -->
 			<div class="breadcrumb-bar">
 				<div class="container">
@@ -62,19 +157,25 @@
 			
 							<div class="row" *ngFor=" let admin of filteredFormateur">
 								<div class="col-lg-3 col-md-6 d-flex" >
+
 									<div class="student-box flex-fill">
 
 										<div class="student-content pb-0">												
-											<h6><a href="student-profile.html">{{admin.email}}</a></h6>
-											<h6><a href="student-profile.html">Identifiant : {{admin.username}}</a></h6>
+											<h6>{{admin.email}}</h6>
+											<h6>Identifiant : {{admin.username}}</h6>
 										
 											<div class="loc-blk d-flex align-items-center justify-content-center">universityName
 												<img src="assets/img/students/loc-icon.svg" class="me-1" alt="">
 											
 											</div>
+											<button type="button" class="btn btn-success"
+												(click)="updateProfileDialog = true;getProfileByIdUser(admin.id)">Update</button>
+					
 										</div>
 									</div>
+									
 								</div>
+								
 								
 							</div>
 							
