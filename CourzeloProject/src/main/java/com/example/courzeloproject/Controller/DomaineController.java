@@ -1,5 +1,6 @@
 package com.example.courzeloproject.Controller;
 
+import com.example.courzeloproject.Entite.Commentaire;
 import com.example.courzeloproject.Entite.Domaine;
 import com.example.courzeloproject.Repository.IDomaineRepo;
 import com.example.courzeloproject.Service.IDomaineService;
@@ -62,8 +63,13 @@ public class DomaineController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
-
+    @GetMapping("/tri")
+    List<Commentaire> tri(){
+        return iDomaineService.tri();
     }
+
+
+}
 
 
 

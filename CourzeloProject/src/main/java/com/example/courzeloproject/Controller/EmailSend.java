@@ -18,6 +18,7 @@ public class EmailSend {
     @CrossOrigin("*")
     @PostMapping("/send-email")
     public String sendEmail(@RequestBody EmailRequest request) {
+
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {

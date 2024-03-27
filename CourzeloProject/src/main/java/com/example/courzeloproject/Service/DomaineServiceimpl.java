@@ -1,7 +1,9 @@
 package com.example.courzeloproject.Service;
 
 
+import com.example.courzeloproject.Entite.Commentaire;
 import com.example.courzeloproject.Entite.Domaine;
+import com.example.courzeloproject.Repository.ICommRepo;
 import com.example.courzeloproject.Repository.IDomaineRepo;
 
 
@@ -24,7 +26,9 @@ import java.util.List;
 @Service
 public class DomaineServiceimpl implements IDomaineService {
     @Autowired
-    IDomaineRepo iDomaineRepo;
+    IDomaineRepo iDomaineRepo ;
+    @Autowired
+    ICommRepo iCommRepo;
     @Value("${file.upload-dir}")
     private String uploadDir;
 
@@ -110,5 +114,11 @@ public class DomaineServiceimpl implements IDomaineService {
             throw new RuntimeException("File not found: " + fileName, e);
         }
     }
+
+    @Override
+    public List<Commentaire> tri() {
+        return iCommRepo.findAllByOrderByDateComm();
+    }
+
 
 }

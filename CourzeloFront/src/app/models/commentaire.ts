@@ -7,6 +7,9 @@ export class Commentaire {
     subject?: string;
     date?: Date;
     Reponse?: string;
+    likes?: number;
+    dislikes?: number;
+
 
 }
 

@@ -52,4 +52,9 @@ public class CommServiceImpl implements ICommService{
         commentaire.setReponse(reponse);
         return iCommRepo.save(commentaire);
     }
+
+    @Override
+    public List<Commentaire> search(String search) {
+        return iCommRepo.findByFullname(search);
+    }
 }

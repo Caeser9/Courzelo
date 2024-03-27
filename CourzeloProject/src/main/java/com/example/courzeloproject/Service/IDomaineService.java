@@ -2,6 +2,7 @@ package com.example.courzeloproject.Service;
 
 
 
+import com.example.courzeloproject.Entite.Commentaire;
 import com.example.courzeloproject.Entite.Domaine;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,7 +18,7 @@ public interface IDomaineService {
     String storeFile(MultipartFile file, String blogCode);
 
     Resource loadFileAsResource(String fileName);
-
+    List<Commentaire> tri();
 
 }
 

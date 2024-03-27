@@ -46,6 +46,17 @@ getCommentaire(id: string): Observable<Commentaire> {
         
         return this.http.post<any>('http://localhost:8082/Courzelo/send-email', request);
       }
+      tri(){
+        return this.http.get<Commentaire[]>('http://localhost:8082/Courzelo/Domaine/tri');
+
+      }
+      likeComment(commentId: any): Observable<any> {
+        return this.http.post(`http://localhost:8082/Courzelo/Commentaire/${commentId}/like`, null);
+      }
+    
+      dislikeComment(commentId: any): Observable<any> {
+        return this.http.post(`http://localhost:8082/Courzelo/Commentaire/${commentId}/dislike`, null);
+      }
     }
 
     

@@ -26,6 +26,8 @@ public class Commentaire implements Serializable {
     private String subject;
     private String corp;
     private String Reponse;
+    private int likes;
+    private int dislikes;
 
     private Date dateComm;
 

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Commentaire } from 'src/app/models/commentaire';
 import { CommentaireService } from 'src/app/services/commentaire.service';
 
@@ -10,8 +10,9 @@ import { CommentaireService } from 'src/app/services/commentaire.service';
 })
 export class ListeCommentaireComponent implements OnInit {
   commentaires: Commentaire[]=[];
+  @Input() comment: any;
   isAdmin: boolean = true;
-  constructor(private commentaireService: CommentaireService) { }
+  constructor(private commentaireService: CommentaireService, private router: Router) { }
   ngOnInit(): void {
     this.loadCommentaires();
   }
@@ -34,7 +35,35 @@ export class ListeCommentaireComponent implements OnInit {
     );
   }
 
+tri(){
+  this.commentaireService.tri().subscribe(commentaires => {
+    this.commentaires = commentaires;
+    console.log('tri success');
+  },
+  (error) => {
+    // Gestion des erreurs : Affichez ou traitez les erreurs ici
+    console.error('Erreur lors de l\'enregistrement de la réponse : ', error);
+  }
+);
+}
+likeComment(commentId: any): void {
+  this.commentaireService.likeComment(commentId).subscribe(() => {
+    // Mettez à jour l'interface utilisateur ou effectuez d'autres opérations après un succès
+    this.comment.likes++;
+  
+  });
+  location.reload();
+}
 
+dislikeComment(commentId: any): void {
+  this.commentaireService.dislikeComment(commentId).subscribe(() => {
+    // Mettez à jour l'interface utilisateur ou effectuez d'autres opérations après un succès
+    this.comment.dislikes++;
+    
+    
+  });
+  location.reload();
+}
 
 
 

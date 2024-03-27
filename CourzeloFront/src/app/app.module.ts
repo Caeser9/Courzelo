@@ -14,9 +14,11 @@ import { DeleteDomaineComponent } from './domaine/delete-domaine/delete-domaine.
 import { UpdateDomaineComponent } from './update-domaine/update-domaine.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PhotoComponent } from './photo/photo.component';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AddCommentaireComponent } from './commentaire/add-commentaire/add-commentaire.component';
 import { ListeCommentaireComponent } from './liste-commentaire/liste-commentaire.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -41,7 +43,9 @@ import { ListeCommentaireComponent } from './liste-commentaire/liste-commentaire
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatIconModule
     
    
   ],

@@ -544,7 +544,10 @@
 																		</select>
 																	</div>
 																</div>	
+
 																<div class="col-md-6 col-lg-3 col-item">
+																	
+
 																	<div class="input-block select-form mb-1">
 																		<select class="form-select select"  name="sellist1">
 																		  <option>Rating</option>
@@ -556,12 +559,11 @@
 																</div>
 																<div class="col-md-6 col-lg-3 col-item">
 																	<div class="input-block select-form mb-1">
-																		<select class="form-select select"  name="sellist1">
-																		  <option>Sort</option>
-																		  <option>Sort 1</option>
-																		  <option>Sort 2</option>
-																		  <option>Sort 3</option>
-																		</select>
+																		<button mat-button color="primary" (click)="tri()">
+																			Trier <mat-icon>sort</mat-icon>
+																		  </button>
+																		  
+
 																	</div>
 																</div>	
 															</div>
@@ -591,14 +593,9 @@
 															</div>
 														</div>
 														<p class="rev-info">“ {{commentaire.corp}} “</p>
-                                                      
-                                                        <textarea [(ngModel)]="commentaire.Reponse" ></textarea>
-  
-                                                        <!-- Bouton pour enregistrer la réponse -->
-                                                        <a class="btn btn-reply" *ngIf="isAdmin && commentaire.id && commentaire.Reponse" (click)="enregistrerReponse(commentaire.id, commentaire.Reponse)"> <i class="feather-corner-up-left"></i>Enregistrer Réponse</a>>
-                                                      
-                                                         <!-- Champ de réponse pour les administrateurs -->
- 
+														<button (click)="likeComment(commentaire.id)">Like {{ commentaire.likes }}</button>
+														<button (click)="dislikeComment(commentaire.id)">Dislike {{ commentaire.dislikes }}</button>
+                                                        
 
 
                                      
@@ -614,7 +611,7 @@
 						
 											</div>
 											<!-- Afficher les réponses -->
-  
+											
 
 											
 										

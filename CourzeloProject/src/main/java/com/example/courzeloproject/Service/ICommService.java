@@ -12,5 +12,6 @@ public interface ICommService {
     public Commentaire deleteCommentaireById(String id);
     public Commentaire updateCommentaire(Commentaire c,String id);
     public Commentaire repondre(String commentaireId, String reponse);
+    public List<Commentaire> search(String nom);
 
 }

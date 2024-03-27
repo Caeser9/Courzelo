@@ -28,7 +28,7 @@ export class AddCommentaireComponent {
       this.commentaireService.addCommentaire(CommentaireData).subscribe(
         response => {
           alert('Commentaire ajouté avec succès !');
-          this.addCommentaireForm.reset
+          this.addCommentaireForm.reset();
         },
         error => {
           alert('Une erreur est survenue lors de l\'ajout du Commentaire.');

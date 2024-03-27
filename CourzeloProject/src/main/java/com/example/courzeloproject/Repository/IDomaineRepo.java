@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface IDomaineRepo extends MongoRepository<Domaine,String> {
 
-
+List<Domaine> findAllByOrderByNom();
 
 }
